@@ -4,8 +4,11 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { HiChevronDown, HiCode, HiLightBulb, HiCog } from 'react-icons/hi'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
+import { useTranslation } from '@/contexts/TranslationContext'
 
 const Hero = () => {
+  const { t } = useTranslation()
+  
   const scrollToNext = () => {
     const nextSection = document.getElementById('about')
     nextSection?.scrollIntoView({ behavior: 'smooth' })
@@ -46,7 +49,7 @@ const Hero = () => {
             >
               <span className="text-primary-400 font-mono text-sm tracking-wider">
                 <br></br> <br />
-                      Olá, eu sou
+                      {t.hero.greeting}
               </span>
             </motion.div>
 
@@ -56,27 +59,25 @@ const Hero = () => {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
             >
-              <span className="gradient-text">Cauã Costa</span>
+              <span className="gradient-text">{t.hero.name}</span>
             </motion.h1>
 
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-4"
+              className="text-xl md:text-2xl lg:text-3xl text-gray-700 dark:text-gray-300 mb-4"
             >
-              Estudante de Engenharia de Software
+              {t.hero.title}
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Estudante de Engenharia de Software apaixonado por desenvolvimento web, 
-              fullstack e frontend moderno. Interessado em backend escalável, APIs, 
-              automação e inteligência artificial. Localizado em Matão - SP.
+              {t.hero.description}
             </motion.p>
 
             <motion.div
@@ -89,14 +90,14 @@ const Hero = () => {
                 href="#contact"
                 className="btn-primary inline-flex items-center justify-center"
               >
-                Entre em Contato
+                {t.hero.cta}
                 <HiChevronDown className="ml-2 w-4 h-4" />
               </a>
               <a
                 href="#projects"
                 className="btn-secondary inline-flex items-center justify-center"
               >
-                Ver Projetos
+                {t.hero.ctaSecondary}
               </a>
             </motion.div>
 
@@ -120,7 +121,7 @@ const Hero = () => {
                     <div className="w-32 h-32 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mb-4 mx-auto">
                       <span className="text-4xl font-bold text-white">CC</span>
                     </div>
-                    <p className="text-gray-400 text-sm">Foto de perfil</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">Foto de perfil</p>
                   </div>
                 </div>
                 <Image
@@ -173,8 +174,8 @@ const Hero = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           onClick={scrollToNext}
-          className="text-gray-400 hover:text-primary-400 transition-colors duration-300"
-          aria-label="Scroll para próxima seção"
+          className="text-gray-600 dark:text-gray-400 hover:text-primary-400 transition-colors duration-300"
+          aria-label={t.hero.scrollIndicator}
         >
           <HiChevronDown className="w-8 h-8" />
         </motion.button>

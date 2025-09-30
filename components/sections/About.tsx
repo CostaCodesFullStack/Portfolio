@@ -3,49 +3,51 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { HiAcademicCap, HiCode, HiLightBulb, HiUsers } from 'react-icons/hi'
+import { useTranslation } from '@/contexts/TranslationContext'
 
 const About = () => {
+  const { t } = useTranslation()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
   const stats = [
-    { icon: HiCode, label: 'Projetos Concluídos', value: '3+' },
-    { icon: HiAcademicCap, label: 'Anos de Estudo', value: '1' },
-    { icon: HiLightBulb, label: 'Tecnologias Aprendidas', value: '3+' },
+    { icon: HiCode, label: t.about.stats.completedProjects, value: '3+' },
+    { icon: HiAcademicCap, label: t.about.stats.yearsOfStudy, value: '1' },
+    { icon: HiLightBulb, label: t.about.stats.technologiesLearned, value: '3+' },
     /* { icon: HiUsers, label: 'Projetos Colaborativos', value: '3+' }, */
   ]
 
   const timeline = [
     {
       year: '2025',
-      title: 'Formação em Engenharia de Software',
-      description: 'Cursando Engenharia de Software com foco em desenvolvimento web e fullstack',
+      title: t.about.timeline.softwareEngineering,
+      description: t.about.timelineDescriptions.softwareEngineering,
       status: 'current'
     },
     {
       year: '2024',
-      title: 'Primeiros Projetos',
-      description: 'Desenvolveu Conversor de Moedas e Calculadora com React e JavaScript',
+      title: t.about.timeline.firstProjects,
+      description: t.about.timelineDescriptions.firstProjects,
       status: 'completed'
     },
     {
       year: '2024',
-      title: 'Descoberta da Paixão',
-      description: 'Descobriu o fascínio pela programação e desenvolvimento web',
+      title: t.about.timeline.passionDiscovery,
+      description: t.about.timelineDescriptions.passionDiscovery,
       status: 'completed'
     },
     {
       year: '2023',
-      title: 'Primeiro Contato',
-      description: 'Primeiro contato com tecnologia e programação',
+      title: t.about.timeline.firstContact,
+      description: t.about.timelineDescriptions.firstContact,
       status: 'completed'
     }
   ]
 
   return (
-    <section id="about" ref={ref} className="section-padding bg-dark-800/30">
+    <section id="about" ref={ref} className="section-padding bg-gray-100/50 dark:bg-dark-800/30">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -54,10 +56,10 @@ const About = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="gradient-text">Sobre Mim</span>
+            <span className="gradient-text">{t.about.title}</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Conheça um pouco mais sobre minha jornada na programação e meus objetivos profissionais
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-3xl mx-auto">
+            {t.about.subtitle}
           </p>
         </motion.div>
 
@@ -69,25 +71,19 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-white mb-6">Minha História</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t.about.myStory}</h3>
             
-            <div className="space-y-4 text-gray-300">
+            <div className="space-y-4 text-gray-700 dark:text-gray-300">
               <p>
-                Olá! Sou Cauã Costa, estudante de Engenharia de Software apaixonado por tecnologia 
-                e desenvolvimento. Minha jornada na programação começou em 2024, quando descobri o 
-                fascinante mundo da criação de soluções digitais e decidi me dedicar a essa área.
+                {t.about.storyText1}
               </p>
               
               <p>
-                Atualmente, estou cursando Engenharia de Software com previsão de conclusão em 2025, 
-                focado em desenvolvimento web, fullstack e frontend moderno. Tenho grande interesse 
-                em backend escalável, APIs, automação e inteligência artificial.
+                {t.about.storyText2}
               </p>
               
               <p>
-                Meu objetivo é me tornar um desenvolvedor full-stack de excelência, contribuindo para 
-                projetos que tenham impacto real na sociedade. Estou sempre em busca de novos desafios 
-                e oportunidades de crescimento na área de tecnologia, especialmente em desenvolvimento web.
+                {t.about.storyText3}
               </p>
             </div>
 
@@ -99,11 +95,11 @@ const About = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="text-center p-4 bg-dark-700/50 rounded-lg"
+                  className="text-center p-4 bg-white/50 dark:bg-dark-700/50 rounded-lg"
                 >
                   <stat.icon className="w-8 h-8 text-primary-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">{stat.value}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -116,7 +112,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-white mb-6">Minha Jornada</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t.about.myJourney}</h3>
             
             <div className="space-y-6">
               {timeline.map((item, index) => (
@@ -149,14 +145,14 @@ const About = () => {
                       </span>
                       {item.status === 'current' && (
                         <span className="px-2 py-1 bg-primary-600/20 text-primary-400 text-xs rounded-full">
-                          Atual
+                          {t.experience.current}
                         </span>
                       )}
                     </div>
-                    <h4 className="text-lg font-semibold text-white mb-1">
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                       {item.title}
                     </h4>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
                       {item.description}
                     </p>
                   </div>
@@ -174,17 +170,17 @@ const About = () => {
           className="text-center mt-16"
         >
           <div className="bg-gradient-to-r from-primary-600/10 to-primary-400/10 rounded-2xl p-8 border border-primary-600/20">
-            <h3 className="text-xl font-bold text-white mb-4">
-              Interessado em trabalhar comigo?
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              {t.about.cta.title}
             </h3>
-            <p className="text-gray-400 mb-6">
-              Estou sempre aberto a novas oportunidades e projetos interessantes
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              {t.about.cta.description}
             </p>
             <a
               href="#contact"
               className="btn-primary inline-flex items-center"
             >
-              Vamos Conversar
+              {t.about.cta.button}
             </a>
           </div>
         </motion.div>

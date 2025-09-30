@@ -6,8 +6,10 @@ import { FaGithub, FaExternalLinkAlt, FaCode, FaMobile, FaServer } from 'react-i
 import { HiLightBulb, HiCode } from 'react-icons/hi'
 import Image from 'next/image'
 import { useState } from 'react'
+import { useTranslation } from '@/contexts/TranslationContext'
 
 const Projects = () => {
+  const { t } = useTranslation()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -22,8 +24,8 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'Conversor de Moedas',
-      description: 'Aplicação simples e responsiva para converter moedas em tempo real consumindo API externa. Interface intuitiva com seleção de moedas e valores atualizados.',
+      title: t.projects.project1.title,
+      description: t.projects.project1.description,
       image: '/images/projects/conversor-moedas.jpg',
       technologies: ['React', 'HTML', 'CSS', 'JavaScript', 'API ExchangeRate'],
       category: 'Frontend',
@@ -34,8 +36,8 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: 'Calculadora',
-      description: 'Calculadora funcional desenvolvida em React com interface moderna. Inclui operações básicas com design responsivo e experiência de usuário otimizada.',
+      title: t.projects.project2.title,
+      description: t.projects.project2.description,
       image: '/images/projects/calculadora.jpg',
       technologies: ['React', 'HTML', 'CSS', 'JavaScript'],
       category: 'Frontend',
@@ -46,10 +48,10 @@ const Projects = () => {
     }
   ]
 
-  const categories = ['Todos', 'Frontend', 'Backend', 'Full-Stack']
+  const categories = [t.projects.categories.all, t.projects.categories.frontend, t.projects.categories.backend, t.projects.categories.fullstack]
 
   return (
-    <section id="projects" ref={ref} className="section-padding bg-dark-800/30">
+    <section id="projects" ref={ref} className="section-padding bg-gray-100/50 dark:bg-dark-800/30">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -58,10 +60,10 @@ const Projects = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="gradient-text">Projetos</span>
+            <span className="gradient-text">{t.projects.title}</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Alguns dos projetos que desenvolvi durante minha jornada de aprendizado em programação
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-3xl mx-auto">
+            {t.projects.subtitle}
           </p>
         </motion.div>
 
@@ -78,7 +80,7 @@ const Projects = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-              className="px-6 py-2 bg-dark-700/50 hover:bg-primary-600/20 text-gray-300 hover:text-primary-400 rounded-lg transition-all duration-300 border border-dark-600 hover:border-primary-600/50"
+              className="px-6 py-2 bg-white/50 dark:bg-dark-700/50 hover:bg-primary-600/20 text-gray-700 dark:text-gray-300 hover:text-primary-400 rounded-lg transition-all duration-300 border border-gray-300 dark:border-dark-600 hover:border-primary-600/50"
             >
               {category}
             </motion.button>
@@ -122,7 +124,7 @@ const Projects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300"
-                      aria-label="Ver código no GitHub"
+                      aria-label={t.projects.ariaLabels.viewCode}
                     >
                       <FaGithub className="w-5 h-5 text-white" />
                     </a>
@@ -133,7 +135,7 @@ const Projects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300"
-                      aria-label="Ver demonstração"
+                      aria-label={t.projects.ariaLabels.viewDemo}
                     >
                       <FaExternalLinkAlt className="w-5 h-5 text-white" />
                     </a>
@@ -144,12 +146,12 @@ const Projects = () => {
               {/* Conteúdo do Projeto */}
               <div className="p-6 space-y-4 text-left">
                 {/* Título */}
-                <h3 className="text-xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300 text-left">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-400 transition-colors duration-300 text-left">
                   {project.title}
                 </h3>
 
                 {/* Descrição */}
-                <p className="text-gray-400 text-sm leading-relaxed text-left">
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed text-left">
                   {project.description}
                 </p>
 
@@ -172,10 +174,10 @@ const Projects = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-2 text-gray-400 hover:text-primary-400 transition-colors duration-300 text-sm"
+                      className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-primary-400 transition-colors duration-300 text-sm"
                     >
                       <FaGithub className="w-4 h-4" />
-                      <span>Código</span>
+                      <span>{t.projects.viewCode}</span>
                     </a>
                   )}
                   {project.demo && (
@@ -183,10 +185,10 @@ const Projects = () => {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-2 text-gray-400 hover:text-primary-400 transition-colors duration-300 text-sm"
+                      className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-primary-400 transition-colors duration-300 text-sm"
                     >
                       <FaExternalLinkAlt className="w-4 h-4" />
-                      <span>Demo</span>
+                      <span>{t.projects.viewProject}</span>
                     </a>
                   )}
                 </div>
@@ -203,11 +205,11 @@ const Projects = () => {
           className="text-center mt-16"
         >
           <div className="bg-gradient-to-r from-primary-600/10 to-primary-400/10 rounded-2xl p-8 border border-primary-600/20">
-            <h3 className="text-xl font-bold text-white mb-4">
-              Interessado em ver mais projetos?
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              {t.projects.cta.title}
             </h3>
-            <p className="text-gray-400 mb-6">
-              Confira todos os meus projetos no GitHub e acompanhe minha evolução
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              {t.projects.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -217,14 +219,14 @@ const Projects = () => {
               className="btn-primary inline-flex items-center justify-center"
             >
               <FaGithub className="w-5 h-5 mr-2" />
-              Ver no GitHub
+              {t.projects.cta.githubButton}
             </a>
               <a
                 href="#contact"
                 className="btn-secondary inline-flex items-center justify-center"
               >
                 <HiLightBulb className="w-5 h-5 mr-2" />
-                Propor Projeto
+                {t.projects.cta.proposeButton}
               </a>
             </div>
           </div>

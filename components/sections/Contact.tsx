@@ -13,8 +13,10 @@ import {
   FaCheckCircle
 } from 'react-icons/fa'
 import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi'
+import { useTranslation } from '@/contexts/TranslationContext'
 
 const Contact = () => {
+  const { t } = useTranslation()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -56,24 +58,24 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: FaEnvelope,
-      title: 'Email',
+      title: t.contact.email,
       value: 'cauadevcosta@gmail.com',
       href: 'mailto:cauadevcosta@gmail.com',
-      description: 'Envie-me um email'
+      description: t.contact.contactInfo.email
     },
     {
       icon: FaPhone,
-      title: 'Telefone',
+      title: t.contact.phone,
       value: '+55 (16) 99999-9999',
       href: 'tel:+5516999999999',
-      description: 'Ligue para mim'
+      description: t.contact.contactInfo.phone
     },
     {
       icon: FaMapMarkerAlt,
-      title: 'Localização',
+      title: t.contact.location,
       value: 'Matão, SP - Brasil',
       href: '#',
-      description: 'Estou baseado aqui'
+      description: t.contact.contactInfo.location
     }
   ]
 
@@ -99,7 +101,7 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" ref={ref} className="section-padding bg-dark-800/30">
+    <section id="contact" ref={ref} className="section-padding bg-gray-100/50 dark:bg-dark-800/30">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -108,10 +110,10 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="gradient-text">Contato</span>
+            <span className="gradient-text">{t.contact.title}</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Vamos conversar! Estou sempre aberto a novas oportunidades e projetos interessantes
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-3xl mx-auto">
+            {t.contact.subtitle}
           </p>
         </motion.div>
 
@@ -124,12 +126,11 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Vamos trabalhar juntos?
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                {t.contact.letsWorkTogether}
               </h3>
-              <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                Estou sempre interessado em novos projetos e oportunidades de colaboração. 
-                Se você tem uma ideia ou projeto em mente, não hesite em entrar em contato!
+              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8">
+                {t.contact.contactDescription}
               </p>
             </div>
 
@@ -142,14 +143,14 @@ const Contact = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="flex items-center space-x-4 p-4 bg-dark-700/30 rounded-lg hover:bg-dark-700/50 transition-colors duration-300 group"
+                  className="flex items-center space-x-4 p-4 bg-white/30 dark:bg-dark-700/30 rounded-lg hover:bg-white/50 dark:hover:bg-dark-700/50 transition-colors duration-300 group"
                 >
                   <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center group-hover:bg-primary-600/30 transition-colors duration-300">
                     <info.icon className="w-6 h-6 text-primary-400" />
                   </div>
                   <div>
-                    <h4 className="text-white font-medium">{info.title}</h4>
-                    <p className="text-gray-400 text-sm">{info.value}</p>
+                    <h4 className="text-gray-900 dark:text-white font-medium">{info.title}</h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{info.value}</p>
                     <p className="text-primary-400 text-xs">{info.description}</p>
                   </div>
                 </motion.a>
@@ -158,7 +159,7 @@ const Contact = () => {
 
             {/* Links Sociais */}
             <div>
-              <h4 className="text-lg font-bold text-white mb-4">Redes Sociais</h4>
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t.contact.socialMedia}</h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -171,7 +172,7 @@ const Contact = () => {
                     transition={{ duration: 0.3, delay: 0.8 + index * 0.1 }}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`w-12 h-12 bg-dark-700/50 rounded-lg flex items-center justify-center text-gray-400 ${social.color} transition-all duration-300 hover:bg-dark-700/70`}
+                    className={`w-12 h-12 bg-white/50 dark:bg-dark-700/50 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 ${social.color} transition-all duration-300 hover:bg-white/70 dark:hover:bg-dark-700/70`}
                     aria-label={social.name}
                   >
                     <social.icon className="w-6 h-6" />
@@ -186,10 +187,10 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="card"
+            className="contact-form"
           >
-            <h3 className="text-2xl font-bold text-white mb-6">
-              Envie uma mensagem
+            <h3 className="form-title">
+              {t.contact.sendMessage}
             </h3>
 
             {isSubmitted ? (
@@ -199,19 +200,19 @@ const Contact = () => {
                 className="text-center py-12"
               >
                 <FaCheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-white mb-2">
-                  Mensagem enviada!
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  {t.contact.formSuccess.title}
                 </h4>
-                <p className="text-gray-400">
-                  Obrigado pelo contato. Responderei em breve!
+                <p className="text-gray-600 dark:text-gray-400">
+                  {t.contact.formSuccess.message}
                 </p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Nome *
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label htmlFor="name" className="form-label">
+                      {t.contact.formLabels.name}
                     </label>
                     <input
                       type="text"
@@ -220,13 +221,13 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-dark-700/50 border border-dark-600 rounded-lg text-white placeholder-gray-400 focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20 focus:outline-none transition-colors duration-300"
-                      placeholder="Seu nome completo"
+                      className="form-input"
+                      placeholder={t.contact.formPlaceholders.name}
                     />
                   </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                      Email *
+                  <div className="form-group">
+                    <label htmlFor="email" className="form-label">
+                      {t.contact.formLabels.email}
                     </label>
                     <input
                       type="email"
@@ -235,15 +236,15 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-dark-700/50 border border-dark-600 rounded-lg text-white placeholder-gray-400 focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20 focus:outline-none transition-colors duration-300"
-                      placeholder="seu@email.com"
+                      className="form-input"
+                      placeholder={t.contact.formPlaceholders.email}
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                    Assunto *
+                <div className="form-group">
+                  <label htmlFor="subject" className="form-label">
+                    {t.contact.formLabels.subject}
                   </label>
                   <input
                     type="text"
@@ -252,14 +253,14 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-dark-700/50 border border-dark-600 rounded-lg text-white placeholder-gray-400 focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20 focus:outline-none transition-colors duration-300"
-                    placeholder="Qual o assunto da sua mensagem?"
+                    className="form-input"
+                    placeholder={t.contact.formPlaceholders.subject}
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                    Mensagem *
+                <div className="form-group">
+                  <label htmlFor="message" className="form-label">
+                    {t.contact.formLabels.message}
                   </label>
                   <textarea
                     id="message"
@@ -268,8 +269,8 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-dark-700/50 border border-dark-600 rounded-lg text-white placeholder-gray-400 focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20 focus:outline-none transition-colors duration-300 resize-none"
-                    placeholder="Conte-me sobre seu projeto ou ideia..."
+                    className="form-textarea"
+                    placeholder={t.contact.formPlaceholders.message}
                   />
                 </div>
 
@@ -278,17 +279,17 @@ const Contact = () => {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full btn-primary flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="form-button"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                      Enviando...
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <span>{t.contact.sending}</span>
                     </>
                   ) : (
                     <>
-                      <FaPaperPlane className="w-5 h-5 mr-2" />
-                      Enviar Mensagem
+                      <FaPaperPlane className="w-5 h-5" />
+                      <span>{t.contact.send}</span>
                     </>
                   )}
                 </motion.button>
@@ -305,19 +306,18 @@ const Contact = () => {
           className="text-center mt-16"
         >
           <div className="bg-gradient-to-r from-primary-600/10 to-primary-400/10 rounded-2xl p-8 border border-primary-600/20">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Obrigado por visitar meu portfólio!
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              {t.contact.finalCta.title}
             </h3>
-            <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-              Espero que tenha gostado de conhecer um pouco sobre mim e meus projetos. 
-              Estou sempre em busca de novos desafios e oportunidades de crescimento.
+            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
+              {t.contact.finalCta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="#home"
                 className="btn-primary inline-flex items-center justify-center"
               >
-                Voltar ao Topo
+                {t.contact.finalCta.backToTop}
               </a>
               <a
                 href="https://github.com/CostaCodesFullStack"
@@ -326,7 +326,7 @@ const Contact = () => {
                 className="btn-secondary inline-flex items-center justify-center"
               >
                 <FaGithub className="w-5 h-5 mr-2" />
-                Ver no GitHub
+                {t.contact.finalCta.viewGitHub}
               </a>
             </div>
           </div>

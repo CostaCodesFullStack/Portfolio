@@ -13,8 +13,10 @@ import {
   SiC
 } from 'react-icons/si'
 import { HiCode, HiCog, HiLightBulb, HiUsers } from 'react-icons/hi'
+import { useTranslation } from '@/contexts/TranslationContext'
 
 const Skills = () => {
+  const { t } = useTranslation()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -22,7 +24,7 @@ const Skills = () => {
 
   const technicalSkills = [
     {
-      category: 'Linguagens de Programação',
+      category: t.skills.programmingLanguages,
       icon: HiCode,
       skills: [
         { name: 'HTML', icon: FaHtml5, level: 70, color: 'text-orange-400' },
@@ -36,25 +38,14 @@ const Skills = () => {
   ]
 
   const softSkills = [
-    { name: 'Comunicação', icon: HiUsers, description: 'Capacidade de comunicar ideias técnicas de forma clara' },
-    { name: 'Trabalho em Equipe', icon: HiUsers, description: 'Colaboração eficaz em projetos multidisciplinares' },
-    { name: 'Resolução de Problemas', icon: HiLightBulb, description: 'Abordagem analítica para encontrar soluções' },
-    { name: 'Aprendizado Contínuo', icon: HiCode, description: 'Paixão por aprender novas tecnologias e métodos' },
-    { name: 'Adaptabilidade', icon: HiCog, description: 'Flexibilidade para trabalhar com diferentes tecnologias' },
+    { name: t.skills.softSkillsList.communication, icon: HiUsers, description: t.skills.softSkillsDescriptions.communication },
+    { name: t.skills.softSkillsList.teamwork, icon: HiUsers, description: t.skills.softSkillsDescriptions.teamwork },
+    { name: t.skills.softSkillsList.problemSolving, icon: HiLightBulb, description: t.skills.softSkillsDescriptions.problemSolving },
+    { name: t.skills.softSkillsList.continuousLearning, icon: HiCode, description: t.skills.softSkillsDescriptions.continuousLearning },
+    { name: t.skills.softSkillsList.adaptability, icon: HiCog, description: t.skills.softSkillsDescriptions.adaptability },
   ]
 
-  const concepts = [
-    'Estruturas de Dados',
-    'Algoritmos',
-    'Programação Orientada a Objetos',
-    'Responsive Design',
-    'Desenvolvimento Web',
-    'Clean Code',
-    'Lógica de Programação',
-    'Manipulação do DOM',
-    'CSS Flexbox e Grid',
-    'Componentes React'
-  ]
+  const concepts = t.skills.conceptsList
 
   return (
     <section id="skills" ref={ref} className="section-padding">
@@ -66,10 +57,10 @@ const Skills = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="gradient-text">Habilidades</span>
+            <span className="gradient-text">{t.skills.title}</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Tecnologias e competências que estou desenvolvendo para me tornar um desenvolvedor completo
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-3xl mx-auto">
+            {t.skills.subtitle}
           </p>
         </motion.div>
 
@@ -85,7 +76,7 @@ const Skills = () => {
             >
               <div className="flex items-center space-x-3 mb-6">
                 <category.icon className="w-6 h-6 text-primary-400" />
-                <h3 className="text-xl font-bold text-white">{category.category}</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{category.category}</h3>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -95,13 +86,13 @@ const Skills = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={inView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.4, delay: categoryIndex * 0.2 + skillIndex * 0.1 }}
-                    className="text-center p-4 bg-dark-700/30 rounded-lg hover:bg-dark-700/50 transition-colors duration-300"
+                    className="text-center p-4 bg-white/30 dark:bg-dark-700/30 rounded-lg hover:bg-white/50 dark:hover:bg-dark-700/50 transition-colors duration-300"
                   >
                     <skill.icon className={`w-8 h-8 mx-auto mb-2 ${skill.color}`} />
-                    <div className="text-sm font-medium text-white mb-2">{skill.name}</div>
+                    <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">{skill.name}</div>
                     
                     {/* Barra de progresso */}
-                    <div className="w-full bg-dark-600 rounded-full h-2 mb-2">
+                    <div className="w-full bg-gray-300 dark:bg-dark-600 rounded-full h-2 mb-2">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={inView ? { width: `${skill.level}%` } : {}}
@@ -109,7 +100,7 @@ const Skills = () => {
                         className="bg-gradient-to-r from-primary-400 to-primary-600 h-2 rounded-full"
                       />
                     </div>
-                    <div className="text-xs text-gray-400">{skill.level}%</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">{skill.level}%</div>
                   </motion.div>
                 ))}
               </div>
@@ -124,9 +115,9 @@ const Skills = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="card mb-12"
         >
-          <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
             <HiUsers className="w-6 h-6 text-primary-400 mr-3" />
-            Habilidades Interpessoais
+            {t.skills.softSkills}
           </h3>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -136,13 +127,13 @@ const Skills = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                className="p-4 bg-dark-700/30 rounded-lg hover:bg-dark-700/50 transition-colors duration-300"
+                className="p-4 bg-white/30 dark:bg-dark-700/30 rounded-lg hover:bg-white/50 dark:hover:bg-dark-700/50 transition-colors duration-300"
               >
                 <div className="flex items-center space-x-3 mb-2">
                   <skill.icon className="w-5 h-5 text-primary-400" />
-                  <h4 className="font-semibold text-white">{skill.name}</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">{skill.name}</h4>
                 </div>
-                <p className="text-sm text-gray-400">{skill.description}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{skill.description}</p>
               </motion.div>
             ))}
           </div>
@@ -155,9 +146,9 @@ const Skills = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="card"
         >
-          <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
             <HiLightBulb className="w-6 h-6 text-primary-400 mr-3" />
-            Conceitos e Conhecimentos
+            {t.skills.concepts}
           </h3>
           
           <div className="flex flex-wrap gap-3">
@@ -167,7 +158,7 @@ const Skills = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.3, delay: 1 + index * 0.05 }}
-                className="px-4 py-2 bg-primary-600/20 text-primary-300 rounded-full text-sm border border-primary-600/30 hover:bg-primary-600/30 transition-colors duration-300"
+                className="px-4 py-2 bg-primary-600/20 dark:bg-primary-600/20 text-primary-700 dark:text-primary-300 rounded-full text-sm border border-primary-600/30 hover:bg-primary-600/30 transition-colors duration-300"
               >
                 {concept}
               </motion.span>
@@ -183,17 +174,17 @@ const Skills = () => {
           className="text-center mt-16"
         >
           <div className="bg-gradient-to-r from-primary-600/10 to-primary-400/10 rounded-2xl p-8 border border-primary-600/20">
-            <h3 className="text-xl font-bold text-white mb-4">
-              Interessado em ver meus projetos?
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              {t.skills.cta.title}
             </h3>
-            <p className="text-gray-400 mb-6">
-              Confira alguns dos projetos que desenvolvi aplicando essas habilidades
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              {t.skills.cta.description}
             </p>
             <a
               href="#projects"
               className="btn-primary inline-flex items-center"
             >
-              Ver Projetos
+              {t.skills.cta.button}
             </a>
           </div>
         </motion.div>

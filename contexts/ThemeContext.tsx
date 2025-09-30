@@ -26,8 +26,10 @@ interface ThemeProviderProps {
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>('dark')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     // Verificar se há preferência salva no localStorage
     const savedTheme = localStorage.getItem('theme') as Theme
     if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
@@ -40,6 +42,8 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   }, [])
 
   useEffect(() => {
+    if (!mounted) return
+    
     // Salvar preferência no localStorage
     localStorage.setItem('theme', theme)
     
@@ -51,7 +55,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       document.documentElement.classList.add('light')
       document.documentElement.classList.remove('dark')
     }
-  }, [theme])
+  }, [theme, mounted])
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark')
@@ -61,6 +65,15 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     theme,
     setTheme,
     toggleTheme
+  }
+
+  // Evitar problemas de hidratação
+  if (!mounted) {
+    return (
+      <ThemeContext.Provider value={value}>
+        {children}
+      </ThemeContext.Provider>
+    )
   }
 
   return (

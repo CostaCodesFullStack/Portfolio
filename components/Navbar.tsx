@@ -155,7 +155,7 @@ const Navbar = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
               onClick={toggleTheme}
-              className="text-gray-300 hover:text-primary-400 transition-colors duration-300 p-2"
+              className="text-gray-600 dark:text-gray-300 hover:text-primary-400 transition-colors duration-300 p-2"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
@@ -207,7 +207,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-dark-700">
                   {/* Language Selector Mobile */}
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-400">Idioma:</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">Idioma:</span>
                     <button
                       onClick={() => setLanguage('pt')}
                       className={`px-3 py-1 text-sm rounded transition-colors duration-200 ${
