@@ -34,8 +34,8 @@ Um portfólio profissional e moderno para Cauã Costa, estudante de Engenharia d
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/cauacosta/portfolio.git
-cd portfolio
+git clone https://github.com/CostaCodesFullStack/Portfolio.git
+cd Portfolio
 ```
 
 ### 2. Instale as dependências
@@ -226,7 +226,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 **Cauã Costa**
 - Email: caua@exemplo.com
-- GitHub: [@cauacosta](https://github.com/cauacosta)
+- GitHub: [@CostaCodesFullStack](https://github.com/CostaCodesFullStack)
 - LinkedIn: [Cauã Costa](https://linkedin.com/in/cauacosta)
 
 ## 🙏 Agradecimentos
