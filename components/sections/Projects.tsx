@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FaGithub, FaExternalLinkAlt, FaCode, FaMobile, FaServer } from 'react-icons/fa'
@@ -45,6 +46,13 @@ const Projects = () => {
       github: 'https://github.com/CostaCodesFullStack/Calculadora-Online',
       demo: 'https://costacodesfullstack.github.io/Calculadora-Online',
       featured: true
+    },
+    {
+      id: 3,
+      title: t.projects.project3.title,
+      description: t.projects.project3.description,
+      image: '/images/projects/calculadora-imc.jpg',
+      technologies: ['React', 'HTML', 'CSS', 'JavaScript'],
     }
   ]
 
@@ -112,7 +120,7 @@ const Projects = () => {
                   </div>
                 ) : (
                   <div className="w-full h-48 bg-gradient-to-br from-primary-600/20 to-primary-400/20 flex items-center justify-center">
-                    <project.icon className="w-16 h-16 text-primary-400" />
+                    {project.icon && React.createElement(project.icon, { className: "w-16 h-16 text-primary-400" })}
                   </div>
                 )}
                 

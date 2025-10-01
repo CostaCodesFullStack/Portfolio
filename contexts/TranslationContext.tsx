@@ -167,6 +167,10 @@ interface Translation {
       title: string
       description: string
     }
+    project3: {
+      title: string
+      description: string
+    }
     ariaLabels: {
       viewCode: string
       viewDemo: string
@@ -435,6 +439,10 @@ const translations: Record<Language, Translation> = {
         title: 'Calculadora',
         description: 'Calculadora funcional desenvolvida em React com interface moderna. Inclui operações básicas com design responsivo e experiência de usuário otimizada.'
       },
+      project3: {
+        title: 'Calculadora IMC',
+        description: 'Uma calculadora de IMC completa e moderna que vai além do cálculo básico. Acompanhe seu histórico, visualize sua evolução com gráficos interativos, defina metas de peso e receba orientações personalizadas. Interface intuitiva com modo escuro, suporte a diferentes unidades de medida e design responsivo para todos os dispositivos.'
+      },
       ariaLabels: {
         viewCode: 'Ver código no GitHub',
         viewDemo: 'Ver demonstração'
@@ -700,6 +708,10 @@ const translations: Record<Language, Translation> = {
       project2: {
         title: 'Calculator',
         description: 'Functional calculator developed in React with modern interface. Includes basic operations with responsive design and optimized user experience.'
+      },
+      project3: {
+        title: 'IMC Calculator',
+        description: 'A complete and modern IMC calculator that goes beyond the basic calculation. Track your history, visualize your evolution with interactive graphs, set weight goals and receive personalized guidance. Intuitive interface with dark mode, support for different measurement units and responsive design for all devices.'
       },
       ariaLabels: {
         viewCode: 'View code on GitHub',
