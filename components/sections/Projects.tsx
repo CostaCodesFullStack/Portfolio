@@ -52,7 +52,12 @@ const Projects = () => {
       title: t.projects.project3.title,
       description: t.projects.project3.description,
       image: '/images/projects/calculadora-imc.jpg',
-      technologies: ['React', 'HTML', 'CSS', 'JavaScript'],
+      technologies: ['HTML', 'CSS', 'JavaScript'],
+      category: 'Frontend',
+      icon: FaCode,
+      github: 'https://github.com/CostaCodesFullStack/IMC-Online',
+      demo: 'https://costacodesfullstack.github.io/IMC-Online',
+      featured: true
     }
   ]
 
