@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Cauã Costa - Estudante de Engenharia de Software',
-  description: 'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na UFC. Conheça meus projetos, habilidades e jornada de aprendizado em programação.',
+  description: 'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na Faculdade Anhanguera Conheça meus projetos, habilidades e jornada de aprendizado em programação.',
   keywords: ['portfólio', 'engenharia de software', 'desenvolvedor', 'programação', 'tecnologia', 'UFC', 'Fortaleza', 'React', 'JavaScript'],
   authors: [{ name: 'Cauã Costa' }],
   creator: 'Cauã Costa',
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: 'https://cauacosta.dev',
     title: 'Cauã Costa - Estudante de Engenharia de Software',
-    description: 'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na UFC. Conheça meus projetos e habilidades.',
+    description: 'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na Faculdade Anhanguera Conheça meus projetos e habilidades.',
     siteName: 'Cauã Costa Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Cauã Costa - Estudante de Engenharia de Software',
-    description: 'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na UFC.',
+    description: 'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na Faculdade Anhanguera',
   },
   robots: {
     index: true,
