@@ -441,7 +441,7 @@ const translations: Record<Language, Translation> = {
       },
       project3: {
         title: 'Calculadora IMC',
-        description: 'Uma calculadora de IMC completa e moderna que vai além do cálculo básico. Acompanhe seu histórico, visualize sua evolução com gráficos interativos, defina metas de peso e receba orientações personalizadas. Interface intuitiva com modo escuro, suporte a diferentes unidades de medida e design responsivo para todos os dispositivos.'
+        description: 'Calculadora de IMC avançada desenvolvida em React com histórico de medições, gráficos de evolução e metas personalizadas. Interface moderna com modo escuro e design responsivo.'
       },
       ariaLabels: {
         viewCode: 'Ver código no GitHub',
@@ -711,7 +711,7 @@ const translations: Record<Language, Translation> = {
       },
       project3: {
         title: 'IMC Calculator',
-        description: 'A complete and modern IMC calculator that goes beyond the basic calculation. Track your history, visualize your evolution with interactive graphs, set weight goals and receive personalized guidance. Intuitive interface with dark mode, support for different measurement units and responsive design for all devices.'
+        description: 'Advanced IMC calculator developed in React with measurement history, evolution graphs and personalized goals. Modern interface with dark mode and responsive design.'
       },
       ariaLabels: {
         viewCode: 'View code on GitHub',
