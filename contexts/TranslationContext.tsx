@@ -171,6 +171,10 @@ interface Translation {
       title: string
       description: string
     }
+    project4: {
+      title: string
+      description: string
+    }
     ariaLabels: {
       viewCode: string
       viewDemo: string
@@ -443,6 +447,10 @@ const translations: Record<Language, Translation> = {
         title: 'Calculadora IMC',
         description: 'Calculadora de IMC avançada desenvolvida em React com histórico de medições, gráficos de evolução e metas personalizadas. Interface moderna com modo escuro e design responsivo.'
       },
+      project4: {
+        title: 'Netflix Clone',
+        description: 'Clone da Netflix desenvolvido com React e Node.js, incluindo frontend responsivo e backend com autenticação de usuários. Projeto em desenvolvimento com interface moderna e funcionalidades de streaming.'
+      },
       ariaLabels: {
         viewCode: 'Ver código no GitHub',
         viewDemo: 'Ver demonstração'
@@ -712,6 +720,10 @@ const translations: Record<Language, Translation> = {
       project3: {
         title: 'IMC Calculator',
         description: 'Advanced IMC calculator developed in React with measurement history, evolution graphs and personalized goals. Modern interface with dark mode and responsive design.'
+      },
+      project4: {
+        title: 'Netflix Clone',
+        description: 'Netflix clone developed with React and Node.js, including responsive frontend and backend with user authentication. Project in development with modern interface and streaming features.'
       },
       ariaLabels: {
         viewCode: 'View code on GitHub',

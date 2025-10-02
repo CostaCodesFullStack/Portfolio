@@ -58,6 +58,18 @@ const Projects = () => {
       github: 'https://github.com/CostaCodesFullStack/IMC-Online',
       demo: 'https://costacodesfullstack.github.io/IMC-Online',
       featured: true
+    },
+    {
+      id: 4,
+      title: t.projects.project4.title,
+      description: t.projects.project4.description,
+      image: '/images/projects/netflix-clone.jpg',
+      technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'JavaScript', 'CSS'],
+      category: 'Full-Stack',
+      icon: FaServer,
+      github: null,
+      demo: null,
+      featured: true
     }
   ]
 
