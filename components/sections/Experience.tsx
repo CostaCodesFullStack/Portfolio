@@ -89,7 +89,7 @@ const Experience = () => {
     },
     {
       title: t.experience.certificationsList.python,
-      issuer: 'Curso em Vídeo',
+      issuer: 'Santander Open Academy',
       date: '2025',
       icon: FaCertificate,
       description: t.experience.certificationDetails.python
