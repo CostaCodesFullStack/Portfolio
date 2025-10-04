@@ -86,6 +86,13 @@ const Experience = () => {
       date: '2025',
       icon: FaCertificate,
       description: t.experience.certificationDetails.react
+    },
+    {
+      title: t.experience.certificationsList.python,
+      issuer: 'Curso em Vídeo',
+      date: '2025',
+      icon: FaCertificate,
+      description: t.experience.certificationDetails.python
     }
   ]
 

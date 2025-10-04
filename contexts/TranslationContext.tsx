@@ -105,6 +105,7 @@ interface Translation {
       htmlCss: string
       javascript: string
       react: string
+      python: string
     }
     achievementsList: {
       portfolio: string
@@ -133,6 +134,7 @@ interface Translation {
       htmlCss: string
       javascript: string
       react: string
+      python: string
     }
     achievementDetails: {
       portfolio: string
@@ -363,7 +365,8 @@ const translations: Record<Language, Translation> = {
       certificationsList: {
         htmlCss: 'HTML5 e CSS3',
         javascript: 'JavaScript',
-        react: 'React'
+        react: 'React',
+        python: 'Python'
       },
       achievementsList: {
         portfolio: 'Portfólio Profissional',
@@ -408,7 +411,8 @@ const translations: Record<Language, Translation> = {
       certificationDetails: {
         htmlCss: 'Desenvolvimento web com HTML5 e CSS3, incluindo responsividade e design moderno.',
         javascript: 'Fundamentos de JavaScript, DOM, APIs e desenvolvimento web interativo.',
-        react: 'Desenvolvimento de aplicações React com componentes, hooks e integração de APIs.'
+        react: 'Desenvolvimento de aplicações React com componentes, hooks e integração de APIs.',
+        python: 'Fundamentos de Python, estruturas de dados, algoritmos e desenvolvimento de aplicações.'
       },
       achievementDetails: {
         portfolio: 'Desenvolvimento de portfólio completo com React e Next.js',
@@ -637,7 +641,8 @@ const translations: Record<Language, Translation> = {
       certificationsList: {
         htmlCss: 'HTML5 and CSS3',
         javascript: 'JavaScript',
-        react: 'React'
+        react: 'React',
+        python: 'Python'
       },
       achievementsList: {
         portfolio: 'Professional Portfolio',
@@ -682,7 +687,8 @@ const translations: Record<Language, Translation> = {
       certificationDetails: {
         htmlCss: 'Web development with HTML5 and CSS3, including responsiveness and modern design.',
         javascript: 'JavaScript fundamentals, DOM, APIs and interactive web development.',
-        react: 'React application development with components, hooks and API integration.'
+        react: 'React application development with components, hooks and API integration.',
+        python: 'Python fundamentals, data structures, algorithms and application development.'
       },
       achievementDetails: {
         portfolio: 'Complete portfolio development with React and Next.js',
