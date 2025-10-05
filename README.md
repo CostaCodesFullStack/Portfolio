@@ -79,8 +79,6 @@ Aqui estão alguns projetos que desenvolvi para praticar e demonstrar minhas hab
     -   Python para Backend - *Santander Open Academy*
 
 ## 🎯 Roadmap Futuro
-
--   [ ] Implementar tema claro/escuro (dark mode toggle)
 -   [ ] Adicionar blog técnico com artigos sobre desenvolvimento
 -   [ ] Conectar formulário de contato a um backend funcional
 -   [ ] Integrar CMS para gerenciamento de conteúdo dos projetos
