@@ -177,6 +177,10 @@ interface Translation {
       title: string
       description: string
     }
+    project5: {
+      title: string
+      description: string
+    }
     ariaLabels: {
       viewCode: string
       viewDemo: string
@@ -455,6 +459,10 @@ const translations: Record<Language, Translation> = {
         title: 'Netflix Clone',
         description: 'Clone da Netflix desenvolvido com React e Node.js, incluindo frontend responsivo e backend com autenticação de usuários. Projeto em desenvolvimento com interface moderna e funcionalidades de streaming.'
       },
+      project5: {
+        title: 'Landing Page Educacional',
+        description: 'Landing page moderna e responsiva para uma cafeteria fictícia, desenvolvida com HTML, CSS e JavaScript. Inclui seções de apresentação, cardápio, depoimentos e contato com design elegante e interativo.'
+      },
       ariaLabels: {
         viewCode: 'Ver código no GitHub',
         viewDemo: 'Ver demonstração'
@@ -730,6 +738,10 @@ const translations: Record<Language, Translation> = {
       project4: {
         title: 'Netflix Clone',
         description: 'Netflix clone developed with React and Node.js, including responsive frontend and backend with user authentication. Project in development with modern interface and streaming features.'
+      },
+      project5: {
+        title: 'Educational Landing Page',
+        description: 'Modern and responsive landing page for a fictional coffee shop, developed with HTML, CSS and JavaScript. Includes presentation, menu, testimonials and contact sections with elegant and interactive design.'
       },
       ariaLabels: {
         viewCode: 'View code on GitHub',

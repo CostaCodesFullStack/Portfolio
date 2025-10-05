@@ -61,16 +61,16 @@ const Projects = () => {
     },
     {
       id: 4,
-      title: t.projects.project4.title,
-      description: t.projects.project4.description,
-      image: '/images/projects/netflix-clone.jpg',
-      technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'JavaScript', 'CSS'],
-      category: 'Full-Stack',
-      icon: FaServer,
-      github: null,
-      demo: null,
+      title: t.projects.project5.title,
+      description: t.projects.project5.description,
+      image: '/images/projects/landing-page-educational.jpg',
+      technologies: ['HTML', 'CSS', 'JavaScript'],
+      category: 'Frontend',
+      icon: FaCode,
+      github: 'https://github.com/CostaCodesFullStack/landing-page',
+      demo: 'https://costacodesfullstack.github.io/landing-page',
       featured: true
-    }
+    },
   ]
 
   const categories = [t.projects.categories.all, t.projects.categories.frontend, t.projects.categories.backend, t.projects.categories.fullstack]
