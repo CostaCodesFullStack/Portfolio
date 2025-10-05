@@ -63,7 +63,7 @@ const Projects = () => {
       id: 4,
       title: t.projects.project5.title,
       description: t.projects.project5.description,
-      image: '/images/projects/landing-page-educational.jpg',
+      image: '/images/projects/landing-page.gif',
       technologies: ['HTML', 'CSS', 'JavaScript'],
       category: 'Frontend',
       icon: FaCode,
