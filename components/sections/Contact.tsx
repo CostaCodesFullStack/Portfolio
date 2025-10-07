@@ -10,7 +10,9 @@ import {
   FaPhone, 
   FaMapMarkerAlt,
   FaPaperPlane,
-  FaCheckCircle
+  FaCheckCircle,
+  FaExclamationTriangle,
+  FaTimes
 } from 'react-icons/fa'
 import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi'
 import { useTranslation } from '@/contexts/TranslationContext'
@@ -30,29 +32,57 @@ const Contact = () => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+  const [validationErrors, setValidationErrors] = useState<string[]>([])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
+    // Limpar erros quando o usuário começar a digitar
+    if (submitError) setSubmitError('')
+    if (validationErrors.length > 0) setValidationErrors([])
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError('')
+    setValidationErrors([])
     
-    // Simular envio do formulário
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    
-    // Resetar formulário após 3 segundos
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-    }, 3000)
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setIsSubmitted(true)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        
+        // Resetar estado de sucesso após 5 segundos
+        setTimeout(() => {
+          setIsSubmitted(false)
+        }, 5000)
+      } else {
+        if (data.errors && data.errors.length > 0) {
+          setValidationErrors(data.errors)
+        } else {
+          setSubmitError(data.message || 'Erro ao enviar mensagem. Tente novamente.')
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error)
+      setSubmitError('Erro de conexão. Verifique sua internet e tente novamente.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -192,6 +222,49 @@ const Contact = () => {
             <h3 className="form-title">
               {t.contact.sendMessage}
             </h3>
+
+            {/* Mensagens de erro */}
+            {(submitError || validationErrors.length > 0) && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
+              >
+                <div className="flex items-start">
+                  <FaExclamationTriangle className="w-5 h-5 text-red-500 mt-0.5 mr-3 flex-shrink-0" />
+                  <div className="flex-1">
+                    {submitError && (
+                      <p className="text-red-700 dark:text-red-300 font-medium mb-2">
+                        {submitError}
+                      </p>
+                    )}
+                    {validationErrors.length > 0 && (
+                      <div>
+                        <p className="text-red-700 dark:text-red-300 font-medium mb-2">
+                          Por favor, corrija os seguintes erros:
+                        </p>
+                        <ul className="list-disc list-inside space-y-1">
+                          {validationErrors.map((error, index) => (
+                            <li key={index} className="text-red-600 dark:text-red-400 text-sm">
+                              {error}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setSubmitError('')
+                      setValidationErrors([])
+                    }}
+                    className="ml-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+                  >
+                    <FaTimes className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            )}
 
             {isSubmitted ? (
               <motion.div
