@@ -291,5 +291,6 @@ Estudante de Engenharia de Software
 💙 Desenvolvido com paixão por Cauã Costa
 Interessado em colaborar ou contratar? Vamos conversar!
 </div>
-#   P i p e l i n e   C I / C D   f u n c i o n a n d o !  
+#   P i p e l i n e   C I / C D   f u n c i o n a n d o ! 
+ 
  
