@@ -8,6 +8,13 @@ on:
   pull_request_review:
     types: [submitted]
 
+# Permissões necessárias para CodeQL
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+  pull-requests: write
+
 # Configurações globais
 env:
   NODE_VERSION: '20'

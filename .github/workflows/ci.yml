@@ -8,6 +8,12 @@ on:
     branches: [main, develop]
   workflow_dispatch: # Permite execução manual
 
+# Permissões necessárias para CodeQL
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
 # Configurações globais
 env:
   NODE_VERSION: '20'
