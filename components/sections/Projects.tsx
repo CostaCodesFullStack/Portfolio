@@ -1,26 +1,34 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { FaGithub, FaExternalLinkAlt, FaCode, FaMobile, FaServer } from 'react-icons/fa'
-import { HiLightBulb, HiCode } from 'react-icons/hi'
-import Image from 'next/image'
-import { useState } from 'react'
-import { useTranslation } from '@/contexts/TranslationContext'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaCode,
+  FaMobile,
+  FaServer,
+} from 'react-icons/fa';
+import { HiLightBulb, HiCode } from 'react-icons/hi';
+import Image from 'next/image';
+import { useState } from 'react';
+import { useTranslation } from '@/contexts/TranslationContext';
 
 const Projects = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
+  });
 
-  const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
+  const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
   const handleImageError = (projectId: number) => {
-    setImageErrors(prev => ({ ...prev, [projectId]: true }))
-  }
+    setImageErrors(prev => ({ ...prev, [projectId]: true }));
+  };
 
   const projects = [
     {
@@ -33,7 +41,7 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/conversor-moedas',
       demo: 'https://costacodesfullstack.github.io/conversor-moedas',
-      featured: true
+      featured: true,
     },
     {
       id: 2,
@@ -45,7 +53,7 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/Calculadora-Online',
       demo: 'https://costacodesfullstack.github.io/Calculadora-Online',
-      featured: true
+      featured: true,
     },
     {
       id: 3,
@@ -57,7 +65,7 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/IMC-Online',
       demo: 'https://costacodesfullstack.github.io/IMC-Online',
-      featured: true
+      featured: true,
     },
     {
       id: 4,
@@ -69,14 +77,23 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/landing-page',
       demo: 'https://costacodesfullstack.github.io/landing-page',
-      featured: true
+      featured: true,
     },
-  ]
+  ];
 
-  const categories = [t.projects.categories.all, t.projects.categories.frontend, t.projects.categories.backend, t.projects.categories.fullstack]
+  const categories = [
+    t.projects.categories.all,
+    t.projects.categories.frontend,
+    t.projects.categories.backend,
+    t.projects.categories.fullstack,
+  ];
 
   return (
-    <section id="projects" ref={ref} className="section-padding bg-gray-100/50 dark:bg-dark-800/30">
+    <section
+      id="projects"
+      ref={ref}
+      className="section-padding bg-gray-100/50 dark:bg-dark-800/30"
+    >
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -137,10 +154,13 @@ const Projects = () => {
                   </div>
                 ) : (
                   <div className="w-full h-48 bg-gradient-to-br from-primary-600/20 to-primary-400/20 flex items-center justify-center">
-                    {project.icon && React.createElement(project.icon, { className: "w-16 h-16 text-primary-400" })}
+                    {project.icon &&
+                      React.createElement(project.icon, {
+                        className: 'w-16 h-16 text-primary-400',
+                      })}
                   </div>
                 )}
-                
+
                 {/* Overlay com links */}
                 <div className="absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
                   {project.github && (
@@ -237,15 +257,15 @@ const Projects = () => {
               {t.projects.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://github.com/CostaCodesFullStack"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary inline-flex items-center justify-center"
-            >
-              <FaGithub className="w-5 h-5 mr-2" />
-              {t.projects.cta.githubButton}
-            </a>
+              <a
+                href="https://github.com/CostaCodesFullStack"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex items-center justify-center"
+              >
+                <FaGithub className="w-5 h-5 mr-2" />
+                {t.projects.cta.githubButton}
+              </a>
               <a
                 href="#contact"
                 className="btn-secondary inline-flex items-center justify-center"
@@ -258,7 +278,7 @@ const Projects = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Projects
+export default Projects;

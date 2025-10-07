@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Configuração para resolver warning de múltiplos lockfiles
+  outputFileTracingRoot: __dirname,
   images: {
     domains: ['images.unsplash.com', 'via.placeholder.com'],
     unoptimized: true,
@@ -14,14 +16,14 @@ const nextConfig = {
       config.watchOptions = {
         poll: 1000,
         aggregateTimeout: 300,
-      }
+      };
     }
-    return config
+    return config;
   },
   // Removido output: 'export' para desenvolvimento
   // output: 'export', // Para GitHub Pages
   // trailingSlash: true, // Para GitHub Pages
   // assetPrefix: process.env.NODE_ENV === 'production' ? '/portifolio2' : '', // Ajuste conforme seu repositório
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -1,0 +1,247 @@
+name: 🚀 CI/CD Pipeline
+
+# Triggers do workflow
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch: # Permite execução manual
+
+# Configurações globais
+env:
+  NODE_VERSION: '20'
+  COVERAGE_THRESHOLD: 80
+
+jobs:
+  # Job 1: Validação de Código
+  lint-and-validate:
+    name: 🔍 Lint & Validação
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔍 Executar ESLint
+        run: npm run lint
+
+      - name: 🏗️ Verificar build TypeScript
+        run: npx tsc --noEmit
+
+      - name: 📊 Verificar formatação (se aplicável)
+        run: |
+          if [ -f ".prettierrc" ] || [ -f "prettier.config.js" ]; then
+            npx prettier --check .
+          else
+            echo "Prettier não configurado, pulando verificação de formatação"
+          fi
+
+  # Job 2: Testes Unitários
+  test:
+    name: 🧪 Testes & Cobertura
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    strategy:
+      matrix:
+        node-version: [18, 20]
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🧪 Executar testes com cobertura
+        run: npm run test:coverage
+
+      - name: 📊 Verificar cobertura mínima
+        run: |
+          COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+          echo "Cobertura atual: $COVERAGE%"
+          if (( $(echo "$COVERAGE < ${{ env.COVERAGE_THRESHOLD }}" | bc -l) )); then
+            echo "❌ Cobertura insuficiente! Mínimo: ${{ env.COVERAGE_THRESHOLD }}%, Atual: $COVERAGE%"
+            exit 1
+          else
+            echo "✅ Cobertura adequada: $COVERAGE%"
+          fi
+        env:
+          COVERAGE_THRESHOLD: ${{ env.COVERAGE_THRESHOLD }}
+
+      - name: 📤 Upload relatório de cobertura
+        uses: actions/upload-artifact@v4
+        if: matrix.node-version == 20
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 30
+
+      - name: 📊 Comentar cobertura no PR
+        if: github.event_name == 'pull_request' && matrix.node-version == 20
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const coverage = JSON.parse(fs.readFileSync('coverage/coverage-summary.json', 'utf8'));
+            const total = coverage.total;
+
+            const comment = `## 📊 Relatório de Cobertura de Testes
+
+            | Métrica | Valor | Status |
+            |---------|-------|--------|
+            | **Linhas** | ${total.lines.pct}% | ${total.lines.pct >= ${{ env.COVERAGE_THRESHOLD }} ? '✅' : '❌'} |
+            | **Funções** | ${total.functions.pct}% | ${total.functions.pct >= ${{ env.COVERAGE_THRESHOLD }} ? '✅' : '❌'} |
+            | **Branches** | ${total.branches.pct}% | ${total.branches.pct >= ${{ env.COVERAGE_THRESHOLD }} ? '✅' : '❌'} |
+            | **Statements** | ${total.statements.pct}% | ${total.statements.pct >= ${{ env.COVERAGE_THRESHOLD }} ? '✅' : '❌'} |
+
+            **Meta de cobertura:** ${{ env.COVERAGE_THRESHOLD }}%
+
+            ${total.lines.pct < ${{ env.COVERAGE_THRESHOLD }} ? '⚠️ **Atenção:** Cobertura abaixo do mínimo exigido!' : '🎉 **Parabéns:** Cobertura adequada!'}
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Job 3: Build do Projeto
+  build:
+    name: 🏗️ Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [lint-and-validate, test]
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🏗️ Build do projeto
+        run: npm run build
+
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          path: .next/
+          retention-days: 7
+
+  # Job 4: Análise de Segurança
+  security:
+    name: 🔒 Análise de Segurança
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔍 Auditoria de segurança NPM
+        run: npm audit --audit-level=moderate
+
+      - name: 🔒 Análise com CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: 🔍 Executar CodeQL
+        uses: github/codeql-action/analyze@v3
+
+  # Job 5: Deploy (apenas para main)
+  deploy:
+    name: 🚀 Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint-and-validate, test, build, security]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🏗️ Build para produção
+        run: npm run build
+
+      - name: 🚀 Deploy para Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+
+      - name: 📢 Notificar sucesso do deploy
+        if: success()
+        run: |
+          echo "🎉 Deploy realizado com sucesso!"
+          echo "URL: https://${{ secrets.VERCEL_PROJECT_ID }}.vercel.app"
+
+  # Job 6: Notificação de Status
+  notify:
+    name: 📢 Notificação
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [lint-and-validate, test, build, security]
+    if: always()
+
+    steps:
+      - name: 📊 Resumo do Pipeline
+        run: |
+          echo "## 📊 Resumo do Pipeline CI/CD" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Lint & Validação | ${{ needs.lint-and-validate.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Testes | ${{ needs.test.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{ needs.build.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Segurança | ${{ needs.security.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Autor:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY

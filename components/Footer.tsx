@@ -1,19 +1,27 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from 'react-icons/fa'
-import { HiCode } from 'react-icons/hi'
-import { useTranslation } from '@/contexts/TranslationContext'
+import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from 'react-icons/fa';
+import { HiCode } from 'react-icons/hi';
+import { useTranslation } from '@/contexts/TranslationContext';
 
 const Footer = () => {
-  const { t } = useTranslation()
-  const currentYear = new Date().getFullYear()
+  const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/CostaCodesFullStack', label: 'GitHub' },
-    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/caua-costa-222900278', label: 'LinkedIn' },
+    {
+      icon: FaGithub,
+      href: 'https://github.com/CostaCodesFullStack',
+      label: 'GitHub',
+    },
+    {
+      icon: FaLinkedin,
+      href: 'https://www.linkedin.com/in/caua-costa-222900278',
+      label: 'LinkedIn',
+    },
     { icon: FaEnvelope, href: 'mailto:cauadevcosta@gmail.com', label: 'Email' },
-  ]
+  ];
 
   const quickLinks = [
     { name: t.footer.quickLinksList.home, href: '#home' },
@@ -22,7 +30,7 @@ const Footer = () => {
     { name: t.footer.quickLinksList.projects, href: '#projects' },
     { name: t.footer.quickLinksList.experience, href: '#experience' },
     { name: t.footer.quickLinksList.contact, href: '#contact' },
-  ]
+  ];
 
   return (
     <footer className="bg-gray-100 dark:bg-dark-900 border-t border-gray-300 dark:border-dark-700">
@@ -40,7 +48,9 @@ const Footer = () => {
                 <div className="w-8 h-8 bg-gradient-to-r from-primary-400 to-primary-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-lg">C</span>
                 </div>
-                <span className="text-xl font-bold gradient-text">Cauã Costa</span>
+                <span className="text-xl font-bold gradient-text">
+                  Cauã Costa
+                </span>
               </div>
               <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md">
                 {t.footer.description}
@@ -69,7 +79,9 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t.footer.quickLinks}</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                {t.footer.quickLinks}
+              </h3>
               <ul className="space-y-2">
                 {quickLinks.map((link, index) => (
                   <li key={index}>
@@ -90,15 +102,21 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t.footer.contact}</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                {t.footer.contact}
+              </h3>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <FaEnvelope className="w-4 h-4 text-primary-400" />
-                  <span className="text-gray-600 dark:text-gray-400 text-sm">{t.footer.contactInfo.email}</span>
+                  <span className="text-gray-600 dark:text-gray-400 text-sm">
+                    {t.footer.contactInfo.email}
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <HiCode className="w-4 h-4 text-primary-400" />
-                  <span className="text-gray-600 dark:text-gray-400 text-sm">{t.footer.contactInfo.location}</span>
+                  <span className="text-gray-600 dark:text-gray-400 text-sm">
+                    {t.footer.contactInfo.location}
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -118,7 +136,7 @@ const Footer = () => {
               <FaHeart className="w-4 h-4 text-red-400 mx-1" />
               {t.footer.madeWith}
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -134,7 +152,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

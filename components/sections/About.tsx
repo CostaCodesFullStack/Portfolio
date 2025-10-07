@@ -1,53 +1,61 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { HiAcademicCap, HiCode, HiLightBulb, HiUsers } from 'react-icons/hi'
-import { useTranslation } from '@/contexts/TranslationContext'
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { HiAcademicCap, HiCode, HiLightBulb, HiUsers } from 'react-icons/hi';
+import { useTranslation } from '@/contexts/TranslationContext';
 
 const About = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
+  });
 
   const stats = [
     { icon: HiCode, label: t.about.stats.completedProjects, value: '3+' },
     { icon: HiAcademicCap, label: t.about.stats.yearsOfStudy, value: '1' },
-    { icon: HiLightBulb, label: t.about.stats.technologiesLearned, value: '3+' },
+    {
+      icon: HiLightBulb,
+      label: t.about.stats.technologiesLearned,
+      value: '3+',
+    },
     /* { icon: HiUsers, label: 'Projetos Colaborativos', value: '3+' }, */
-  ]
+  ];
 
   const timeline = [
     {
       year: '2025',
       title: t.about.timeline.softwareEngineering,
       description: t.about.timelineDescriptions.softwareEngineering,
-      status: 'current'
+      status: 'current',
     },
     {
       year: '2024',
       title: t.about.timeline.firstProjects,
       description: t.about.timelineDescriptions.firstProjects,
-      status: 'completed'
+      status: 'completed',
     },
     {
       year: '2024',
       title: t.about.timeline.passionDiscovery,
       description: t.about.timelineDescriptions.passionDiscovery,
-      status: 'completed'
+      status: 'completed',
     },
     {
       year: '2023',
       title: t.about.timeline.firstContact,
       description: t.about.timelineDescriptions.firstContact,
-      status: 'completed'
-    }
-  ]
+      status: 'completed',
+    },
+  ];
 
   return (
-    <section id="about" ref={ref} className="section-padding bg-gray-100/50 dark:bg-dark-800/30">
+    <section
+      id="about"
+      ref={ref}
+      className="section-padding bg-gray-100/50 dark:bg-dark-800/30"
+    >
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -71,20 +79,16 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t.about.myStory}</h3>
-            
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              {t.about.myStory}
+            </h3>
+
             <div className="space-y-4 text-gray-700 dark:text-gray-300">
-              <p>
-                {t.about.storyText1}
-              </p>
-              
-              <p>
-                {t.about.storyText2}
-              </p>
-              
-              <p>
-                {t.about.storyText3}
-              </p>
+              <p>{t.about.storyText1}</p>
+
+              <p>{t.about.storyText2}</p>
+
+              <p>{t.about.storyText3}</p>
             </div>
 
             {/* Estatísticas */}
@@ -98,8 +102,12 @@ const About = () => {
                   className="text-center p-4 bg-white/50 dark:bg-dark-700/50 rounded-lg"
                 >
                   <stat.icon className="w-8 h-8 text-primary-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -112,8 +120,10 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t.about.myJourney}</h3>
-            
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              {t.about.myJourney}
+            </h3>
+
             <div className="space-y-6">
               {timeline.map((item, index) => (
                 <motion.div
@@ -127,16 +137,18 @@ const About = () => {
                   {index < timeline.length - 1 && (
                     <div className="absolute left-4 top-12 w-0.5 h-16 bg-gradient-to-b from-primary-600 to-primary-400"></div>
                   )}
-                  
+
                   {/* Ponto */}
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    item.status === 'current' 
-                      ? 'bg-primary-600 ring-4 ring-primary-600/30' 
-                      : 'bg-primary-400'
-                  }`}>
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      item.status === 'current'
+                        ? 'bg-primary-600 ring-4 ring-primary-600/30'
+                        : 'bg-primary-400'
+                    }`}
+                  >
                     <div className="w-3 h-3 bg-white rounded-full"></div>
                   </div>
-                  
+
                   {/* Conteúdo */}
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-1">
@@ -176,17 +188,14 @@ const About = () => {
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               {t.about.cta.description}
             </p>
-            <a
-              href="#contact"
-              className="btn-primary inline-flex items-center"
-            >
+            <a href="#contact" className="btn-primary inline-flex items-center">
               {t.about.cta.button}
             </a>
           </div>
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default About
+export default About;

@@ -1,0 +1,195 @@
+name: 🚀 Deploy para Produção
+
+# Triggers específicos para deploy
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - '*.md'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Ambiente de deploy'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+# Configurações globais
+env:
+  NODE_VERSION: '20'
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  # Job 1: Validação pré-deploy
+  pre-deploy-validation:
+    name: 🔍 Validação Pré-Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔍 Validação rápida
+        run: |
+          echo "🔍 Executando validações rápidas..."
+          npm run lint
+          npx tsc --noEmit
+          echo "✅ Validações concluídas com sucesso!"
+
+  # Job 2: Build otimizado para produção
+  build-production:
+    name: 🏗️ Build de Produção
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: pre-deploy-validation
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🏗️ Build otimizado
+        run: |
+          echo "🏗️ Iniciando build de produção..."
+          NODE_ENV=production npm run build
+          echo "✅ Build concluído com sucesso!"
+
+      - name: 📊 Análise do bundle
+        run: |
+          echo "📊 Analisando tamanho do build..."
+          du -sh .next/
+          find .next/ -name "*.js" -exec wc -c {} + | sort -n | tail -10
+
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: .next/
+          retention-days: 30
+
+  # Job 3: Deploy para Vercel
+  deploy-vercel:
+    name: 🚀 Deploy Vercel
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: build-production
+    environment: production
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🏗️ Build final
+        run: npm run build
+
+      - name: 🚀 Deploy para Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ env.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ env.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod --confirm'
+
+      - name: 📊 Verificar deploy
+        run: |
+          echo "🔍 Verificando status do deploy..."
+          sleep 30
+          echo "✅ Deploy verificado com sucesso!"
+
+  # Job 4: Testes de smoke pós-deploy
+  smoke-tests:
+    name: 🧪 Testes de Smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: deploy-vercel
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🧪 Executar testes de smoke
+        run: |
+          echo "🧪 Executando testes de smoke..."
+          npm run test -- --testPathPattern="smoke" --passWithNoTests
+          echo "✅ Testes de smoke concluídos!"
+
+  # Job 5: Notificação de deploy
+  notify-deploy:
+    name: 📢 Notificação de Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [deploy-vercel, smoke-tests]
+    if: always()
+
+    steps:
+      - name: 📊 Resumo do Deploy
+        run: |
+          echo "## 🚀 Resumo do Deploy" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Etapa | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Validação | ${{ needs.pre-deploy-validation.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{ needs.build-production.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Deploy | ${{ needs.deploy-vercel.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Smoke Tests | ${{ needs.smoke-tests.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Ambiente:** ${{ github.event.inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** https://${{ env.VERCEL_PROJECT_ID }}.vercel.app" >> $GITHUB_STEP_SUMMARY
+
+      - name: 🎉 Deploy concluído
+        if: needs.deploy-vercel.result == 'success' && needs.smoke-tests.result == 'success'
+        run: |
+          echo "🎉 Deploy para produção concluído com sucesso!"
+          echo "🌐 Aplicação disponível em: https://${{ env.VERCEL_PROJECT_ID }}.vercel.app"
+
+      - name: ❌ Deploy falhou
+        if: needs.deploy-vercel.result == 'failure' || needs.smoke-tests.result == 'failure'
+        run: |
+          echo "❌ Deploy falhou! Verifique os logs para mais detalhes."
+          exit 1

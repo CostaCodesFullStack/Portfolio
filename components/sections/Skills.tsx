@@ -1,26 +1,18 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { 
-  FaReact, 
-  FaPython, 
-  FaJs, 
-  FaHtml5, 
-  FaCss3Alt
-} from 'react-icons/fa'
-import { 
-  SiC
-} from 'react-icons/si'
-import { HiCode, HiCog, HiLightBulb, HiUsers } from 'react-icons/hi'
-import { useTranslation } from '@/contexts/TranslationContext'
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { FaReact, FaPython, FaJs, FaHtml5, FaCss3Alt } from 'react-icons/fa';
+import { SiC } from 'react-icons/si';
+import { HiCode, HiCog, HiLightBulb, HiUsers } from 'react-icons/hi';
+import { useTranslation } from '@/contexts/TranslationContext';
 
 const Skills = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
+  });
 
   const technicalSkills = [
     {
@@ -33,19 +25,39 @@ const Skills = () => {
         { name: 'C', icon: SiC, level: 50, color: 'text-blue-500' },
         { name: 'Python', icon: FaPython, level: 50, color: 'text-yellow-500' },
         { name: 'React', icon: FaReact, level: 40, color: 'text-blue-400' },
-      ]
-    }
-  ]
+      ],
+    },
+  ];
 
   const softSkills = [
-    { name: t.skills.softSkillsList.communication, icon: HiUsers, description: t.skills.softSkillsDescriptions.communication },
-    { name: t.skills.softSkillsList.teamwork, icon: HiUsers, description: t.skills.softSkillsDescriptions.teamwork },
-    { name: t.skills.softSkillsList.problemSolving, icon: HiLightBulb, description: t.skills.softSkillsDescriptions.problemSolving },
-    { name: t.skills.softSkillsList.continuousLearning, icon: HiCode, description: t.skills.softSkillsDescriptions.continuousLearning },
-    { name: t.skills.softSkillsList.adaptability, icon: HiCog, description: t.skills.softSkillsDescriptions.adaptability },
-  ]
+    {
+      name: t.skills.softSkillsList.communication,
+      icon: HiUsers,
+      description: t.skills.softSkillsDescriptions.communication,
+    },
+    {
+      name: t.skills.softSkillsList.teamwork,
+      icon: HiUsers,
+      description: t.skills.softSkillsDescriptions.teamwork,
+    },
+    {
+      name: t.skills.softSkillsList.problemSolving,
+      icon: HiLightBulb,
+      description: t.skills.softSkillsDescriptions.problemSolving,
+    },
+    {
+      name: t.skills.softSkillsList.continuousLearning,
+      icon: HiCode,
+      description: t.skills.softSkillsDescriptions.continuousLearning,
+    },
+    {
+      name: t.skills.softSkillsList.adaptability,
+      icon: HiCog,
+      description: t.skills.softSkillsDescriptions.adaptability,
+    },
+  ];
 
-  const concepts = t.skills.conceptsList
+  const concepts = t.skills.conceptsList;
 
   return (
     <section id="skills" ref={ref} className="section-padding">
@@ -76,31 +88,45 @@ const Skills = () => {
             >
               <div className="flex items-center space-x-3 mb-6">
                 <category.icon className="w-6 h-6 text-primary-400" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{category.category}</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {category.category}
+                </h3>
               </div>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.4, delay: categoryIndex * 0.2 + skillIndex * 0.1 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: categoryIndex * 0.2 + skillIndex * 0.1,
+                    }}
                     className="text-center p-4 bg-white/30 dark:bg-dark-700/30 rounded-lg hover:bg-white/50 dark:hover:bg-dark-700/50 transition-colors duration-300"
                   >
-                    <skill.icon className={`w-8 h-8 mx-auto mb-2 ${skill.color}`} />
-                    <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">{skill.name}</div>
-                    
+                    <skill.icon
+                      className={`w-8 h-8 mx-auto mb-2 ${skill.color}`}
+                    />
+                    <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                      {skill.name}
+                    </div>
+
                     {/* Barra de progresso */}
                     <div className="w-full bg-gray-300 dark:bg-dark-600 rounded-full h-2 mb-2">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={inView ? { width: `${skill.level}%` } : {}}
-                        transition={{ duration: 1, delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.5 }}
+                        transition={{
+                          duration: 1,
+                          delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.5,
+                        }}
                         className="bg-gradient-to-r from-primary-400 to-primary-600 h-2 rounded-full"
                       />
                     </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">{skill.level}%</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                      {skill.level}%
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -119,7 +145,7 @@ const Skills = () => {
             <HiUsers className="w-6 h-6 text-primary-400 mr-3" />
             {t.skills.softSkills}
           </h3>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {softSkills.map((skill, index) => (
               <motion.div
@@ -131,9 +157,13 @@ const Skills = () => {
               >
                 <div className="flex items-center space-x-3 mb-2">
                   <skill.icon className="w-5 h-5 text-primary-400" />
-                  <h4 className="font-semibold text-gray-900 dark:text-white">{skill.name}</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">
+                    {skill.name}
+                  </h4>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{skill.description}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {skill.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -150,7 +180,7 @@ const Skills = () => {
             <HiLightBulb className="w-6 h-6 text-primary-400 mr-3" />
             {t.skills.concepts}
           </h3>
-          
+
           <div className="flex flex-wrap gap-3">
             {concepts.map((concept, index) => (
               <motion.span
@@ -190,7 +220,7 @@ const Skills = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Skills
+export default Skills;

@@ -1,0 +1,18 @@
+# Configuração do act para testar workflows localmente
+# Para mais informações: https://github.com/nektos/act
+
+# Usar imagem Ubuntu com act pré-instalado
+-P ubuntu-latest=catthehacker/ubuntu:act-latest
+
+# Configurações de ambiente
+--env-file .env.act
+--secret-file .secrets
+
+# Configurações de artefatos
+--artifact-server-path /tmp/artifacts
+
+# Configurações de verbose
+--verbose
+
+# Configurações de plataforma
+--platform ubuntu-latest=catthehacker/ubuntu:act-latest

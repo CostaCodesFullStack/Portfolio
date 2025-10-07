@@ -1,58 +1,60 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { useState } from 'react'
-import { 
-  FaGithub, 
-  FaLinkedin, 
-  FaEnvelope, 
-  FaPhone, 
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { useState } from 'react';
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaPhone,
   FaMapMarkerAlt,
   FaPaperPlane,
   FaCheckCircle,
   FaExclamationTriangle,
-  FaTimes
-} from 'react-icons/fa'
-import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi'
-import { useTranslation } from '@/contexts/TranslationContext'
-import { getContactInfo } from '@/lib/config'
+  FaTimes,
+} from 'react-icons/fa';
+import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi';
+import { useTranslation } from '@/contexts/TranslationContext';
+import { getContactInfo } from '@/lib/config';
 
 const Contact = () => {
-  const { t } = useTranslation()
-  const contactInfo = getContactInfo()
+  const { t } = useTranslation();
+  const contactInfo = getContactInfo();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
+  });
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [submitError, setSubmitError] = useState('')
-  const [validationErrors, setValidationErrors] = useState<string[]>([])
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
     // Limpar erros quando o usuário começar a digitar
-    if (submitError) setSubmitError('')
-    if (validationErrors.length > 0) setValidationErrors([])
-  }
+    if (submitError) setSubmitError('');
+    if (validationErrors.length > 0) setValidationErrors([]);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitError('')
-    setValidationErrors([])
-    
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError('');
+    setValidationErrors([]);
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -60,32 +62,36 @@ const Contact = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
-        setIsSubmitted(true)
-        setFormData({ name: '', email: '', subject: '', message: '' })
-        
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+
         // Resetar estado de sucesso após 5 segundos
         setTimeout(() => {
-          setIsSubmitted(false)
-        }, 5000)
+          setIsSubmitted(false);
+        }, 5000);
       } else {
         if (data.errors && data.errors.length > 0) {
-          setValidationErrors(data.errors)
+          setValidationErrors(data.errors);
         } else {
-          setSubmitError(data.message || 'Erro ao enviar mensagem. Tente novamente.')
+          setSubmitError(
+            data.message || 'Erro ao enviar mensagem. Tente novamente.'
+          );
         }
       }
     } catch (error) {
-      console.error('Erro ao enviar formulário:', error)
-      setSubmitError('Erro de conexão. Verifique sua internet e tente novamente.')
+      console.error('Erro ao enviar formulário:', error);
+      setSubmitError(
+        'Erro de conexão. Verifique sua internet e tente novamente.'
+      );
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const contactInfoData = [
     {
@@ -93,47 +99,51 @@ const Contact = () => {
       title: t.contact.email,
       value: contactInfo.email,
       href: `mailto:${contactInfo.email}`,
-      description: t.contact.contactInfo.email
+      description: t.contact.contactInfo.email,
     },
     {
       icon: FaPhone,
       title: t.contact.phone,
       value: contactInfo.phone,
       href: `tel:${contactInfo.phone.replace(/\s/g, '')}`,
-      description: t.contact.contactInfo.phone
+      description: t.contact.contactInfo.phone,
     },
     {
       icon: FaMapMarkerAlt,
       title: t.contact.location,
       value: contactInfo.location,
       href: '#',
-      description: t.contact.contactInfo.location
-    }
-  ]
+      description: t.contact.contactInfo.location,
+    },
+  ];
 
   const socialLinks = [
     {
       icon: FaGithub,
       name: 'GitHub',
       href: contactInfo.social.github,
-      color: 'hover:text-gray-100'
+      color: 'hover:text-gray-100',
     },
     {
       icon: FaLinkedin,
       name: 'LinkedIn',
       href: contactInfo.social.linkedin,
-      color: 'hover:text-blue-400'
+      color: 'hover:text-blue-400',
     },
     {
       icon: FaEnvelope,
       name: 'Email',
       href: `mailto:${contactInfo.social.email}`,
-      color: 'hover:text-red-400'
-    }
-  ]
+      color: 'hover:text-red-400',
+    },
+  ];
 
   return (
-    <section id="contact" ref={ref} className="section-padding bg-gray-100/50 dark:bg-dark-800/30">
+    <section
+      id="contact"
+      ref={ref}
+      className="section-padding bg-gray-100/50 dark:bg-dark-800/30"
+    >
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -181,9 +191,15 @@ const Contact = () => {
                     <info.icon className="w-6 h-6 text-primary-400" />
                   </div>
                   <div>
-                    <h4 className="text-gray-900 dark:text-white font-medium">{info.title}</h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{info.value}</p>
-                    <p className="text-primary-400 text-xs">{info.description}</p>
+                    <h4 className="text-gray-900 dark:text-white font-medium">
+                      {info.title}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      {info.value}
+                    </p>
+                    <p className="text-primary-400 text-xs">
+                      {info.description}
+                    </p>
                   </div>
                 </motion.a>
               ))}
@@ -191,7 +207,9 @@ const Contact = () => {
 
             {/* Links Sociais */}
             <div>
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t.contact.socialMedia}</h4>
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                {t.contact.socialMedia}
+              </h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -221,9 +239,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="contact-form"
           >
-            <h3 className="form-title">
-              {t.contact.sendMessage}
-            </h3>
+            <h3 className="form-title">{t.contact.sendMessage}</h3>
 
             {/* Mensagens de erro */}
             {(submitError || validationErrors.length > 0) && (
@@ -247,7 +263,10 @@ const Contact = () => {
                         </p>
                         <ul className="list-disc list-inside space-y-1">
                           {validationErrors.map((error, index) => (
-                            <li key={index} className="text-red-600 dark:text-red-400 text-sm">
+                            <li
+                              key={index}
+                              className="text-red-600 dark:text-red-400 text-sm"
+                            >
                               {error}
                             </li>
                           ))}
@@ -257,8 +276,8 @@ const Contact = () => {
                   </div>
                   <button
                     onClick={() => {
-                      setSubmitError('')
-                      setValidationErrors([])
+                      setSubmitError('');
+                      setValidationErrors([]);
                     }}
                     className="ml-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                   >
@@ -408,7 +427,7 @@ const Contact = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

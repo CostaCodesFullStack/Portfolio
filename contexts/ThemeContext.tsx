@@ -1,84 +1,88 @@
-'use client'
+'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 
-type Theme = 'dark' | 'light'
+type Theme = 'dark' | 'light';
 
 interface ThemeContextType {
-  theme: Theme
-  setTheme: (theme: Theme) => void
-  toggleTheme: () => void
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+  toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext)
+  const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider')
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
-  return context
-}
+  return context;
+};
 
 interface ThemeProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<Theme>('dark')
-  const [mounted, setMounted] = useState(false)
+  const [theme, setTheme] = useState<Theme>('dark');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true);
     // Verificar se há preferência salva no localStorage
-    const savedTheme = localStorage.getItem('theme') as Theme
+    const savedTheme = localStorage.getItem('theme') as Theme;
     if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
-      setTheme(savedTheme)
+      setTheme(savedTheme);
     } else {
       // Verificar preferência do sistema
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      setTheme(prefersDark ? 'dark' : 'light')
+      const prefersDark = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      ).matches;
+      setTheme(prefersDark ? 'dark' : 'light');
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if (!mounted) return
-    
+    if (!mounted) return;
+
     // Salvar preferência no localStorage
-    localStorage.setItem('theme', theme)
-    
+    localStorage.setItem('theme', theme);
+
     // Aplicar tema ao documento
     if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
-      document.documentElement.classList.remove('light')
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
     } else {
-      document.documentElement.classList.add('light')
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
     }
-  }, [theme, mounted])
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
-  }
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const value = {
     theme,
     setTheme,
-    toggleTheme
-  }
+    toggleTheme,
+  };
 
   // Evitar problemas de hidratação
   if (!mounted) {
     return (
-      <ThemeContext.Provider value={value}>
-        {children}
-      </ThemeContext.Provider>
-    )
+      <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    );
   }
 
   return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
-  )
-}
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
+};

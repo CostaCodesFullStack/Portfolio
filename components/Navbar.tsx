@@ -1,42 +1,42 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { HiMenuAlt3, HiX } from 'react-icons/hi'
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
-import { HiGlobeAlt, HiSun, HiMoon } from 'react-icons/hi2'
-import { useTranslation } from '@/contexts/TranslationContext'
-import { useTheme } from '@/contexts/ThemeContext'
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { HiGlobeAlt, HiSun, HiMoon } from 'react-icons/hi2';
+import { useTranslation } from '@/contexts/TranslationContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [showLanguageMenu, setShowLanguageMenu] = useState(false)
-  const { language, setLanguage, t } = useTranslation()
-  const { theme, toggleTheme } = useTheme()
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const { language, setLanguage, t } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
+      setScrolled(window.scrollY > 50);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (showLanguageMenu) {
-        const target = event.target as Element
+        const target = event.target as Element;
         if (!target.closest('[data-language-menu]')) {
-          setShowLanguageMenu(false)
+          setShowLanguageMenu(false);
         }
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [showLanguageMenu])
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showLanguageMenu]);
 
   const navItems = [
     { name: t.nav.home, href: '#home' },
@@ -44,13 +44,21 @@ const Navbar = () => {
     { name: t.nav.experience, href: '#experience' },
     { name: t.nav.projects, href: '#projects' },
     { name: t.nav.contact, href: '#contact' },
-  ]
+  ];
 
   const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/CostaCodesFullStack', label: 'GitHub' },
-    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/caua-costa-222900278', label: 'LinkedIn' },
+    {
+      icon: FaGithub,
+      href: 'https://github.com/CostaCodesFullStack',
+      label: 'GitHub',
+    },
+    {
+      icon: FaLinkedin,
+      href: 'https://www.linkedin.com/in/caua-costa-222900278',
+      label: 'LinkedIn',
+    },
     { icon: FaEnvelope, href: 'mailto:cauadevcosta@gmail.com', label: 'Email' },
-  ]
+  ];
 
   return (
     <motion.nav
@@ -71,7 +79,7 @@ const Navbar = () => {
             transition={{ delay: 0.2 }}
             className="flex items-center space-x-2"
           >
-            <span 
+            <span
               className="text-xl font-bold text-gray-900 dark:text-gray-100 cursor-pointer hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300"
               onClick={() => window.location.reload()}
             >
@@ -109,7 +117,7 @@ const Navbar = () => {
               >
                 <HiGlobeAlt className="w-5 h-5" />
               </motion.button>
-              
+
               <AnimatePresence>
                 {showLanguageMenu && (
                   <motion.div
@@ -120,12 +128,12 @@ const Navbar = () => {
                   >
                     <button
                       onClick={() => {
-                        setLanguage('pt')
-                        setShowLanguageMenu(false)
+                        setLanguage('pt');
+                        setShowLanguageMenu(false);
                       }}
                       className={`w-full text-left px-4 py-2 text-sm transition-colors duration-200 ${
-                        language === 'pt' 
-                          ? 'text-primary-400 bg-primary-400/10' 
+                        language === 'pt'
+                          ? 'text-primary-400 bg-primary-400/10'
                           : 'text-gray-600 dark:text-gray-300 hover:text-primary-400 hover:bg-primary-400/5'
                       }`}
                     >
@@ -133,12 +141,12 @@ const Navbar = () => {
                     </button>
                     <button
                       onClick={() => {
-                        setLanguage('en')
-                        setShowLanguageMenu(false)
+                        setLanguage('en');
+                        setShowLanguageMenu(false);
                       }}
                       className={`w-full text-left px-4 py-2 text-sm transition-colors duration-200 ${
-                        language === 'en' 
-                          ? 'text-primary-400 bg-primary-400/10' 
+                        language === 'en'
+                          ? 'text-primary-400 bg-primary-400/10'
                           : 'text-gray-600 dark:text-gray-300 hover:text-primary-400 hover:bg-primary-400/5'
                       }`}
                     >
@@ -175,7 +183,11 @@ const Navbar = () => {
             className="md:hidden text-gray-600 dark:text-gray-300 hover:text-primary-400 transition-colors duration-300"
             aria-label="Toggle menu"
           >
-            {isOpen ? <HiX className="w-6 h-6" /> : <HiMenuAlt3 className="w-6 h-6" />}
+            {isOpen ? (
+              <HiX className="w-6 h-6" />
+            ) : (
+              <HiMenuAlt3 className="w-6 h-6" />
+            )}
           </motion.button>
         </div>
 
@@ -203,16 +215,18 @@ const Navbar = () => {
                     {item.name}
                   </motion.a>
                 ))}
-                
+
                 <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-dark-700">
                   {/* Language Selector Mobile */}
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Idioma:</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Idioma:
+                    </span>
                     <button
                       onClick={() => setLanguage('pt')}
                       className={`px-3 py-1 text-sm rounded transition-colors duration-200 ${
-                        language === 'pt' 
-                          ? 'text-primary-400 bg-primary-400/10' 
+                        language === 'pt'
+                          ? 'text-primary-400 bg-primary-400/10'
                           : 'text-gray-600 dark:text-gray-300 hover:text-primary-400'
                       }`}
                     >
@@ -221,8 +235,8 @@ const Navbar = () => {
                     <button
                       onClick={() => setLanguage('en')}
                       className={`px-3 py-1 text-sm rounded transition-colors duration-200 ${
-                        language === 'en' 
-                          ? 'text-primary-400 bg-primary-400/10' 
+                        language === 'en'
+                          ? 'text-primary-400 bg-primary-400/10'
                           : 'text-gray-600 dark:text-gray-300 hover:text-primary-400'
                       }`}
                     >
@@ -249,7 +263,7 @@ const Navbar = () => {
         </AnimatePresence>
       </div>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

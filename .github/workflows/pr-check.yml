@@ -1,0 +1,285 @@
+name: 🔍 Validação de Pull Request
+
+# Triggers para PR
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+  pull_request_review:
+    types: [submitted]
+
+# Configurações globais
+env:
+  NODE_VERSION: '20'
+  COVERAGE_THRESHOLD: 80
+
+jobs:
+  # Job 1: Validação rápida
+  quick-validation:
+    name: ⚡ Validação Rápida
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔍 ESLint
+        run: npm run lint
+
+      - name: 🏗️ Verificação TypeScript
+        run: npx tsc --noEmit
+
+      - name: 📊 Verificar formatação
+        run: |
+          if [ -f ".prettierrc" ] || [ -f "prettier.config.js" ]; then
+            npx prettier --check .
+          else
+            echo "Prettier não configurado"
+          fi
+
+  # Job 2: Testes com cobertura
+  test-coverage:
+    name: 🧪 Testes & Cobertura
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🧪 Executar testes
+        run: npm run test:coverage
+
+      - name: 📊 Verificar cobertura
+        run: |
+          COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+          echo "Cobertura atual: $COVERAGE%"
+          echo "Cobertura mínima: ${{ env.COVERAGE_THRESHOLD }}%"
+
+          if (( $(echo "$COVERAGE < ${{ env.COVERAGE_THRESHOLD }}" | bc -l) )); then
+            echo "❌ Cobertura insuficiente!"
+            exit 1
+          else
+            echo "✅ Cobertura adequada!"
+          fi
+        env:
+          COVERAGE_THRESHOLD: ${{ env.COVERAGE_THRESHOLD }}
+
+      - name: 📤 Upload cobertura
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-pr
+          path: coverage/
+          retention-days: 7
+
+  # Job 3: Build de verificação
+  build-check:
+    name: 🏗️ Build Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [quick-validation, test-coverage]
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🏗️ Build do projeto
+        run: npm run build
+
+      - name: 📊 Análise do build
+        run: |
+          echo "📊 Análise do build:"
+          du -sh .next/
+          echo "Arquivos gerados:"
+          find .next/ -name "*.js" | wc -l
+
+  # Job 4: Análise de segurança
+  security-check:
+    name: 🔒 Segurança
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔍 Auditoria NPM
+        run: npm audit --audit-level=moderate
+
+      - name: 🔒 Análise CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: 🔍 Executar CodeQL
+        uses: github/codeql-action/analyze@v3
+
+  # Job 5: Comentário no PR
+  pr-comment:
+    name: 💬 Comentário no PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [quick-validation, test-coverage, build-check, security-check]
+    if: always() && github.event_name == 'pull_request'
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📊 Gerar relatório de cobertura
+        if: needs.test-coverage.result == 'success'
+        run: |
+          if [ -f "coverage/coverage-summary.json" ]; then
+            COVERAGE=$(cat coverage/coverage-summary.json | jq '.total')
+            echo "COVERAGE_DATA<<EOF" >> $GITHUB_ENV
+            echo "$COVERAGE" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+          fi
+
+      - name: 💬 Comentar no PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            // Remove comentários anteriores do bot
+            const botComments = comments.filter(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('## 🔍 Status da Validação')
+            );
+
+            for (const comment of botComments) {
+              await github.rest.issues.deleteComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: comment.id,
+              });
+            }
+
+            // Determinar status geral
+            const allJobs = ['quick-validation', 'test-coverage', 'build-check', 'security-check'];
+            const failedJobs = allJobs.filter(job => 
+              context.payload.workflow_run?.conclusion === 'failure' || 
+              needs[job]?.result === 'failure'
+            );
+
+            const status = failedJobs.length === 0 ? 'success' : 'failure';
+            const statusIcon = status === 'success' ? '✅' : '❌';
+            const statusText = status === 'success' ? 'Aprovado' : 'Falhou';
+
+            // Gerar relatório de cobertura se disponível
+            let coverageReport = '';
+            if (process.env.COVERAGE_DATA) {
+              try {
+                const coverage = JSON.parse(process.env.COVERAGE_DATA);
+                coverageReport = `
+                
+                ## 📊 Relatório de Cobertura
+                
+                | Métrica | Valor | Status |
+                |---------|-------|--------|
+                | **Linhas** | ${coverage.lines.pct}% | ${coverage.lines.pct >= ${{ env.COVERAGE_THRESHOLD }} ? '✅' : '❌'} |
+                | **Funções** | ${coverage.functions.pct}% | ${coverage.functions.pct >= ${{ env.COVERAGE_THRESHOLD }} ? '✅' : '❌'} |
+                | **Branches** | ${coverage.branches.pct}% | ${coverage.branches.pct >= ${{ env.COVERAGE_THRESHOLD }} ? '✅' : '❌'} |
+                | **Statements** | ${coverage.statements.pct}% | ${coverage.statements.pct >= ${{ env.COVERAGE_THRESHOLD }} ? '✅' : '❌'} |
+                `;
+              } catch (e) {
+                coverageReport = '\n\n📊 Relatório de cobertura não disponível';
+              }
+            }
+
+            const comment = `## 🔍 Status da Validação
+
+            ${statusIcon} **Status Geral:** ${statusText}
+
+            | Validação | Status |
+            |-----------|--------|
+            | ⚡ Validação Rápida | ${needs['quick-validation']?.result === 'success' ? '✅' : '❌'} |
+            | 🧪 Testes & Cobertura | ${needs['test-coverage']?.result === 'success' ? '✅' : '❌'} |
+            | 🏗️ Build Check | ${needs['build-check']?.result === 'success' ? '✅' : '❌'} |
+            | 🔒 Segurança | ${needs['security-check']?.result === 'success' ? '✅' : '❌'} |
+
+            ${coverageReport}
+
+            ${status === 'success' ? 
+              '🎉 **Parabéns!** Este PR está pronto para merge.' : 
+              '⚠️ **Atenção!** Este PR precisa de correções antes do merge.'
+            }
+
+            ---
+            *Atualizado em: ${new Date().toLocaleString('pt-BR')}*
+            `;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Job 6: Status check final
+  pr-status:
+    name: 📋 Status Final
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    needs: [quick-validation, test-coverage, build-check, security-check]
+    if: always()
+
+    steps:
+      - name: 📊 Resumo do PR
+        run: |
+          echo "## 🔍 Resumo da Validação do PR" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Validação | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Validação Rápida | ${{ needs.quick-validation.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Testes & Cobertura | ${{ needs.test-coverage.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build Check | ${{ needs.build-check.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Segurança | ${{ needs.security-check.result == 'success' && '✅ Sucesso' || '❌ Falhou' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**PR:** #${{ github.event.pull_request.number }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.head_ref }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Autor:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
