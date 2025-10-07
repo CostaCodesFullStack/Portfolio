@@ -14,4 +14,16 @@ describe('Exemplo de Teste', () => {
       screen.getByRole('button', { name: 'Clique aqui' })
     ).toBeInTheDocument();
   });
+
+  it('deve testar o pipeline CI/CD', () => {
+    const pipeline = {
+      name: 'CI/CD Pipeline',
+      status: 'funcionando',
+      jobs: ['lint', 'test', 'build', 'deploy']
+    };
+    
+    expect(pipeline.name).toBe('CI/CD Pipeline');
+    expect(pipeline.status).toBe('funcionando');
+    expect(pipeline.jobs).toHaveLength(4);
+  });
 });

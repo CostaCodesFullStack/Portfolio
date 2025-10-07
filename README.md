@@ -291,6 +291,26 @@ Estudante de Engenharia de Software
 💙 Desenvolvido com paixão por Cauã Costa
 Interessado em colaborar ou contratar? Vamos conversar!
 </div>
-#   P i p e l i n e   C I / C D   f u n c i o n a n d o ! 
- 
- 
+
+---
+
+## 🧪 Teste do Pipeline CI/CD
+
+Esta seção foi adicionada para testar o workflow de validação de Pull Request.
+
+### O que o pipeline deve fazer:
+
+- ✅ **Validação Rápida** - ESLint + TypeScript + Prettier
+- ✅ **Testes & Cobertura** - Jest com relatório de cobertura
+- ✅ **Build Check** - Verificação de build do Next.js
+- ✅ **Segurança** - Auditoria NPM + CodeQL
+- ✅ **Comentário no PR** - Relatório automático de status
+
+### Status esperado:
+
+- Todos os jobs devem passar ✅
+- Comentário automático no PR 📝
+- Badge de status atualizado 🏷️
+  #   P i p e l i n e   C I / C D   f u n c i o n a n d o ! 
+   
+   
