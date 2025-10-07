@@ -25,7 +25,7 @@ export const portfolioConfig = {
   // Configurações do site
   site: {
     name: 'Cauã Costa - Portfólio',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-one-gold-6xch6vskv8.vercel.app',
     author: 'Cauã Costa'
   }
 }

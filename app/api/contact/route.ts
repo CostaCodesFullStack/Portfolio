@@ -46,6 +46,21 @@ const createTransporter = () => {
 
 export async function POST(request: NextRequest) {
   try {
+    // Configurar CORS para Vercel
+    const origin = request.headers.get('origin')
+    const allowedOrigins = [
+      'https://portfolio-one-gold-6xch6vskv8.vercel.app',
+      'http://localhost:3000',
+      'https://localhost:3000'
+    ]
+    
+    if (origin && !allowedOrigins.includes(origin)) {
+      return NextResponse.json(
+        { success: false, message: 'Origem não permitida' },
+        { status: 403 }
+      )
+    }
+
     const body = await request.json()
     const { name, email, subject, message } = body
 
@@ -140,6 +155,12 @@ Responda diretamente para: ${email}
     return NextResponse.json({
       success: true,
       message: 'Mensagem enviada com sucesso!'
+    }, {
+      headers: {
+        'Access-Control-Allow-Origin': origin || '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      }
     })
 
   } catch (error) {
@@ -155,10 +176,31 @@ Responda diretamente para: ${email}
   }
 }
 
+// Método OPTIONS para CORS
+export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get('origin')
+  const allowedOrigins = [
+    'https://portfolio-one-gold-6xch6vskv8.vercel.app',
+    'http://localhost:3000',
+    'https://localhost:3000'
+  ]
+
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': allowedOrigins.includes(origin || '') ? origin || '*' : 'https://portfolio-one-gold-6xch6vskv8.vercel.app',
+      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Max-Age': '86400',
+    },
+  })
+}
+
 // Método GET para verificar se a API está funcionando
 export async function GET() {
   return NextResponse.json({
     message: 'API de contato funcionando',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    site: 'https://portfolio-one-gold-6xch6vskv8.vercel.app'
   })
 }
