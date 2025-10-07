@@ -16,9 +16,11 @@ import {
 } from 'react-icons/fa'
 import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi'
 import { useTranslation } from '@/contexts/TranslationContext'
+import { getContactInfo } from '@/lib/config'
 
 const Contact = () => {
   const { t } = useTranslation()
+  const contactInfo = getContactInfo()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -85,25 +87,25 @@ const Contact = () => {
     }
   }
 
-  const contactInfo = [
+  const contactInfoData = [
     {
       icon: FaEnvelope,
       title: t.contact.email,
-      value: 'cauadevcosta@gmail.com',
-      href: 'mailto:cauadevcosta@gmail.com',
+      value: contactInfo.email,
+      href: `mailto:${contactInfo.email}`,
       description: t.contact.contactInfo.email
     },
     {
       icon: FaPhone,
       title: t.contact.phone,
-      value: '+55 (16) 98857-2014',
-      href: 'tel:+5516988572014',
+      value: contactInfo.phone,
+      href: `tel:${contactInfo.phone.replace(/\s/g, '')}`,
       description: t.contact.contactInfo.phone
     },
     {
       icon: FaMapMarkerAlt,
       title: t.contact.location,
-      value: 'Matão, SP - Brasil',
+      value: contactInfo.location,
       href: '#',
       description: t.contact.contactInfo.location
     }
@@ -113,19 +115,19 @@ const Contact = () => {
     {
       icon: FaGithub,
       name: 'GitHub',
-      href: 'https://github.com/CostaCodesFullStack',
+      href: contactInfo.social.github,
       color: 'hover:text-gray-100'
     },
     {
       icon: FaLinkedin,
       name: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/caua-costa-222900278',
+      href: contactInfo.social.linkedin,
       color: 'hover:text-blue-400'
     },
     {
       icon: FaEnvelope,
       name: 'Email',
-      href: 'mailto:cauadevcosta@gmail.com',
+      href: `mailto:${contactInfo.social.email}`,
       color: 'hover:text-red-400'
     }
   ]
@@ -166,7 +168,7 @@ const Contact = () => {
 
             {/* Informações de Contato */}
             <div className="space-y-6">
-              {contactInfo.map((info, index) => (
+              {contactInfoData.map((info, index) => (
                 <motion.a
                   key={index}
                   href={info.href}
@@ -393,7 +395,7 @@ const Contact = () => {
                 {t.contact.finalCta.backToTop}
               </a>
               <a
-                href="https://github.com/CostaCodesFullStack"
+                href={contactInfo.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary inline-flex items-center justify-center"

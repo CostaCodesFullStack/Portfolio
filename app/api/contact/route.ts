@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { getEmailConfig, generateEmailSubject, getDestinationEmail } from '@/lib/config'
 
 // Validação de email
 const isValidEmail = (email: string): boolean => {
@@ -32,8 +33,10 @@ const validateFormData = (data: any) => {
 
 // Configuração do transporter de email
 const createTransporter = () => {
+  const emailConfig = getEmailConfig()
+  
   return nodemailer.createTransport({
-    service: 'gmail', // ou outro provedor
+    service: emailConfig.service,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
@@ -71,19 +74,23 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Obter configurações de email
+    const emailConfig = getEmailConfig()
+    const destinationEmail = getDestinationEmail()
+    
     // Criar transporter
     const transporter = createTransporter()
 
     // Configurar email
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // Enviar para o próprio email
+      from: emailConfig.from,
+      to: destinationEmail, // Usar email centralizado
       replyTo: email,
-      subject: `[Portfólio] ${subject}`,
+      subject: generateEmailSubject(subject),
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
-            Nova mensagem do portfólio
+            Nova mensagem do portfólio - ${emailConfig.destination}
           </h2>
           
           <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
