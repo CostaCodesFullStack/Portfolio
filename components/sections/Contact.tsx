@@ -66,8 +66,8 @@ const Contact = () => {
     {
       icon: FaPhone,
       title: t.contact.phone,
-      value: '+55 (16) 99999-9999',
-      href: 'tel:+5516999999999',
+      value: '+55 (16) 98857-2014',
+      href: 'tel:+5516988572014',
       description: t.contact.contactInfo.phone
     },
     {
