@@ -31,7 +31,7 @@ const About = () => {
       status: 'current',
     },
     {
-      year: '2024',
+      year: '2025',
       title: t.about.timeline.firstProjects,
       description: t.about.timelineDescriptions.firstProjects,
       status: 'completed',
