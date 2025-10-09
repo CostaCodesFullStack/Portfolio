@@ -54,14 +54,14 @@ O projeto foi construído com **Next.js 15.5, TypeScript 5.3 e Tailwind CSS 3.4*
 
 ## 🛠️ Stack Tecnológica
 
-| Categoria               | Tecnologias                                               |
-| :---------------------- | :-------------------------------------------------------- |
-| **Core**                | `Next.js 15.5`, `React 18.2`, `TypeScript 5.3`, `Tailwind CSS 3.4`    |
-| **Backend**             | `Next.js API Routes`, `Nodemailer 7.0`, `Email Validation`    |
+| Categoria               | Tecnologias                                                          |
+| :---------------------- | :------------------------------------------------------------------- |
+| **Core**                | `Next.js 15.5`, `React 18.2`, `TypeScript 5.3`, `Tailwind CSS 3.4`   |
+| **Backend**             | `Next.js API Routes`, `Nodemailer 7.0`, `Email Validation`           |
 | **Animação e Estilo**   | `Framer Motion 10.16`, `React Icons 4.12`, `PostCSS`, `Autoprefixer` |
-| **Qualidade de Código** | `ESLint 8.56`, `Prettier 3.1`, `Jest 30.2`, `Testing Library 16.3`           |
-| **CI/CD**               | `GitHub Actions`, `Vercel`, `CodeQL`, `Act`               |
-| **Deploy**              | `Vercel`, `Git`, `GitHub`                                 |
+| **Qualidade de Código** | `ESLint 8.56`, `Prettier 3.1`, `Jest 30.2`, `Testing Library 16.3`   |
+| **CI/CD**               | `GitHub Actions`, `Vercel`, `CodeQL`, `Act`                          |
+| **Deploy**              | `Vercel`, `Git`, `GitHub`                                            |
 
 ## 📂 Estrutura do Projeto
 
@@ -108,12 +108,14 @@ portifolio2/
 Este projeto implementa um sistema robusto de testes e qualidade de código:
 
 ### 📊 Cobertura de Testes
+
 - **Jest 30.2** - Framework de testes principal
 - **React Testing Library 16.3** - Testes de componentes React
 - **Cobertura mínima:** 80% de todas as funcionalidades
 - **Testes automatizados** em cada commit e pull request
 
 ### 🔍 Ferramentas de Qualidade
+
 - **ESLint 8.56** - Análise estática de código
 - **Prettier 3.1** - Formatação automática de código
 - **TypeScript 5.3** - Verificação de tipos em tempo de compilação
