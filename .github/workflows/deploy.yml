@@ -154,7 +154,7 @@ jobs:
       - name: 🧪 Executar testes de smoke
         run: |
           echo "🧪 Executando testes de smoke..."
-          npm run test -- --testPathPattern="smoke" --passWithNoTests
+          npm run test -- --testPathPatterns="smoke" --passWithNoTests
           echo "✅ Testes de smoke concluídos!"
 
   # Job 5: Notificação de deploy

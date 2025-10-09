@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:ci": "jest --coverage --watchAll=false --passWithNoTests",
-    "test:smoke": "jest --testPathPattern=smoke --passWithNoTests",
+    "test:smoke": "jest --testPathPatterns=smoke --passWithNoTests",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
