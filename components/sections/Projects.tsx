@@ -22,6 +22,7 @@ const Projects = () => {
     threshold: 0.1,
   });
 
+  const [selectedCategory, setSelectedCategory] = useState('featured');
   const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>(
     {}
   );
@@ -82,11 +83,19 @@ const Projects = () => {
   ];
 
   const categories = [
-    t.projects.categories.all,
-    t.projects.categories.frontend,
-    t.projects.categories.backend,
-    t.projects.categories.fullstack,
+    { key: 'featured', label: t.projects.categories.featured },
+    { key: 'frontend', label: t.projects.categories.frontend },
+    { key: 'backend', label: t.projects.categories.backend },
+    { key: 'fullstack', label: t.projects.categories.fullstack },
   ];
+
+  // Filtrar projetos baseado na categoria selecionada
+  const filteredProjects = projects.filter(project => {
+    if (selectedCategory === 'featured') {
+      return project.featured;
+    }
+    return project.category.toLowerCase() === selectedCategory;
+  });
 
   return (
     <section
@@ -116,22 +125,31 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
-          {categories.map((category, index) => (
-            <motion.button
-              key={category}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-              className="px-6 py-2 bg-white/50 dark:bg-dark-700/50 hover:bg-primary-600/20 text-gray-700 dark:text-gray-300 hover:text-primary-400 rounded-lg transition-all duration-300 border border-gray-300 dark:border-dark-600 hover:border-primary-600/50"
-            >
-              {category}
-            </motion.button>
-          ))}
+          {categories.map((category, index) => {
+            const isActive = selectedCategory === category.key;
+            
+            return (
+              <motion.button
+                key={category.key}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                onClick={() => setSelectedCategory(category.key)}
+                className={`px-6 py-2 rounded-lg transition-all duration-300 border ${
+                  isActive
+                    ? 'bg-primary-600 text-white border-primary-600'
+                    : 'bg-white/50 dark:bg-dark-700/50 hover:bg-primary-600/20 text-gray-700 dark:text-gray-300 hover:text-primary-400 border-gray-300 dark:border-dark-600 hover:border-primary-600/50'
+                }`}
+              >
+                {category.label}
+              </motion.button>
+            );
+          })}
         </motion.div>
 
         {/* Grid de Projetos */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 30 }}

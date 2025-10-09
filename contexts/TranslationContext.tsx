@@ -110,7 +110,6 @@ interface Translation {
     certificationsList: {
       htmlCss: string;
       javascript: string;
-      react: string;
       python: string;
     };
     achievementsList: {
@@ -136,10 +135,26 @@ interface Translation {
       learningAchievements: string[];
       modsAchievements: string[];
     };
+    practicalExperience: {
+      title: string;
+      webDevelopment: {
+        title: string;
+        type: string;
+        period: string;
+        description: string;
+        achievements: string[];
+      };
+      modsDevelopment: {
+        title: string;
+        type: string;
+        period: string;
+        description: string;
+        achievements: string[];
+      };
+    };
     certificationDetails: {
       htmlCss: string;
       javascript: string;
-      react: string;
       python: string;
     };
     achievementDetails: {
@@ -150,10 +165,32 @@ interface Translation {
       projectDeploy: string;
       continuousLearning: string;
     };
+    technologies: {
+      title: string;
+      subtitle: string;
+      categories: {
+        frontend: string;
+        backend: string;
+        tools: string;
+      };
+      technologies: {
+        react: string;
+        html5: string;
+        css3: string;
+        javascript: string;
+        python: string;
+        c: string;
+        lua: string;
+        git: string;
+        api: string;
+        mysql: string;
+      };
+    };
     cta: {
       title: string;
       description: string;
       button: string;
+      viewProjects: string;
     };
   };
   projects: {
@@ -162,7 +199,7 @@ interface Translation {
     viewProject: string;
     viewCode: string;
     categories: {
-      all: string;
+      featured: string;
       frontend: string;
       backend: string;
       fullstack: string;
@@ -291,9 +328,9 @@ const translations: Record<Language, Translation> = {
       myStory: 'Minha História',
       myJourney: 'Minha Jornada',
       storyText1:
-        'Olá! Sou Cauã Costa, estudante de Engenharia de Software apaixonado por tecnologia e desenvolvimento. Minha jornada na programação começou em 2024, quando descobri o fascinante mundo da criação de soluções digitais e decidi me dedicar a essa área.',
+        'Olá! Sou Cauã Costa, estudante de Engenharia de Software apaixonado por tecnologia e desenvolvimento. Minha jornada na programação começou em 2023, quando descobri o fascinante mundo da criação de soluções digitais e decidi me dedicar a essa área.',
       storyText2:
-        'Atualmente, estou cursando Engenharia de Software com previsão de conclusão em 2025, focado em desenvolvimento web, fullstack e frontend moderno. Tenho grande interesse em backend escalável, APIs, automação e inteligência artificial.',
+        'Atualmente, estou cursando Engenharia de Software com previsão de conclusão em 2029, focado em desenvolvimento web, fullstack e frontend moderno. Tenho grande interesse em backend escalável, APIs, automação e inteligência artificial.',
       storyText3:
         'Meu objetivo é me tornar um desenvolvedor full-stack de excelência, contribuindo para projetos que tenham impacto real na sociedade. Estou sempre em busca de novos desafios e oportunidades de crescimento na área de tecnologia, especialmente em desenvolvimento web.',
       stats: {
@@ -383,12 +420,11 @@ const translations: Record<Language, Translation> = {
         personalProjects: 'Projetos Pessoais',
         webDevelopmentStudies: 'Estudos em Desenvolvimento Web',
         independentLearning: 'Aprendizado Independente',
-        modsDevelopment: 'Estudos e Desenvolvementos de Mods MTA/FIVEM',
+        modsDevelopment: 'Estudos e Desenvolvimento de Mods MTA/FIVEM',
       },
       certificationsList: {
         htmlCss: 'HTML5 e CSS3',
         javascript: 'JavaScript',
-        react: 'React',
         python: 'Python',
       },
       achievementsList: {
@@ -404,44 +440,69 @@ const translations: Record<Language, Translation> = {
         institution: 'Faculdade Anhanguera',
         location: 'Matão, SP',
         description:
-          'Graduação em Engenharia de Software com foco em desenvolvimento de sistemas, arquitetura de software e engenharia de requisitos. Previsão de conclusão em 2025.',
+          'Graduação em Engenharia de Software com foco em desenvolvimento de sistemas, arquitetura de software e engenharia de requisitos. Previsão de conclusão em 2029.',
       },
-      experienceDetails: {
-        achievements: 'Principais realizações:',
-        webDevelopmentDescription:
-          'Desenvolvimento de projetos web práticos incluindo Conversor de Moedas e Calculadora, aplicando conhecimentos em React e JavaScript.',
-        learningDescription:
-          'Dedicação intensiva ao aprendizado de tecnologias web modernas através de cursos online e prática constante.',
-        modsDescription:
-          'Dedicação intensiva ao estudo da linguagem LUA aplicada ao desenvolvimento de modificações (mods) para plataformas MTA e FIVEM, explorando conceitos de lógica de programação, sistemas dinâmicos e integração com servidores.',
-        webDevelopmentAchievements: [
+    experienceDetails: {
+      achievements: 'Principais realizações:',
+      webDevelopmentDescription:
+        'Desenvolvimento de projetos web práticos incluindo Conversor de Moedas e Calculadora, aplicando conhecimentos em React e JavaScript.',
+      learningDescription:
+        'Dedicação intensiva ao aprendizado de tecnologias web modernas através de cursos online e prática constante.',
+      modsDescription:
+        'Dedicação intensiva ao estudo da linguagem LUA aplicada ao desenvolvimento de modificações (mods) para plataformas MTA e FIVEM, explorando conceitos de lógica de programação, sistemas dinâmicos e integração com servidores.',
+      webDevelopmentAchievements: [
+        'Conversor de Moedas com API externa',
+        'Calculadora funcional em React',
+        'Interface responsiva e moderna',
+        'Integração com APIs externas',
+        'Deploy em GitHub Pages',
+      ],
+      learningAchievements: [
+        'Aprendizado de React e JavaScript',
+        'Desenvolvimento de habilidades em HTML e CSS',
+        'Integração com APIs externas',
+        'Criação de projetos práticos',
+        'Versionamento com Git e GitHub',
+      ],
+      modsAchievements: [
+        'Aprendizado e prática da linguagem LUA para criação de scripts e sistemas em servidores MTA e FIVEM',
+        'Desenvolvimento de recursos personalizados como sistemas de login, inventário, economia e HUDs',
+        'Integração com bancos de dados externos (MySQL) para persistência de informações do servidor',
+        'Criação de interfaces interativas usando HTML, CSS e JavaScript integradas ao client-side dos servidores',
+      ],
+    },
+    practicalExperience: {
+      title: 'Experiência Prática',
+      webDevelopment: {
+        title: 'Desenvolvimento de Projetos Web',
+        type: 'Projetos Pessoais',
+        period: '2025',
+        description: 'Desenvolvimento de projetos web práticos aplicando React e JavaScript',
+        achievements: [
           'Conversor de Moedas com API externa',
           'Calculadora funcional em React',
           'Interface responsiva e moderna',
-          'Integração com APIs externas',
           'Deploy em GitHub Pages',
         ],
-        learningAchievements: [
-          'Aprendizado de React e JavaScript',
-          'Desenvolvimento de habilidades em HTML e CSS',
-          'Integração com APIs externas',
-          'Criação de projetos práticos',
-          'Versionamento com Git e GitHub',
-        ],
-        modsAchievements: [
-          'Aprendizado e prática da linguagem LUA para criação de scripts e sistemas em servidores MTA e FIVEM',
-          'Desenvolvimento de recursos personalizados como sistemas de login, inventário, economia e HUDs',
-          'Integração com bancos de dados externos (MySQL) para persistência de informações do servidor',
-          'Criação de interfaces interativas usando HTML, CSS e JavaScript integradas ao client-side dos servidores',
+      },
+      modsDevelopment: {
+        title: 'Mods MTA/FIVEM (LUA)',
+        type: 'Aprendizado Independente',
+        period: '2023',
+        description: 'Desenvolvimento de modificações usando LUA para servidores de jogos',
+        achievements: [
+          'Sistemas de login, inventário e economia',
+          'Integração com MySQL para persistência de dados',
+          'Interfaces interativas com HTML/CSS/JS',
+          'Scripts e sistemas dinâmicos',
         ],
       },
+    },
       certificationDetails: {
         htmlCss:
           'Desenvolvimento web com HTML5 e CSS3, incluindo responsividade e design moderno.',
         javascript:
           'Fundamentos de JavaScript, DOM, APIs e desenvolvimento web interativo.',
-        react:
-          'Desenvolvimento de aplicações React com componentes, hooks e integração de APIs.',
         python:
           'Fundamentos de Python, estruturas de dados, algoritmos e desenvolvimento de aplicações.',
       },
@@ -456,11 +517,33 @@ const translations: Record<Language, Translation> = {
         continuousLearning:
           'Dedicação ao estudo de desenvolvimento web e fullstack',
       },
+      technologies: {
+        title: 'Tecnologias Dominadas',
+        subtitle: 'Tecnologias e ferramentas que domino através de prática e estudo',
+        categories: {
+          frontend: 'Frontend',
+          backend: 'Backend/Linguagens',
+          tools: 'Ferramentas',
+        },
+        technologies: {
+          react: 'React',
+          html5: 'HTML5',
+          css3: 'CSS3',
+          javascript: 'JavaScript',
+          python: 'Python',
+          c: 'C',
+          lua: 'LUA',
+          git: 'Git/GitHub',
+          api: 'APIs REST',
+          mysql: 'MySQL',
+        },
+      },
       cta: {
         title: 'Pronto para novos desafios?',
         description:
           'Estou em busca de oportunidades para aplicar meus conhecimentos e continuar aprendendo',
         button: 'Vamos Conversar',
+        viewProjects: 'Ver Todos os Projetos',
       },
     },
     projects: {
@@ -470,7 +553,7 @@ const translations: Record<Language, Translation> = {
       viewProject: 'Ver Projeto',
       viewCode: 'Ver Código',
       categories: {
-        all: 'Todos',
+        featured: 'Destaques',
         frontend: 'Frontend',
         backend: 'Backend',
         fullstack: 'Full-Stack',
@@ -547,8 +630,8 @@ const translations: Record<Language, Translation> = {
       },
       contactInfo: {
         email: 'Envie-me um email',
-        phone: 'Ligue para mim',
-        location: 'Estou baseado aqui',
+        phone: 'Envie uma mensagem no WhatsApp',
+        location: 'Ver no Google Maps',
       },
       finalCta: {
         title: 'Obrigado por visitar meu portfólio!',
@@ -575,8 +658,8 @@ const translations: Record<Language, Translation> = {
         email: 'cauadevcosta@gmail.com',
         location: 'Matão, SP',
       },
-      copyright: 'Cauã Costa. Feito com',
-      madeWith: 'e muito café ☕',
+      copyright: 'Cauã Costa.',
+      madeWith: '',
       developedWith: 'Desenvolvido com Next.js',
     },
   },
@@ -607,9 +690,9 @@ const translations: Record<Language, Translation> = {
       myStory: 'My Story',
       myJourney: 'My Journey',
       storyText1:
-        'Hello! I am Cauã Costa, a Software Engineering student passionate about technology and development. My programming journey began in 2024, when I discovered the fascinating world of creating digital solutions and decided to dedicate myself to this field.',
+        'Hello! I am Cauã Costa, a Software Engineering student passionate about technology and development. My programming journey began in 2023, when I discovered the fascinating world of creating digital solutions and decided to dedicate myself to this field.',
       storyText2:
-        'Currently, I am studying Software Engineering with expected completion in 2025, focused on web development, fullstack and modern frontend. I have great interest in scalable backend, APIs, automation and artificial intelligence.',
+        'Currently, I am studying Software Engineering with expected completion in 2029, focused on web development, fullstack and modern frontend. I have great interest in scalable backend, APIs, automation and artificial intelligence.',
       storyText3:
         'My goal is to become an excellent full-stack developer, contributing to projects that have real impact on society. I am always looking for new challenges and growth opportunities in the technology field, especially in web development.',
       stats: {
@@ -703,7 +786,6 @@ const translations: Record<Language, Translation> = {
       certificationsList: {
         htmlCss: 'HTML5 and CSS3',
         javascript: 'JavaScript',
-        react: 'React',
         python: 'Python',
       },
       achievementsList: {
@@ -719,44 +801,69 @@ const translations: Record<Language, Translation> = {
         institution: 'Anhanguera University',
         location: 'Matão, SP',
         description:
-          "Bachelor's degree in Software Engineering with focus on systems development, software architecture and requirements engineering. Expected completion in 2025.",
+          "Bachelor's degree in Software Engineering with focus on systems development, software architecture and requirements engineering. Expected completion in 2029.",
       },
-      experienceDetails: {
-        achievements: 'Main achievements:',
-        webDevelopmentDescription:
-          'Development of practical web projects including Currency Converter and Calculator, applying React and JavaScript knowledge.',
-        learningDescription:
-          'Intensive dedication to learning modern web technologies through online courses and constant practice.',
-        modsDescription:
-          'Intensive study of LUA language applied to the development of modifications (mods) for MTA and FIVEM platforms, exploring programming logic concepts, dynamic systems and server integration.',
-        webDevelopmentAchievements: [
+    experienceDetails: {
+      achievements: 'Main achievements:',
+      webDevelopmentDescription:
+        'Development of practical web projects including Currency Converter and Calculator, applying React and JavaScript knowledge.',
+      learningDescription:
+        'Intensive dedication to learning modern web technologies through online courses and constant practice.',
+      modsDescription:
+        'Intensive study of LUA language applied to the development of modifications (mods) for MTA and FIVEM platforms, exploring programming logic concepts, dynamic systems and server integration.',
+      webDevelopmentAchievements: [
+        'Currency Converter with external API',
+        'Functional Calculator in React',
+        'Responsive and modern interface',
+        'External API integration',
+        'Deploy on GitHub Pages',
+      ],
+      learningAchievements: [
+        'Learning React and JavaScript',
+        'Developing HTML and CSS skills',
+        'External API integration',
+        'Creating practical projects',
+        'Versioning with Git and GitHub',
+      ],
+      modsAchievements: [
+        'Learning and practicing LUA language for creating scripts and systems on MTA and FIVEM servers',
+        'Developing custom resources like login systems, inventory, economy and HUDs',
+        'Integration with external databases (MySQL) for server information persistence',
+        'Creating interactive interfaces using HTML, CSS and JavaScript integrated with server client-side',
+      ],
+    },
+    practicalExperience: {
+      title: 'Practical Experience',
+      webDevelopment: {
+        title: 'Web Project Development',
+        type: 'Personal Projects',
+        period: '2025',
+        description: 'Development of practical web projects applying React and JavaScript',
+        achievements: [
           'Currency Converter with external API',
           'Functional Calculator in React',
           'Responsive and modern interface',
-          'External API integration',
           'Deploy on GitHub Pages',
         ],
-        learningAchievements: [
-          'Learning React and JavaScript',
-          'Developing HTML and CSS skills',
-          'External API integration',
-          'Creating practical projects',
-          'Versioning with Git and GitHub',
-        ],
-        modsAchievements: [
-          'Learning and practicing LUA language for creating scripts and systems on MTA and FIVEM servers',
-          'Developing custom resources like login systems, inventory, economy and HUDs',
-          'Integration with external databases (MySQL) for server information persistence',
-          'Creating interactive interfaces using HTML, CSS and JavaScript integrated with server client-side',
+      },
+      modsDevelopment: {
+        title: 'MTA/FIVEM Mods (LUA)',
+        type: 'Independent Learning',
+        period: '2024',
+        description: 'Development of modifications using LUA for game servers',
+        achievements: [
+          'Login, inventory and economy systems',
+          'Integration with MySQL for data persistence',
+          'Interactive interfaces with HTML/CSS/JS',
+          'Dynamic scripts and systems',
         ],
       },
+    },
       certificationDetails: {
         htmlCss:
           'Web development with HTML5 and CSS3, including responsiveness and modern design.',
         javascript:
           'JavaScript fundamentals, DOM, APIs and interactive web development.',
-        react:
-          'React application development with components, hooks and API integration.',
         python:
           'Python fundamentals, data structures, algorithms and application development.',
       },
@@ -771,11 +878,33 @@ const translations: Record<Language, Translation> = {
         continuousLearning:
           'Dedication to web development and fullstack studies',
       },
+      technologies: {
+        title: 'Mastered Technologies',
+        subtitle: 'Technologies and tools I master through practice and study',
+        categories: {
+          frontend: 'Frontend',
+          backend: 'Backend/Languages',
+          tools: 'Tools',
+        },
+        technologies: {
+          react: 'React',
+          html5: 'HTML5',
+          css3: 'CSS3',
+          javascript: 'JavaScript',
+          python: 'Python',
+          c: 'C',
+          lua: 'LUA',
+          git: 'Git/GitHub',
+          api: 'REST APIs',
+          mysql: 'MySQL',
+        },
+      },
       cta: {
         title: 'Ready for new challenges?',
         description:
           'I am looking for opportunities to apply my knowledge and continue learning',
         button: "Let's Talk",
+        viewProjects: 'View All Projects',
       },
     },
     projects: {
@@ -785,7 +914,7 @@ const translations: Record<Language, Translation> = {
       viewProject: 'View Project',
       viewCode: 'View Code',
       categories: {
-        all: 'All',
+        featured: 'Featured',
         frontend: 'Frontend',
         backend: 'Backend',
         fullstack: 'Full-Stack',

@@ -49,6 +49,21 @@ const Contact = () => {
     if (validationErrors.length > 0) setValidationErrors([]);
   };
 
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // Tentar abrir o Gmail diretamente
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${contactInfo.email}&su=Contato via Portfólio&body=Olá Cauã,%0D%0A%0D%0AEspero que esteja bem!%0D%0A%0D%0A`;
+    
+    // Abrir em nova aba
+    window.open(gmailUrl, '_blank');
+    
+    // Fallback: tentar mailto também
+    setTimeout(() => {
+      window.location.href = `mailto:${contactInfo.email}?subject=Contato via Portfólio&body=Olá Cauã,%0D%0A%0D%0AEspero que esteja bem!%0D%0A%0D%0A`;
+    }, 100);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -63,6 +78,17 @@ const Contact = () => {
         },
         body: JSON.stringify(formData),
       });
+
+      // Verificar se a resposta é válida
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Verificar se o conteúdo é JSON válido
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Resposta não é JSON válido');
+      }
 
       const data = await response.json();
 
@@ -85,9 +111,15 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Erro ao enviar formulário:', error);
-      setSubmitError(
-        'Erro de conexão. Verifique sua internet e tente novamente.'
-      );
+      
+      // Tratar diferentes tipos de erro
+      if (error instanceof SyntaxError) {
+        setSubmitError('Erro no servidor. Tente novamente mais tarde.');
+      } else if (error instanceof TypeError) {
+        setSubmitError('Erro de conexão. Verifique sua internet e tente novamente.');
+      } else {
+        setSubmitError('Erro inesperado. Tente novamente mais tarde.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -98,21 +130,22 @@ const Contact = () => {
       icon: FaEnvelope,
       title: t.contact.email,
       value: contactInfo.email,
-      href: `mailto:${contactInfo.email}`,
+      href: '#',
       description: t.contact.contactInfo.email,
+      onClick: handleEmailClick,
     },
     {
       icon: FaPhone,
       title: t.contact.phone,
       value: contactInfo.phone,
-      href: `tel:${contactInfo.phone.replace(/\s/g, '')}`,
+      href: `https://wa.me/5516988572014?text=Olá Cauã! Vi seu portfólio e gostaria de conversar sobre`,
       description: t.contact.contactInfo.phone,
     },
     {
       icon: FaMapMarkerAlt,
       title: t.contact.location,
       value: contactInfo.location,
-      href: '#',
+      href: 'https://www.google.com/maps/search/Matão,+SP,+Brasil',
       description: t.contact.contactInfo.location,
     },
   ];
@@ -182,10 +215,14 @@ const Contact = () => {
                 <motion.a
                   key={index}
                   href={info.href}
+                  onClick={info.onClick}
+                  target={info.href.startsWith('mailto:') || info.href.startsWith('tel:') ? '_self' : '_blank'}
+                  rel={info.href.startsWith('mailto:') || info.href.startsWith('tel:') ? '' : 'noopener noreferrer'}
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="flex items-center space-x-4 p-4 bg-white/30 dark:bg-dark-700/30 rounded-lg hover:bg-white/50 dark:hover:bg-dark-700/50 transition-colors duration-300 group"
+                  className="flex items-center space-x-4 p-4 bg-white/30 dark:bg-dark-700/30 rounded-lg hover:bg-white/50 dark:hover:bg-dark-700/50 transition-colors duration-300 group cursor-pointer"
+                  aria-label={`${info.title}: ${info.value}`}
                 >
                   <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center group-hover:bg-primary-600/30 transition-colors duration-300">
                     <info.icon className="w-6 h-6 text-primary-400" />

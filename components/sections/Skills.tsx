@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaReact, FaPython, FaJs, FaHtml5, FaCss3Alt } from 'react-icons/fa';
-import { SiC } from 'react-icons/si';
+import { SiC, SiReact, SiHtml5, SiCss3, SiJavascript, SiPython, SiLua, SiGit, SiMysql } from 'react-icons/si';
 import { HiCode, HiCog, HiLightBulb, HiUsers } from 'react-icons/hi';
 import { useTranslation } from '@/contexts/TranslationContext';
 
@@ -14,20 +13,25 @@ const Skills = () => {
     threshold: 0.1,
   });
 
-  const technicalSkills = [
-    {
-      category: t.skills.programmingLanguages,
-      icon: HiCode,
-      skills: [
-        { name: 'HTML', icon: FaHtml5, level: 70, color: 'text-orange-400' },
-        { name: 'CSS', icon: FaCss3Alt, level: 70, color: 'text-blue-300' },
-        { name: 'JavaScript', icon: FaJs, level: 70, color: 'text-yellow-400' },
-        { name: 'C', icon: SiC, level: 50, color: 'text-blue-500' },
-        { name: 'Python', icon: FaPython, level: 50, color: 'text-yellow-500' },
-        { name: 'React', icon: FaReact, level: 40, color: 'text-blue-400' },
-      ],
-    },
-  ];
+  // Tecnologias Dominadas - Badges por Categoria
+  const technologies = {
+    frontend: [
+      { name: t.experience.technologies.technologies.react, icon: SiReact },
+      { name: t.experience.technologies.technologies.html5, icon: SiHtml5 },
+      { name: t.experience.technologies.technologies.css3, icon: SiCss3 },
+      { name: t.experience.technologies.technologies.javascript, icon: SiJavascript },
+    ],
+    backend: [
+      { name: t.experience.technologies.technologies.python, icon: SiPython },
+      { name: t.experience.technologies.technologies.c, icon: SiC },
+      { name: t.experience.technologies.technologies.lua, icon: SiLua },
+    ],
+    tools: [
+      { name: t.experience.technologies.technologies.git, icon: SiGit },
+      { name: t.experience.technologies.technologies.api, icon: HiCode },
+      { name: t.experience.technologies.technologies.mysql, icon: SiMysql },
+    ],
+  };
 
   const softSkills = [
     {
@@ -76,63 +80,52 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        {/* Habilidades Técnicas */}
-        <div className="space-y-12 mb-16">
-          {technicalSkills.map((category, categoryIndex) => (
-            <motion.div
-              key={category.category}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
-              className="card"
-            >
-              <div className="flex items-center space-x-3 mb-6">
-                <category.icon className="w-6 h-6 text-primary-400" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  {category.category}
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{
-                      duration: 0.4,
-                      delay: categoryIndex * 0.2 + skillIndex * 0.1,
-                    }}
-                    className="text-center p-4 bg-white/30 dark:bg-dark-700/30 rounded-lg hover:bg-white/50 dark:hover:bg-dark-700/50 transition-colors duration-300"
-                  >
-                    <skill.icon
-                      className={`w-8 h-8 mx-auto mb-2 ${skill.color}`}
-                    />
-                    <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-                      {skill.name}
-                    </div>
-
-                    {/* Barra de progresso */}
-                    <div className="w-full bg-gray-300 dark:bg-dark-600 rounded-full h-2 mb-2">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={inView ? { width: `${skill.level}%` } : {}}
-                        transition={{
-                          duration: 1,
-                          delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.5,
-                        }}
-                        className="bg-gradient-to-r from-primary-400 to-primary-600 h-2 rounded-full"
-                      />
-                    </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">
-                      {skill.level}%
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Tecnologias Dominadas */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="card mb-12"
+        >
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+            <HiCode className="w-6 h-6 text-primary-400 mr-3" />
+            {t.experience.technologies.title}
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
+            {t.experience.technologies.subtitle}
+          </p>
+          
+          <div className="space-y-8">
+            {Object.entries(technologies).map(([category, techs], categoryIndex) => (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, x: -20 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 + categoryIndex * 0.2 }}
+                className="space-y-4"
+              >
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  {t.experience.technologies.categories[category as keyof typeof t.experience.technologies.categories]}
+                </h4>
+                
+                <div className="flex flex-wrap gap-3">
+                  {techs.map((tech, techIndex) => (
+                    <motion.div
+                      key={techIndex}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.3, delay: 0.6 + categoryIndex * 0.2 + techIndex * 0.1 }}
+                      className="flex items-center space-x-2 bg-purple-600/10 hover:bg-purple-600/20 text-purple-400 hover:text-purple-300 px-4 py-2 rounded-full border border-purple-600/30 hover:scale-105 transition-all duration-300 cursor-pointer"
+                    >
+                      <tech.icon className="w-5 h-5" />
+                      <span className="text-sm font-medium">{tech.name}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Habilidades Interpessoais */}
         <motion.div
