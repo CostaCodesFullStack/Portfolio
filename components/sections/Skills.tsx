@@ -2,7 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { SiC, SiReact, SiHtml5, SiCss3, SiJavascript, SiPython, SiLua, SiGit, SiMysql } from 'react-icons/si';
+import {
+  SiC,
+  SiReact,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiPython,
+  SiLua,
+  SiGit,
+  SiMysql,
+} from 'react-icons/si';
 import { HiCode, HiCog, HiLightBulb, HiUsers } from 'react-icons/hi';
 import { useTranslation } from '@/contexts/TranslationContext';
 
@@ -19,7 +29,10 @@ const Skills = () => {
       { name: t.experience.technologies.technologies.react, icon: SiReact },
       { name: t.experience.technologies.technologies.html5, icon: SiHtml5 },
       { name: t.experience.technologies.technologies.css3, icon: SiCss3 },
-      { name: t.experience.technologies.technologies.javascript, icon: SiJavascript },
+      {
+        name: t.experience.technologies.technologies.javascript,
+        icon: SiJavascript,
+      },
     ],
     backend: [
       { name: t.experience.technologies.technologies.python, icon: SiPython },
@@ -94,36 +107,48 @@ const Skills = () => {
           <p className="text-gray-600 dark:text-gray-400 mb-8">
             {t.experience.technologies.subtitle}
           </p>
-          
+
           <div className="space-y-8">
-            {Object.entries(technologies).map(([category, techs], categoryIndex) => (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 + categoryIndex * 0.2 }}
-                className="space-y-4"
-              >
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {t.experience.technologies.categories[category as keyof typeof t.experience.technologies.categories]}
-                </h4>
-                
-                <div className="flex flex-wrap gap-3">
-                  {techs.map((tech, techIndex) => (
-                    <motion.div
-                      key={techIndex}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={inView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ duration: 0.3, delay: 0.6 + categoryIndex * 0.2 + techIndex * 0.1 }}
-                      className="flex items-center space-x-2 bg-purple-600/10 hover:bg-purple-600/20 text-purple-400 hover:text-purple-300 px-4 py-2 rounded-full border border-purple-600/30 hover:scale-105 transition-all duration-300 cursor-pointer"
-                    >
-                      <tech.icon className="w-5 h-5" />
-                      <span className="text-sm font-medium">{tech.name}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+            {Object.entries(technologies).map(
+              ([category, techs], categoryIndex) => (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.4 + categoryIndex * 0.2,
+                  }}
+                  className="space-y-4"
+                >
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    {
+                      t.experience.technologies.categories[
+                        category as keyof typeof t.experience.technologies.categories
+                      ]
+                    }
+                  </h4>
+
+                  <div className="flex flex-wrap gap-3">
+                    {techs.map((tech, techIndex) => (
+                      <motion.div
+                        key={techIndex}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={inView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{
+                          duration: 0.3,
+                          delay: 0.6 + categoryIndex * 0.2 + techIndex * 0.1,
+                        }}
+                        className="flex items-center space-x-2 bg-purple-600/10 hover:bg-purple-600/20 text-purple-400 hover:text-purple-300 px-4 py-2 rounded-full border border-purple-600/30 hover:scale-105 transition-all duration-300 cursor-pointer"
+                      >
+                        <tech.icon className="w-5 h-5" />
+                        <span className="text-sm font-medium">{tech.name}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )
+            )}
           </div>
         </motion.div>
 

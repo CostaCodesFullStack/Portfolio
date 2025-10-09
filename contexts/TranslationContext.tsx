@@ -442,62 +442,64 @@ const translations: Record<Language, Translation> = {
         description:
           'Graduação em Engenharia de Software com foco em desenvolvimento de sistemas, arquitetura de software e engenharia de requisitos. Previsão de conclusão em 2029.',
       },
-    experienceDetails: {
-      achievements: 'Principais realizações:',
-      webDevelopmentDescription:
-        'Desenvolvimento de projetos web práticos incluindo Conversor de Moedas e Calculadora, aplicando conhecimentos em React e JavaScript.',
-      learningDescription:
-        'Dedicação intensiva ao aprendizado de tecnologias web modernas através de cursos online e prática constante.',
-      modsDescription:
-        'Dedicação intensiva ao estudo da linguagem LUA aplicada ao desenvolvimento de modificações (mods) para plataformas MTA e FIVEM, explorando conceitos de lógica de programação, sistemas dinâmicos e integração com servidores.',
-      webDevelopmentAchievements: [
-        'Conversor de Moedas com API externa',
-        'Calculadora funcional em React',
-        'Interface responsiva e moderna',
-        'Integração com APIs externas',
-        'Deploy em GitHub Pages',
-      ],
-      learningAchievements: [
-        'Aprendizado de React e JavaScript',
-        'Desenvolvimento de habilidades em HTML e CSS',
-        'Integração com APIs externas',
-        'Criação de projetos práticos',
-        'Versionamento com Git e GitHub',
-      ],
-      modsAchievements: [
-        'Aprendizado e prática da linguagem LUA para criação de scripts e sistemas em servidores MTA e FIVEM',
-        'Desenvolvimento de recursos personalizados como sistemas de login, inventário, economia e HUDs',
-        'Integração com bancos de dados externos (MySQL) para persistência de informações do servidor',
-        'Criação de interfaces interativas usando HTML, CSS e JavaScript integradas ao client-side dos servidores',
-      ],
-    },
-    practicalExperience: {
-      title: 'Experiência Prática',
-      webDevelopment: {
-        title: 'Desenvolvimento de Projetos Web',
-        type: 'Projetos Pessoais',
-        period: '2025',
-        description: 'Desenvolvimento de projetos web práticos aplicando React e JavaScript',
-        achievements: [
+      experienceDetails: {
+        achievements: 'Principais realizações:',
+        webDevelopmentDescription:
+          'Desenvolvimento de projetos web práticos incluindo Conversor de Moedas e Calculadora, aplicando conhecimentos em React e JavaScript.',
+        learningDescription:
+          'Dedicação intensiva ao aprendizado de tecnologias web modernas através de cursos online e prática constante.',
+        modsDescription:
+          'Dedicação intensiva ao estudo da linguagem LUA aplicada ao desenvolvimento de modificações (mods) para plataformas MTA e FIVEM, explorando conceitos de lógica de programação, sistemas dinâmicos e integração com servidores.',
+        webDevelopmentAchievements: [
           'Conversor de Moedas com API externa',
           'Calculadora funcional em React',
           'Interface responsiva e moderna',
+          'Integração com APIs externas',
           'Deploy em GitHub Pages',
         ],
-      },
-      modsDevelopment: {
-        title: 'Mods MTA/FIVEM (LUA)',
-        type: 'Aprendizado Independente',
-        period: '2023',
-        description: 'Desenvolvimento de modificações usando LUA para servidores de jogos',
-        achievements: [
-          'Sistemas de login, inventário e economia',
-          'Integração com MySQL para persistência de dados',
-          'Interfaces interativas com HTML/CSS/JS',
-          'Scripts e sistemas dinâmicos',
+        learningAchievements: [
+          'Aprendizado de React e JavaScript',
+          'Desenvolvimento de habilidades em HTML e CSS',
+          'Integração com APIs externas',
+          'Criação de projetos práticos',
+          'Versionamento com Git e GitHub',
+        ],
+        modsAchievements: [
+          'Aprendizado e prática da linguagem LUA para criação de scripts e sistemas em servidores MTA e FIVEM',
+          'Desenvolvimento de recursos personalizados como sistemas de login, inventário, economia e HUDs',
+          'Integração com bancos de dados externos (MySQL) para persistência de informações do servidor',
+          'Criação de interfaces interativas usando HTML, CSS e JavaScript integradas ao client-side dos servidores',
         ],
       },
-    },
+      practicalExperience: {
+        title: 'Experiência Prática',
+        webDevelopment: {
+          title: 'Desenvolvimento de Projetos Web',
+          type: 'Projetos Pessoais',
+          period: '2025',
+          description:
+            'Desenvolvimento de projetos web práticos aplicando React e JavaScript',
+          achievements: [
+            'Conversor de Moedas com API externa',
+            'Calculadora funcional em React',
+            'Interface responsiva e moderna',
+            'Deploy em GitHub Pages',
+          ],
+        },
+        modsDevelopment: {
+          title: 'Mods MTA/FIVEM (LUA)',
+          type: 'Aprendizado Independente',
+          period: '2023',
+          description:
+            'Desenvolvimento de modificações usando LUA para servidores de jogos',
+          achievements: [
+            'Sistemas de login, inventário e economia',
+            'Integração com MySQL para persistência de dados',
+            'Interfaces interativas com HTML/CSS/JS',
+            'Scripts e sistemas dinâmicos',
+          ],
+        },
+      },
       certificationDetails: {
         htmlCss:
           'Desenvolvimento web com HTML5 e CSS3, incluindo responsividade e design moderno.',
@@ -519,7 +521,8 @@ const translations: Record<Language, Translation> = {
       },
       technologies: {
         title: 'Tecnologias Dominadas',
-        subtitle: 'Tecnologias e ferramentas que domino através de prática e estudo',
+        subtitle:
+          'Tecnologias e ferramentas que domino através de prática e estudo',
         categories: {
           frontend: 'Frontend',
           backend: 'Backend/Linguagens',
@@ -803,62 +806,64 @@ const translations: Record<Language, Translation> = {
         description:
           "Bachelor's degree in Software Engineering with focus on systems development, software architecture and requirements engineering. Expected completion in 2029.",
       },
-    experienceDetails: {
-      achievements: 'Main achievements:',
-      webDevelopmentDescription:
-        'Development of practical web projects including Currency Converter and Calculator, applying React and JavaScript knowledge.',
-      learningDescription:
-        'Intensive dedication to learning modern web technologies through online courses and constant practice.',
-      modsDescription:
-        'Intensive study of LUA language applied to the development of modifications (mods) for MTA and FIVEM platforms, exploring programming logic concepts, dynamic systems and server integration.',
-      webDevelopmentAchievements: [
-        'Currency Converter with external API',
-        'Functional Calculator in React',
-        'Responsive and modern interface',
-        'External API integration',
-        'Deploy on GitHub Pages',
-      ],
-      learningAchievements: [
-        'Learning React and JavaScript',
-        'Developing HTML and CSS skills',
-        'External API integration',
-        'Creating practical projects',
-        'Versioning with Git and GitHub',
-      ],
-      modsAchievements: [
-        'Learning and practicing LUA language for creating scripts and systems on MTA and FIVEM servers',
-        'Developing custom resources like login systems, inventory, economy and HUDs',
-        'Integration with external databases (MySQL) for server information persistence',
-        'Creating interactive interfaces using HTML, CSS and JavaScript integrated with server client-side',
-      ],
-    },
-    practicalExperience: {
-      title: 'Practical Experience',
-      webDevelopment: {
-        title: 'Web Project Development',
-        type: 'Personal Projects',
-        period: '2025',
-        description: 'Development of practical web projects applying React and JavaScript',
-        achievements: [
+      experienceDetails: {
+        achievements: 'Main achievements:',
+        webDevelopmentDescription:
+          'Development of practical web projects including Currency Converter and Calculator, applying React and JavaScript knowledge.',
+        learningDescription:
+          'Intensive dedication to learning modern web technologies through online courses and constant practice.',
+        modsDescription:
+          'Intensive study of LUA language applied to the development of modifications (mods) for MTA and FIVEM platforms, exploring programming logic concepts, dynamic systems and server integration.',
+        webDevelopmentAchievements: [
           'Currency Converter with external API',
           'Functional Calculator in React',
           'Responsive and modern interface',
+          'External API integration',
           'Deploy on GitHub Pages',
         ],
-      },
-      modsDevelopment: {
-        title: 'MTA/FIVEM Mods (LUA)',
-        type: 'Independent Learning',
-        period: '2024',
-        description: 'Development of modifications using LUA for game servers',
-        achievements: [
-          'Login, inventory and economy systems',
-          'Integration with MySQL for data persistence',
-          'Interactive interfaces with HTML/CSS/JS',
-          'Dynamic scripts and systems',
+        learningAchievements: [
+          'Learning React and JavaScript',
+          'Developing HTML and CSS skills',
+          'External API integration',
+          'Creating practical projects',
+          'Versioning with Git and GitHub',
+        ],
+        modsAchievements: [
+          'Learning and practicing LUA language for creating scripts and systems on MTA and FIVEM servers',
+          'Developing custom resources like login systems, inventory, economy and HUDs',
+          'Integration with external databases (MySQL) for server information persistence',
+          'Creating interactive interfaces using HTML, CSS and JavaScript integrated with server client-side',
         ],
       },
-    },
+      practicalExperience: {
+        title: 'Practical Experience',
+        webDevelopment: {
+          title: 'Web Project Development',
+          type: 'Personal Projects',
+          period: '2025',
+          description:
+            'Development of practical web projects applying React and JavaScript',
+          achievements: [
+            'Currency Converter with external API',
+            'Functional Calculator in React',
+            'Responsive and modern interface',
+            'Deploy on GitHub Pages',
+          ],
+        },
+        modsDevelopment: {
+          title: 'MTA/FIVEM Mods (LUA)',
+          type: 'Independent Learning',
+          period: '2024',
+          description:
+            'Development of modifications using LUA for game servers',
+          achievements: [
+            'Login, inventory and economy systems',
+            'Integration with MySQL for data persistence',
+            'Interactive interfaces with HTML/CSS/JS',
+            'Dynamic scripts and systems',
+          ],
+        },
+      },
       certificationDetails: {
         htmlCss:
           'Web development with HTML5 and CSS3, including responsiveness and modern design.',

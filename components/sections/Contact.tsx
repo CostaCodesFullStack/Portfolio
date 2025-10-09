@@ -51,13 +51,13 @@ const Contact = () => {
 
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    
+
     // Tentar abrir o Gmail diretamente
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${contactInfo.email}&su=Contato via Portfólio&body=Olá Cauã,%0D%0A%0D%0AEspero que esteja bem!%0D%0A%0D%0A`;
-    
+
     // Abrir em nova aba
     window.open(gmailUrl, '_blank');
-    
+
     // Fallback: tentar mailto também
     setTimeout(() => {
       window.location.href = `mailto:${contactInfo.email}?subject=Contato via Portfólio&body=Olá Cauã,%0D%0A%0D%0AEspero que esteja bem!%0D%0A%0D%0A`;
@@ -111,12 +111,14 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Erro ao enviar formulário:', error);
-      
+
       // Tratar diferentes tipos de erro
       if (error instanceof SyntaxError) {
         setSubmitError('Erro no servidor. Tente novamente mais tarde.');
       } else if (error instanceof TypeError) {
-        setSubmitError('Erro de conexão. Verifique sua internet e tente novamente.');
+        setSubmitError(
+          'Erro de conexão. Verifique sua internet e tente novamente.'
+        );
       } else {
         setSubmitError('Erro inesperado. Tente novamente mais tarde.');
       }
@@ -216,8 +218,18 @@ const Contact = () => {
                   key={index}
                   href={info.href}
                   onClick={info.onClick}
-                  target={info.href.startsWith('mailto:') || info.href.startsWith('tel:') ? '_self' : '_blank'}
-                  rel={info.href.startsWith('mailto:') || info.href.startsWith('tel:') ? '' : 'noopener noreferrer'}
+                  target={
+                    info.href.startsWith('mailto:') ||
+                    info.href.startsWith('tel:')
+                      ? '_self'
+                      : '_blank'
+                  }
+                  rel={
+                    info.href.startsWith('mailto:') ||
+                    info.href.startsWith('tel:')
+                      ? ''
+                      : 'noopener noreferrer'
+                  }
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}

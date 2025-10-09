@@ -19,9 +19,9 @@ describe('Exemplo de Teste', () => {
     const pipeline = {
       name: 'CI/CD Pipeline',
       status: 'funcionando',
-      jobs: ['lint', 'test', 'build', 'deploy']
+      jobs: ['lint', 'test', 'build', 'deploy'],
     };
-    
+
     expect(pipeline.name).toBe('CI/CD Pipeline');
     expect(pipeline.status).toBe('funcionando');
     expect(pipeline.jobs).toHaveLength(4);

@@ -38,7 +38,8 @@ const Experience = () => {
       type: t.experience.practicalExperience.webDevelopment.type,
       period: t.experience.practicalExperience.webDevelopment.period,
       description: t.experience.practicalExperience.webDevelopment.description,
-      achievements: t.experience.practicalExperience.webDevelopment.achievements,
+      achievements:
+        t.experience.practicalExperience.webDevelopment.achievements,
       icon: HiCode,
       color: 'bg-emerald-600',
     },
@@ -47,7 +48,8 @@ const Experience = () => {
       type: t.experience.practicalExperience.modsDevelopment.type,
       period: t.experience.practicalExperience.modsDevelopment.period,
       description: t.experience.practicalExperience.modsDevelopment.description,
-      achievements: t.experience.practicalExperience.modsDevelopment.achievements,
+      achievements:
+        t.experience.practicalExperience.modsDevelopment.achievements,
       icon: FaGamepad,
       color: 'bg-purple-600',
     },
@@ -77,7 +79,6 @@ const Experience = () => {
       icon: FaCertificate,
     },
   ];
-
 
   return (
     <section
@@ -113,7 +114,7 @@ const Experience = () => {
               <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center ring-4 ring-blue-600/30">
                 <education.icon className="w-8 h-8 text-white" />
               </div>
-              
+
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-3">
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -123,11 +124,11 @@ const Experience = () => {
                     {t.experience.current}
                   </span>
                 </div>
-                
+
                 <p className="text-blue-400 font-semibold text-lg mb-2">
                   {education.institution}
                 </p>
-                
+
                 <div className="flex items-center space-x-6 text-gray-600 dark:text-gray-400 mb-4">
                   <span className="flex items-center">
                     <HiCalendar className="w-5 h-5 mr-2 text-blue-500" />
@@ -138,11 +139,11 @@ const Experience = () => {
                     {education.location}
                   </span>
                 </div>
-                
+
                 <p className="text-gray-700 dark:text-gray-300 mb-6">
                   {education.description}
                 </p>
-                
+
                 {/* Barra de Progresso */}
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
@@ -150,7 +151,7 @@ const Experience = () => {
                     <span>Ano 1 de 4 ({education.progress}%)</span>
                   </div>
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                    <div 
+                    <div
                       className="bg-blue-600 h-3 rounded-full transition-all duration-1000 ease-out"
                       style={{ width: `${education.progress}%` }}
                     ></div>
@@ -171,7 +172,7 @@ const Experience = () => {
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             {t.experience.practicalExperience.title}
           </h3>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {practicalExperiences.map((exp, index) => (
               <motion.div
@@ -182,10 +183,12 @@ const Experience = () => {
                 className="card hover:scale-105 transition-transform duration-300"
               >
                 <div className="flex items-start space-x-4">
-                  <div className={`w-12 h-12 ${exp.color} rounded-full flex items-center justify-center`}>
+                  <div
+                    className={`w-12 h-12 ${exp.color} rounded-full flex items-center justify-center`}
+                  >
                     <exp.icon className="w-6 h-6 text-white" />
                   </div>
-                  
+
                   <div className="flex-1">
                     <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                       {exp.title}
@@ -196,7 +199,7 @@ const Experience = () => {
                     <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
                       {exp.description}
                     </p>
-                    
+
                     <div>
                       <h5 className="text-sm font-semibold text-primary-600 dark:text-primary-400 mb-2">
                         {t.experience.experienceDetails.achievements}
@@ -231,7 +234,7 @@ const Experience = () => {
             <FaCertificate className="w-6 h-6 text-primary-400 mr-3" />
             {t.experience.certifications}
           </h3>
-          
+
           <div className="grid md:grid-cols-3 gap-6">
             {certifications.map((cert, index) => (
               <motion.div
@@ -246,7 +249,7 @@ const Experience = () => {
                     <cert.icon className="w-6 h-6 text-white" />
                   </div>
                 </div>
-                
+
                 <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                   {cert.title}
                 </h4>
@@ -259,7 +262,7 @@ const Experience = () => {
                 <p className="text-gray-700 dark:text-gray-300 text-xs">
                   {cert.description}
                 </p>
-                
+
                 <div className="flex justify-center mt-4">
                   <HiCheckCircle className="w-5 h-5 text-emerald-500" />
                 </div>
@@ -283,10 +286,16 @@ const Experience = () => {
               {t.experience.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#contact" className="btn-primary inline-flex items-center">
+              <a
+                href="#contact"
+                className="btn-primary inline-flex items-center"
+              >
                 {t.experience.cta.button}
               </a>
-              <a href="#projects" className="btn-secondary inline-flex items-center">
+              <a
+                href="#projects"
+                className="btn-secondary inline-flex items-center"
+              >
                 {t.experience.cta.viewProjects}
               </a>
             </div>

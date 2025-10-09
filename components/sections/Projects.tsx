@@ -127,7 +127,7 @@ const Projects = () => {
         >
           {categories.map((category, index) => {
             const isActive = selectedCategory === category.key;
-            
+
             return (
               <motion.button
                 key={category.key}
