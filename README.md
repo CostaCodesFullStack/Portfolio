@@ -8,7 +8,7 @@
 
 <div align="center">
   
-  ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js )
+  ![Next.js](https://img.shields.io/badge/Next.js-15.5-black?style=for-the-badge&logo=next.js )
   ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?style=for-the-badge&logo=typescript )
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwind-css )
   ![Framer Motion](https://img.shields.io/badge/Framer_Motion-10.16-pink?style=for-the-badge&logo=framer )
@@ -20,12 +20,6 @@
 </div>
 
 <div align="center">
-
-  <!-- Badges de CI/CD -->
-
-![CI/CD Pipeline](https://github.com/CostaCodesFullStack/Portfolio/workflows/🚀%20CI/CD%20Pipeline/badge.svg)
-![Deploy Status](https://github.com/CostaCodesFullStack/Portfolio/workflows/🚀%20Deploy%20para%20Produção/badge.svg)
-![PR Check](https://github.com/CostaCodesFullStack/Portfolio/workflows/🔍%20Validação%20de%20Pull%20Request/badge.svg)
 
   <!-- Badges de Qualidade -->
 
@@ -47,7 +41,7 @@
 
 Este portfólio foi desenvolvido para apresentar minha jornada e minhas habilidades como estudante de Engenharia de Software. Sou um desenvolvedor apaixonado por criar soluções web modernas, com foco em **frontend, backend escalável, APIs e automação**.
 
-O projeto foi construído com **Next.js 14, TypeScript e Tailwind CSS**, seguindo as melhores práticas de desenvolvimento para garantir performance, acessibilidade e uma excelente experiência de usuário.
+O projeto foi construído com **Next.js 15.5, TypeScript 5.3 e Tailwind CSS 3.4**, seguindo as melhores práticas de desenvolvimento para garantir performance, acessibilidade e uma excelente experiência de usuário.
 
 ## ✨ Destaques Técnicos
 
@@ -56,47 +50,78 @@ O projeto foi construído com **Next.js 14, TypeScript e Tailwind CSS**, seguind
 - **🧩 Arquitetura Escalável:** Estrutura de projeto baseada em componentes, facilitando a manutenção e a adição de novas funcionalidades.
 - **♿ Acessibilidade (A11y):** Desenvolvimento seguindo as diretrizes WCAG para garantir que o site seja acessível a todos.
 - **📧 Formulário Funcional:** Sistema completo de contato com validação, envio de emails reais e feedback visual.
+- **🧪 Testes Automatizados:** Cobertura de testes com Jest e React Testing Library para garantir qualidade do código.
 
 ## 🛠️ Stack Tecnológica
 
 | Categoria               | Tecnologias                                               |
 | :---------------------- | :-------------------------------------------------------- |
-| **Core**                | `Next.js 15`, `React 18`, `TypeScript`, `Tailwind CSS`    |
-| **Backend**             | `Next.js API Routes`, `Nodemailer`, `Email Validation`    |
-| **Animação e Estilo**   | `Framer Motion`, `React Icons`, `PostCSS`, `Autoprefixer` |
-| **Qualidade de Código** | `ESLint`, `Prettier`, `Jest`, `Testing Library`           |
+| **Core**                | `Next.js 15.5`, `React 18.2`, `TypeScript 5.3`, `Tailwind CSS 3.4`    |
+| **Backend**             | `Next.js API Routes`, `Nodemailer 7.0`, `Email Validation`    |
+| **Animação e Estilo**   | `Framer Motion 10.16`, `React Icons 4.12`, `PostCSS`, `Autoprefixer` |
+| **Qualidade de Código** | `ESLint 8.56`, `Prettier 3.1`, `Jest 30.2`, `Testing Library 16.3`           |
 | **CI/CD**               | `GitHub Actions`, `Vercel`, `CodeQL`, `Act`               |
 | **Deploy**              | `Vercel`, `Git`, `GitHub`                                 |
 
 ## 📂 Estrutura do Projeto
 
 ```
-portfolio/
-├── .github/
-│   └── workflows/      # Workflows de CI/CD
-│       ├── ci.yml      # Pipeline principal
-│       ├── deploy.yml  # Deploy para produção
-│       └── pr-check.yml # Validações de PR
+portifolio2/
 ├── app/                # Rotas, layouts e páginas (App Router)
-├── components/         # Componentes reutilizáveis (Navbar, Footer)
-│   └── sections/       # Componentes de cada seção da página
-├── public/             # Assets estáticos (imagens, fontes)
-├── scripts/            # Scripts de automação
-│   ├── test-workflows.sh    # Teste local (Linux/Mac)
-│   └── test-workflows.ps1   # Teste local (Windows)
+│   ├── api/            # API Routes do Next.js
+│   │   └── contact/    # Endpoint de contato
+│   ├── globals.css     # Estilos globais
+│   ├── layout.tsx      # Layout principal
+│   └── page.tsx        # Página inicial
+├── components/         # Componentes reutilizáveis
+│   ├── sections/       # Componentes de cada seção
+│   │   ├── About.tsx   # Seção sobre
+│   │   ├── Contact.tsx # Seção de contato
+│   │   ├── Experience.tsx # Seção de experiência
+│   │   ├── Hero.tsx    # Seção hero
+│   │   ├── Projects.tsx # Seção de projetos
+│   │   └── Skills.tsx  # Seção de habilidades
+│   ├── Footer.tsx      # Rodapé
+│   ├── Navbar.tsx      # Navegação
+│   ├── Particles.tsx   # Efeito de partículas
+│   └── providers/      # Providers de contexto
+├── contexts/           # Contextos React
+│   ├── ThemeContext.tsx # Contexto de tema
+│   └── TranslationContext.tsx # Contexto de tradução
 ├── lib/                # Funções utilitárias
+│   └── config.ts       # Configurações
+├── public/             # Assets estáticos
+│   └── images/         # Imagens do projeto
+├── __tests__/          # Testes automatizados
+├── coverage/           # Relatórios de cobertura
+├── docs/               # Documentação
+├── scripts/            # Scripts de automação
 ├── tailwind.config.js  # Configuração do Tailwind CSS
 ├── tsconfig.json       # Configuração do TypeScript
 ├── jest.config.js      # Configuração do Jest
-├── .prettierrc         # Configuração do Prettier
+├── next.config.js      # Configuração do Next.js
 └── package.json        # Dependências e scripts
 ```
 
-## 🚀 CI/CD Pipeline
+## 🧪 Testes e Qualidade
 
-Este projeto implementa um pipeline completo de CI/CD usando **GitHub Actions** com as seguintes características:
+Este projeto implementa um sistema robusto de testes e qualidade de código:
 
-### 🔄 Workflows Implementados
+### 📊 Cobertura de Testes
+- **Jest 30.2** - Framework de testes principal
+- **React Testing Library 16.3** - Testes de componentes React
+- **Cobertura mínima:** 80% de todas as funcionalidades
+- **Testes automatizados** em cada commit e pull request
+
+### 🔍 Ferramentas de Qualidade
+- **ESLint 8.56** - Análise estática de código
+- **Prettier 3.1** - Formatação automática de código
+- **TypeScript 5.3** - Verificação de tipos em tempo de compilação
+- **Husky** - Git hooks para validação pré-commit
+
+### 🚀 CI/CD Pipeline
+
+O projeto utiliza GitHub Actions para automação completa:
 
 | Workflow              | Trigger                    | Funcionalidades                |
 | --------------------- | -------------------------- | ------------------------------ |
@@ -104,7 +129,7 @@ Este projeto implementa um pipeline completo de CI/CD usando **GitHub Actions** 
 | **🚀 Deploy**         | Push para `main`           | Deploy automático para Vercel  |
 | **🔍 PR Check**       | Pull Requests              | Validação rápida + Comentários |
 
-### 📊 Validações Automáticas
+### 📈 Validações Automáticas
 
 - ✅ **ESLint** - Análise de código
 - ✅ **TypeScript** - Verificação de tipos
@@ -113,44 +138,6 @@ Este projeto implementa um pipeline completo de CI/CD usando **GitHub Actions** 
 - ✅ **Build** - Verificação de build do Next.js
 - ✅ **Segurança** - Auditoria NPM + CodeQL
 - ✅ **Deploy** - Deploy automático para produção
-
-### 🧪 Testando Localmente
-
-Para testar os workflows localmente, use o script fornecido:
-
-```bash
-# Windows (PowerShell)
-.\scripts\test-workflows.ps1 -Setup
-.\scripts\test-workflows.ps1 -Workflow all
-
-# Linux/Mac (Bash)
-chmod +x scripts/test-workflows.sh
-./scripts/test-workflows.sh
-```
-
-### 🔧 Configuração de Secrets
-
-Configure os seguintes secrets no GitHub:
-
-| Secret              | Descrição                                | Obrigatório |
-| ------------------- | ---------------------------------------- | ----------- |
-| `VERCEL_TOKEN`      | Token da Vercel                          | ✅ Sim      |
-| `VERCEL_ORG_ID`     | ID da organização Vercel                 | ✅ Sim      |
-| `VERCEL_PROJECT_ID` | ID do projeto Vercel                     | ✅ Sim      |
-| `GITHUB_TOKEN`      | Token do GitHub (gerado automaticamente) | ❌ Não      |
-
-**📋 Arquivos de Configuração:**
-
-- `.secrets.example` - Exemplo de secrets para teste local
-- `env.act.example` - Exemplo de variáveis de ambiente
-- `.actrc` - Configuração do act para teste local
-
-### 📈 Métricas de Qualidade
-
-- **Cobertura de Testes:** Mínimo 80%
-- **Tempo de Pipeline:** < 10 minutos
-- **Deploy Time:** < 5 minutos
-- **Disponibilidade:** 99.9% (Vercel)
 
 ## 🚀 Projetos em Destaque
 
@@ -178,9 +165,11 @@ Aqui estão alguns projetos que desenvolvi para praticar e demonstrar minhas hab
 ## 🎯 Roadmap Futuro
 
 - [x] ~~Conectar formulário de contato a um backend funcional~~ ✅ **CONCLUÍDO**
+- [x] ~~Implementar testes automatizados com Jest~~ ✅ **CONCLUÍDO**
 - [ ] Adicionar blog técnico com artigos sobre desenvolvimento
 - [ ] Integrar CMS para gerenciamento de conteúdo dos projetos
-- [ ] Escrever testes automatizados com Jest e React Testing Library
+- [ ] Implementar internacionalização (i18n)
+- [ ] Adicionar modo escuro/claro dinâmico
 
 ## 🚀 Como Executar o Projeto
 
@@ -264,7 +253,7 @@ npm run pre-commit   # Preparar commit (lint:fix + format + test:ci)
 
 ### 📧 Configuração do Formulário de Contato
 
-O formulário de contato agora está **totalmente funcional** e envia emails reais! Para configurar:
+O formulário de contato está **totalmente funcional** e envia emails reais! Para configurar:
 
 1. **Crie um arquivo `.env.local`** na raiz do projeto
 2. **Configure suas credenciais de email**:
@@ -273,22 +262,25 @@ O formulário de contato agora está **totalmente funcional** e envia emails rea
    EMAIL_PASS=sua-senha-de-app
    ```
 3. **Para Gmail**: Ative verificação em duas etapas e gere uma senha de app
-4. **Consulte** `CONFIGURACAO_EMAIL.md` para instruções detalhadas
+4. **Consulte** `env.example` para instruções detalhadas
 
 > 💡 **Sem configuração de email**: O formulário ainda funciona, mas apenas simula o envio.
 
-📄 Licença
-Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
-📞 Contato
-Cauã Costa
+## 📄 Licença
 
+Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+
+## 📞 Contato
+
+**Cauã Costa**  
 Estudante de Engenharia de Software
-📧 Email: cauadevcosta@gmail.com
-💼 GitHub: @CostaCodesFullStack
-📍 Localização: Matão, SP - Brasil
+
+📧 **Email:** cauadevcosta@gmail.com  
+💼 **GitHub:** [@CostaCodesFullStack](https://github.com/CostaCodesFullStack)  
+📍 **Localização:** Matão, SP - Brasil
 
 <div align="center">
-💙 Desenvolvido com paixão por Cauã Costa
+💙 **Desenvolvido com paixão por Cauã Costa**  
 Interessado em colaborar ou contratar? Vamos conversar!
 </div>
 
@@ -296,9 +288,9 @@ Interessado em colaborar ou contratar? Vamos conversar!
 
 ## 🧪 Teste do Pipeline CI/CD
 
-Esta seção foi adicionada para testar o workflow de validação de Pull Request.
+Esta seção demonstra o funcionamento do workflow de validação de Pull Request.
 
-### O que o pipeline deve fazer:
+### O que o pipeline faz:
 
 - ✅ **Validação Rápida** - ESLint + TypeScript + Prettier
 - ✅ **Testes & Cobertura** - Jest com relatório de cobertura
@@ -311,6 +303,5 @@ Esta seção foi adicionada para testar o workflow de validação de Pull Reques
 - Todos os jobs devem passar ✅
 - Comentário automático no PR 📝
 - Badge de status atualizado 🏷️
-  #   P i p e l i n e   C I / C D   f u n c i o n a n d o ! 
-   
-   
+
+**Pipeline CI/CD funcionando perfeitamente!** 🚀
