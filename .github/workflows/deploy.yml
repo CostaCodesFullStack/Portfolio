@@ -97,7 +97,7 @@ jobs:
   deploy-vercel:
     name: 🚀 Deploy Vercel
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     needs: build-production
     environment: production
 
@@ -123,9 +123,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ env.VERCEL_ORG_ID }}
           vercel-project-id: ${{ env.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod --confirm --timeout=300'
-        env:
-          VERCEL_TIMEOUT: 300
+          vercel-args: '--prod --confirm'
 
       - name: 📊 Verificar deploy
         run: |
