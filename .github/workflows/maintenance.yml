@@ -59,7 +59,7 @@ jobs:
         run: |
           echo "🔍 Executando auditoria de segurança..."
           npm audit --audit-level=moderate || echo "⚠️ Vulnerabilidades encontradas"
-          
+
       - name: 🔒 Verificar dependências desatualizadas
         run: |
           echo "🔒 Verificando dependências desatualizadas..."

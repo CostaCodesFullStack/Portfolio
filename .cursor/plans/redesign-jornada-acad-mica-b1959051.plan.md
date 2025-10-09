@@ -1,4 +1,5 @@
 <!-- b1959051-b30f-4c73-bcc2-5e99d024cfb8 2cde0745-9861-4fe5-8635-f18c23c7e31f -->
+
 # Redesign da Seção "Jornada Acadêmica"
 
 ## Visão Geral
