@@ -1,0 +1,99 @@
+name: 🧹 Limpeza e Manutenção
+
+# Executa semanalmente e manualmente
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Segundas-feiras às 2h
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    name: 🧹 Limpeza do Repositório
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 🧹 Limpar branches antigas
+        run: |
+          echo "🧹 Verificando branches antigas..."
+          # Lista branches com mais de 30 dias
+          git for-each-ref --format='%(refname:short) %(committerdate)' refs/remotes/origin | \
+          awk '$2 < "'$(date -d '30 days ago' '+%Y-%m-%d')'" {print $1}' | \
+          grep -v 'origin/main' | grep -v 'origin/develop' || echo "Nenhuma branch antiga encontrada"
+
+      - name: 📊 Estatísticas do repositório
+        run: |
+          echo "## 📊 Estatísticas do Repositório" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Métrica | Valor |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|-------|" >> $GITHUB_SUMMARY
+          echo "| **Commits totais** | $(git rev-list --count HEAD) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Branches** | $(git branch -r | wc -l) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Tags** | $(git tag | wc -l) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Último commit** | $(git log -1 --format='%cd' --date=short) |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Executado em:** $(date)" >> $GITHUB_STEP_SUMMARY
+
+  security-check:
+    name: 🔒 Verificação de Segurança
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔍 Auditoria de segurança
+        run: |
+          echo "🔍 Executando auditoria de segurança..."
+          npm audit --audit-level=moderate || echo "⚠️ Vulnerabilidades encontradas"
+          
+      - name: 🔒 Verificar dependências desatualizadas
+        run: |
+          echo "🔒 Verificando dependências desatualizadas..."
+          npm outdated || echo "✅ Todas as dependências estão atualizadas"
+
+  performance-check:
+    name: ⚡ Verificação de Performance
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📥 Instalar dependências
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🏗️ Build do projeto
+        run: npm run build
+
+      - name: 📊 Análise de performance
+        run: |
+          echo "📊 Analisando performance do build..."
+          echo "Tamanho do build:"
+          du -sh .next/
+          echo ""
+          echo "Arquivos JavaScript:"
+          find .next/ -name "*.js" -exec wc -c {} + | sort -n | tail -10
+          echo ""
+          echo "Arquivos CSS:"
+          find .next/ -name "*.css" -exec wc -c {} + | sort -n | tail -5

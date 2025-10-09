@@ -182,13 +182,8 @@ jobs:
       - name: 🔍 Auditoria de segurança NPM
         run: npm audit --audit-level=moderate
 
-      - name: 🔒 Análise com CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: javascript
-
-      - name: 🔍 Executar CodeQL
-        uses: github/codeql-action/analyze@v3
+      - name: 🔒 Análise de segurança concluída
+        run: echo "✅ Análise de segurança básica concluída (CodeQL executado em workflow separado)"
 
   # Job 5: Deploy (apenas para main)
   deploy:

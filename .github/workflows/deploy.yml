@@ -123,7 +123,9 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ env.VERCEL_ORG_ID }}
           vercel-project-id: ${{ env.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod --confirm'
+          vercel-args: '--prod --confirm --timeout=300'
+        env:
+          VERCEL_TIMEOUT: 300
 
       - name: 📊 Verificar deploy
         run: |
