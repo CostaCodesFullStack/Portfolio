@@ -14,7 +14,7 @@ const About = () => {
 
   const stats = [
     { icon: HiCode, label: t.about.stats.completedProjects, value: '3+' },
-    { icon: HiAcademicCap, label: t.about.stats.yearsOfStudy, value: '1' },
+    { icon: HiAcademicCap, label: t.about.stats.yearsOfStudy, value: '2' },
     {
       icon: HiLightBulb,
       label: t.about.stats.technologiesLearned,
