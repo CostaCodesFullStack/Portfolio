@@ -339,7 +339,7 @@ const translations: Record<Language, Translation> = {
         technologiesLearned: 'Tecnologias Aprendidas',
       },
       timeline: {
-        softwareEngineering: 'Formação em Engenharia de Software',
+        softwareEngineering: 'Cursando Engenharia de Software',
         firstProjects: 'Primeiros Projetos',
         passionDiscovery: 'Descoberta da Paixão',
         firstContact: 'Primeiro Contato',
@@ -410,7 +410,7 @@ const translations: Record<Language, Translation> = {
       achievements: 'Principais Conquistas',
       current: 'Atual',
       timeline: {
-        softwareEngineering: 'Formação em Engenharia de Software',
+        softwareEngineering: 'Cursando Engenharia de Software',
         firstProjects: 'Primeiros Projetos',
         passionDiscovery: 'Descoberta da Paixão',
         firstContact: 'Primeiro Contato',
@@ -704,7 +704,7 @@ const translations: Record<Language, Translation> = {
         technologiesLearned: 'Technologies Learned',
       },
       timeline: {
-        softwareEngineering: 'Software Engineering Degree',
+        softwareEngineering: 'Studying Software Engineering',
         firstProjects: 'First Projects',
         passionDiscovery: 'Passion Discovery',
         firstContact: 'First Contact',
