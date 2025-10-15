@@ -272,7 +272,11 @@ const Experience = () => {
                 </p>
 
                 <div className="flex justify-center mt-4">
-                  <HiCheckCircle className="w-5 h-5 text-emerald-500" />
+                  {cert.year === t.experience.inProgress ? (
+                    <HiClock className="w-5 h-5 text-yellow-500" />
+                  ) : (
+                    <HiCheckCircle className="w-5 h-5 text-emerald-500" />
+                   )}
                 </div>
               </motion.div>
             ))}
