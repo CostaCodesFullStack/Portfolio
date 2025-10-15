@@ -78,6 +78,13 @@ const Experience = () => {
       description: t.experience.certificationDetails.python,
       icon: FaCertificate,
     },
+    {
+      title: t.experience.certificationsList.java,
+      issuer: 'Curso Em Vídeo',
+      year: t.experience.inProgress,
+      description: t.experience.certificationDetails.java,
+      icon: FaCertificate,
+    },
   ];
 
   return (

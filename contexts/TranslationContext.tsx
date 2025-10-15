@@ -94,6 +94,7 @@ interface Translation {
     certifications: string;
     achievements: string;
     current: string;
+    inProgress: string;
     timeline: {
       softwareEngineering: string;
       firstProjects: string;
@@ -412,6 +413,7 @@ const translations: Record<Language, Translation> = {
       certifications: 'Certificações e Cursos',
       achievements: 'Principais Conquistas',
       current: 'Atual',
+      inProgress: 'Cursando',
       timeline: {
         softwareEngineering: 'Cursando Engenharia de Software',
         firstProjects: 'Primeiros Projetos',
@@ -780,6 +782,7 @@ const translations: Record<Language, Translation> = {
       certifications: 'Certifications and Courses',
       achievements: 'Main Achievements',
       current: 'Current',
+      inProgress: 'In Progress',
       timeline: {
         softwareEngineering: 'Software Engineering Degree',
         firstProjects: 'First Projects',
