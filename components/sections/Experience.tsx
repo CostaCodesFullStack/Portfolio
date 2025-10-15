@@ -276,7 +276,7 @@ const Experience = () => {
                     <HiClock className="w-5 h-5 text-yellow-500" />
                   ) : (
                     <HiCheckCircle className="w-5 h-5 text-emerald-500" />
-                   )}
+                  )}
                 </div>
               </motion.div>
             ))}

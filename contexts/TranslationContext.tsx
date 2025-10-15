@@ -513,8 +513,7 @@ const translations: Record<Language, Translation> = {
           'Fundamentos de JavaScript, DOM, APIs e desenvolvimento web interativo.',
         python:
           'Fundamentos de Python, estruturas de dados, algoritmos e desenvolvimento de aplicações.',
-        java:
-          'Fundamentos de Java, orientação a objetos, estruturas de dados e desenvolvimento de aplicações.',
+        java: 'Fundamentos de Java, orientação a objetos, estruturas de dados e desenvolvimento de aplicações.',
       },
       achievementDetails: {
         portfolio: 'Desenvolvimento de portfólio completo com React e Next.js',
@@ -882,8 +881,7 @@ const translations: Record<Language, Translation> = {
           'JavaScript fundamentals, DOM, APIs and interactive web development.',
         python:
           'Python fundamentals, data structures, algorithms and application development.',
-        java:
-          'Java fundamentals, object-oriented programming, data structures and application development.',
+        java: 'Java fundamentals, object-oriented programming, data structures and application development.',
       },
       achievementDetails: {
         portfolio: 'Complete portfolio development with React and Next.js',
