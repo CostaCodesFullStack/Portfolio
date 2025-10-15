@@ -8,6 +8,7 @@ import {
   HiCalendar,
   HiLocationMarker,
   HiCheckCircle,
+  HiClock,
 } from 'react-icons/hi';
 import { FaGraduationCap, FaCertificate, FaGamepad } from 'react-icons/fa';
 import { useTranslation } from '@/contexts/TranslationContext';
@@ -83,7 +84,7 @@ const Experience = () => {
       issuer: 'Curso Em Vídeo',
       year: t.experience.inProgress,
       description: t.experience.certificationDetails.java,
-      icon: FaCertificate,
+      icon: HiClock,
     },
   ];
 
