@@ -111,6 +111,7 @@ interface Translation {
       htmlCss: string;
       javascript: string;
       python: string;
+      java: string;
     };
     achievementsList: {
       portfolio: string;
@@ -156,6 +157,7 @@ interface Translation {
       htmlCss: string;
       javascript: string;
       python: string;
+      java: string;
     };
     achievementDetails: {
       portfolio: string;
@@ -179,6 +181,7 @@ interface Translation {
         css3: string;
         javascript: string;
         python: string;
+        java: string;
         c: string;
         lua: string;
         git: string;
@@ -426,6 +429,7 @@ const translations: Record<Language, Translation> = {
         htmlCss: 'HTML5 e CSS3',
         javascript: 'JavaScript',
         python: 'Python',
+        java: 'Java',
       },
       achievementsList: {
         portfolio: 'Portfólio Profissional',
@@ -507,6 +511,8 @@ const translations: Record<Language, Translation> = {
           'Fundamentos de JavaScript, DOM, APIs e desenvolvimento web interativo.',
         python:
           'Fundamentos de Python, estruturas de dados, algoritmos e desenvolvimento de aplicações.',
+        java:
+          'Fundamentos de Java, orientação a objetos, estruturas de dados e desenvolvimento de aplicações.',
       },
       achievementDetails: {
         portfolio: 'Desenvolvimento de portfólio completo com React e Next.js',
@@ -534,6 +540,7 @@ const translations: Record<Language, Translation> = {
           css3: 'CSS3',
           javascript: 'JavaScript',
           python: 'Python',
+          java: 'Java',
           c: 'C',
           lua: 'LUA',
           git: 'Git/GitHub',
@@ -790,6 +797,7 @@ const translations: Record<Language, Translation> = {
         htmlCss: 'HTML5 and CSS3',
         javascript: 'JavaScript',
         python: 'Python',
+        java: 'Java',
       },
       achievementsList: {
         portfolio: 'Professional Portfolio',
@@ -871,6 +879,8 @@ const translations: Record<Language, Translation> = {
           'JavaScript fundamentals, DOM, APIs and interactive web development.',
         python:
           'Python fundamentals, data structures, algorithms and application development.',
+        java:
+          'Java fundamentals, object-oriented programming, data structures and application development.',
       },
       achievementDetails: {
         portfolio: 'Complete portfolio development with React and Next.js',
@@ -897,6 +907,7 @@ const translations: Record<Language, Translation> = {
           css3: 'CSS3',
           javascript: 'JavaScript',
           python: 'Python',
+          java: 'Java',
           c: 'C',
           lua: 'LUA',
           git: 'Git/GitHub',

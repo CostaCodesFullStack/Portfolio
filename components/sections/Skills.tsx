@@ -13,6 +13,10 @@ import {
   SiGit,
   SiMysql,
 } from 'react-icons/si';
+import {
+  BsFiletypeJava,
+} from 'react-icons/bs';
+
 import { HiCode, HiCog, HiLightBulb, HiUsers } from 'react-icons/hi';
 import { useTranslation } from '@/contexts/TranslationContext';
 
@@ -36,6 +40,7 @@ const Skills = () => {
     ],
     backend: [
       { name: t.experience.technologies.technologies.python, icon: SiPython },
+      { name: t.experience.technologies.technologies.java, icon: BsFiletypeJava },
       { name: t.experience.technologies.technologies.c, icon: SiC },
       { name: t.experience.technologies.technologies.lua, icon: SiLua },
     ],
