@@ -188,6 +188,7 @@ interface Translation {
         git: string;
         api: string;
         mysql: string;
+        typescript: string;
       };
     };
     cta: {
@@ -547,6 +548,7 @@ const translations: Record<Language, Translation> = {
           git: 'Git/GitHub',
           api: 'APIs REST',
           mysql: 'MySQL',
+          typescript: 'TypeScript',
         },
       },
       cta: {
@@ -914,6 +916,7 @@ const translations: Record<Language, Translation> = {
           git: 'Git/GitHub',
           api: 'REST APIs',
           mysql: 'MySQL',
+          typescript: 'TypeScript',
         },
       },
       cta: {
