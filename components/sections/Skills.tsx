@@ -13,7 +13,7 @@ import {
   SiLua,
   SiGit,
   SiMysql,
-  SiTypescript
+  SiTypescript,
 } from 'react-icons/si';
 
 import { HiCode, HiCog, HiLightBulb, HiUsers } from 'react-icons/hi';
@@ -42,7 +42,10 @@ const Skills = () => {
       { name: t.experience.technologies.technologies.java, icon: SiOpenjdk },
       { name: t.experience.technologies.technologies.c, icon: SiC },
       { name: t.experience.technologies.technologies.lua, icon: SiLua },
-      { name: t.experience.technologies.technologies.typescript, icon: SiTypescript },
+      {
+        name: t.experience.technologies.technologies.typescript,
+        icon: SiTypescript,
+      },
     ],
     tools: [
       { name: t.experience.technologies.technologies.git, icon: SiGit },
