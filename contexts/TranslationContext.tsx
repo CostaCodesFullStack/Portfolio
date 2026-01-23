@@ -879,7 +879,7 @@ const translations: Record<Language, Translation> = {
         fivemBot: {
           title: 'FiveM Community Discord Bot',
           type: 'Discord Bot Application',
-          period: '202',
+          period: '2026',
           description:
             'A comprehensive Discord bot designed for FiveM/GTA RP communities, featuring modular architecture with verification, moderation, and community management tools.',
           achievements: [
