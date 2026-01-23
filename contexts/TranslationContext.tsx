@@ -139,6 +139,13 @@ interface Translation {
     };
     practicalExperience: {
       title: string;
+      fivemBot: {
+        title: string;
+        type: string;
+        period: string;
+        description: string;
+        achievements: string[];
+      };
       webDevelopment: {
         title: string;
         type: string;
@@ -480,6 +487,23 @@ const translations: Record<Language, Translation> = {
       },
       practicalExperience: {
         title: 'Experiência Prática',
+        fivemBot: {
+          title: 'Bot Discord para Comunidades FiveM',
+          type: 'Aplicação de Bot Discord',
+          period: '2026',
+          description:
+            'Um bot Discord completo desenvolvido para comunidades FiveM/GTA RP, com arquitetura modular incluindo sistemas de verificação, moderação e ferramentas de gestão comunitária.',
+          achievements: [
+            'Implementei um sistema robusto de verificação usando discord.js v14 e Zod para validação de schemas, garantindo onboarding seguro de usuários com verificações personalizadas.',
+            'Desenvolvi funcionalidades de gestão de advertências com integração MongoDB para armazenamento persistente e políticas automatizadas de escalonamento.',
+            'Criei recursos de anúncios e agendamento de eventos usando Fastify para endpoints API e Canvas para geração dinâmica de imagens.',
+            'Integrei suporte multi-banco de dados (MongoDB, MySQL, SQLite) com Sequelize ORM para gestão flexível de dados conforme diferentes necessidades da comunidade.',
+            'Utilizei Winston para logging avançado e rastreamento de erros, melhorando depuração e monitoramento operacional.',
+            'Empreguei tsup para compilação eficiente de TypeScript e ES Modules com imports mapeados para estrutura de código escalável e sustentável.',
+            'Criei mecanismos de controle de presença com atribuição automática de cargos e rastreamento via eventos do Discord.',
+            'Otimizei performance com arquitetura modular, reduzindo tempos de carga e melhorando experiência do usuário em servidores RP de alto tráfego.',
+          ],
+        },
         webDevelopment: {
           title: 'Desenvolvimento de Projetos Web',
           type: 'Projetos Pessoais',
@@ -849,6 +873,23 @@ const translations: Record<Language, Translation> = {
       },
       practicalExperience: {
         title: 'Practical Experience',
+        fivemBot: {
+          title: 'FiveM Community Discord Bot',
+          type: 'Discord Bot Application',
+          period: '2026',
+          description:
+            'A comprehensive Discord bot designed for FiveM/GTA RP communities, featuring modular architecture with verification, moderation, and community management tools.',
+          achievements: [
+            'Implemented a robust verification system using discord.js v14 and Zod for schema validation, ensuring secure user onboarding with custom checks.',
+            'Developed warning management functionality with MongoDB integration for persistent storage and automated escalation policies.',
+            'Built announcement and event scheduling features using Fastify for API endpoints and Canvas for dynamic image generation.',
+            'Integrated multi-database support (MongoDB, MySQL, SQLite) with Sequelize ORM for flexible data management across different community needs.',
+            'Utilized Winston for advanced logging and error tracking, improving debugging and operational monitoring.',
+            'Employed tsup for efficient TypeScript compilation and ES Modules with mapped imports for scalable, maintainable code structure.',
+            'Created attendance control mechanisms with automated role assignments and presence tracking via Discord events.',
+            'Optimized performance with modular architecture, reducing load times and enhancing user experience in high-traffic RP servers.',
+          ],
+        },
         webDevelopment: {
           title: 'Web Project Development',
           type: 'Personal Projects',
