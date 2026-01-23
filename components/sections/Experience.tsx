@@ -35,6 +35,15 @@ const Experience = () => {
   // Experiência Prática - Cards Médios
   const practicalExperiences = [
     {
+      title: t.experience.practicalExperience.fivemBot.title,
+      type: t.experience.practicalExperience.fivemBot.type,
+      period: t.experience.practicalExperience.fivemBot.period,
+      description: t.experience.practicalExperience.fivemBot.description,
+      achievements: t.experience.practicalExperience.fivemBot.achievements,
+      icon: HiAcademicCap,
+      color: 'bg-blue-600',
+    },
+    {
       title: t.experience.practicalExperience.webDevelopment.title,
       type: t.experience.practicalExperience.webDevelopment.type,
       period: t.experience.practicalExperience.webDevelopment.period,

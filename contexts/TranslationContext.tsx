@@ -107,6 +107,7 @@ interface Translation {
       webDevelopmentStudies: string;
       independentLearning: string;
       modsDevelopment: string;
+      fivemBot: string;
     };
     certificationsList: {
       htmlCss: string;
@@ -434,6 +435,7 @@ const translations: Record<Language, Translation> = {
         webDevelopmentStudies: 'Estudos em Desenvolvimento Web',
         independentLearning: 'Aprendizado Independente',
         modsDevelopment: 'Estudos e Desenvolvimento de Mods MTA/FIVEM',
+        fivemBot: 'Bot Discord para Comunidade FiveM',
       },
       certificationsList: {
         htmlCss: 'HTML5 e CSS3',
@@ -820,6 +822,7 @@ const translations: Record<Language, Translation> = {
         webDevelopmentStudies: 'Web Development Studies',
         independentLearning: 'Independent Learning',
         modsDevelopment: 'MTA/FIVEM Mods Development Studies',
+        fivemBot: 'FiveM Community Discord Bot',
       },
       certificationsList: {
         htmlCss: 'HTML5 and CSS3',
@@ -876,7 +879,7 @@ const translations: Record<Language, Translation> = {
         fivemBot: {
           title: 'FiveM Community Discord Bot',
           type: 'Discord Bot Application',
-          period: '2026',
+          period: '202',
           description:
             'A comprehensive Discord bot designed for FiveM/GTA RP communities, featuring modular architecture with verification, moderation, and community management tools.',
           achievements: [
