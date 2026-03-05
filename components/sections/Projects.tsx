@@ -7,13 +7,24 @@ import {
   FaGithub,
   FaExternalLinkAlt,
   FaCode,
-  FaMobile,
-  FaServer,
 } from 'react-icons/fa';
-import { HiLightBulb, HiCode } from 'react-icons/hi';
+import { HiLightBulb } from 'react-icons/hi';
+import { IconType } from 'react-icons';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useTranslation } from '@/contexts/TranslationContext';
+
+// Wrapper para corrigir tipagem do react-icons com className
+const Icon = ({
+  icon: IconComponent,
+  className,
+}: {
+  icon: IconType;
+  className?: string;
+}) => {
+  const Comp = IconComponent as React.ElementType;
+  return <Comp className={className} />;
+};
 
 const Projects = () => {
   const { t } = useTranslation();
@@ -70,8 +81,8 @@ const Projects = () => {
     },
     {
       id: 4,
-      title: t.projects.project5.title,
-      description: t.projects.project5.description,
+      title: t.projects.project4.title,
+      description: t.projects.project4.description,
       image: '/images/projects/landing-page.gif',
       technologies: ['HTML', 'CSS', 'JavaScript'],
       category: 'Frontend',
@@ -89,7 +100,6 @@ const Projects = () => {
     { key: 'fullstack', label: t.projects.categories.fullstack },
   ];
 
-  // Filtrar projetos baseado na categoria selecionada
   const filteredProjects = projects.filter(project => {
     if (selectedCategory === 'featured') {
       return project.featured;
@@ -172,10 +182,8 @@ const Projects = () => {
                   </div>
                 ) : (
                   <div className="w-full h-48 bg-gradient-to-br from-primary-600/20 to-primary-400/20 flex items-center justify-center">
-                    {project.icon &&
-                      React.createElement(project.icon, {
-                        className: 'w-16 h-16 text-primary-400',
-                      })}
+                    {/* ✅ Corrigido: usando wrapper Icon em vez de React.createElement */}
+                    <Icon icon={project.icon} className="w-16 h-16 text-primary-400" />
                   </div>
                 )}
 
@@ -189,7 +197,8 @@ const Projects = () => {
                       className="p-3 bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300"
                       aria-label={t.projects.ariaLabels.viewCode}
                     >
-                      <FaGithub className="w-5 h-5 text-white" />
+                      {/* ✅ Corrigido */}
+                      <Icon icon={FaGithub} className="w-5 h-5 text-white" />
                     </a>
                   )}
                   {project.demo && (
@@ -200,7 +209,8 @@ const Projects = () => {
                       className="p-3 bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300"
                       aria-label={t.projects.ariaLabels.viewDemo}
                     >
-                      <FaExternalLinkAlt className="w-5 h-5 text-white" />
+                      {/* ✅ Corrigido */}
+                      <Icon icon={FaExternalLinkAlt} className="w-5 h-5 text-white" />
                     </a>
                   )}
                 </div>
@@ -208,19 +218,16 @@ const Projects = () => {
 
               {/* Conteúdo do Projeto */}
               <div className="p-6 space-y-4 text-left">
-                {/* Título */}
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-400 transition-colors duration-300 text-left">
                   {project.title}
                 </h3>
 
-                {/* Descrição */}
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed text-left">
                   {project.description}
                 </p>
 
-                {/* Tecnologias */}
                 <div className="flex flex-wrap gap-2 justify-start">
-                  {project.technologies.map((tech, techIndex) => (
+                  {project.technologies.map((tech) => (
                     <span
                       key={tech}
                       className="px-3 py-1 bg-primary-600/10 text-primary-400 text-xs rounded-full border border-primary-600/20"
@@ -239,7 +246,8 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-primary-400 transition-colors duration-300 text-sm"
                     >
-                      <FaGithub className="w-4 h-4" />
+                      {/* ✅ Corrigido */}
+                      <Icon icon={FaGithub} className="w-4 h-4" />
                       <span>{t.projects.viewCode}</span>
                     </a>
                   )}
@@ -250,7 +258,8 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-primary-400 transition-colors duration-300 text-sm"
                     >
-                      <FaExternalLinkAlt className="w-4 h-4" />
+                      {/* ✅ Corrigido */}
+                      <Icon icon={FaExternalLinkAlt} className="w-4 h-4" />
                       <span>{t.projects.viewProject}</span>
                     </a>
                   )}
@@ -281,14 +290,16 @@ const Projects = () => {
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center justify-center"
               >
-                <FaGithub className="w-5 h-5 mr-2" />
+                {/* ✅ Corrigido */}
+                <Icon icon={FaGithub} className="w-5 h-5 mr-2" />
                 {t.projects.cta.githubButton}
               </a>
               <a
                 href="#contact"
                 className="btn-secondary inline-flex items-center justify-center"
               >
-                <HiLightBulb className="w-5 h-5 mr-2" />
+                {/* ✅ Corrigido */}
+                <Icon icon={HiLightBulb} className="w-5 h-5 mr-2" />
                 {t.projects.cta.proposeButton}
               </a>
             </div>
