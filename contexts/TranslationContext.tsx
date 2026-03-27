@@ -233,6 +233,10 @@ interface Translation {
       title: string;
       description: string;
     };
+    project5: {
+      title: string;
+      description: string;
+    };
     ariaLabels: {
       viewCode: string;
       viewDemo: string;
@@ -612,6 +616,11 @@ const translations: Record<Language, Translation> = {
         title: 'Landing Page Educacional',
         description:
           'Landing page moderna e responsiva para uma cafeteria fictícia, desenvolvida com HTML, CSS e JavaScript. Inclui seções de apresentação, cardápio, depoimentos e contato com design elegante e interativo.',
+      },
+      project5: {
+        title: 'Sistema de Mercado em Java',
+        description:
+          'Projeto educacional de backend em Java puro para simular o funcionamento de um caixa de mercado, com cadastro de produtos, controle de estoque e carrinho de compras aplicando POO e separacao em camadas.',
       },
       ariaLabels: {
         viewCode: 'Ver código no GitHub',
@@ -993,6 +1002,11 @@ const translations: Record<Language, Translation> = {
         title: 'Educational Landing Page',
         description:
           'Modern and responsive landing page for a fictional coffee shop, developed with HTML, CSS and JavaScript. Includes presentation, menu, testimonials and contact sections with elegant and interactive design.',
+      },
+      project5: {
+        title: 'Java Market System',
+        description:
+          'Educational backend project built with pure Java to simulate a grocery checkout system, including product registration, stock control and shopping cart flows while applying OOP and layered separation.',
       },
       ariaLabels: {
         viewCode: 'View code on GitHub',

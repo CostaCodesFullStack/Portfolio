@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaGithub, FaExternalLinkAlt, FaCode } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaCode, FaServer } from 'react-icons/fa';
 import { HiLightBulb } from 'react-icons/hi';
 import { IconType } from 'react-icons';
 import Image from 'next/image';
@@ -22,6 +22,19 @@ const Icon = ({
   return <Comp className={className} />;
 };
 
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image?: string;
+  technologies: string[];
+  category: 'Frontend' | 'Backend' | 'Fullstack';
+  icon: IconType;
+  github: string;
+  demo?: string;
+  featured: boolean;
+}
+
 const Projects = () => {
   const { t } = useTranslation();
   const [ref, inView] = useInView({
@@ -38,7 +51,7 @@ const Projects = () => {
     setImageErrors(prev => ({ ...prev, [projectId]: true }));
   };
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
       title: t.projects.project1.title,
@@ -85,6 +98,16 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/landing-page',
       demo: 'https://costacodesfullstack.github.io/landing-page',
+      featured: true,
+    },
+    {
+      id: 5,
+      title: t.projects.project5.title,
+      description: t.projects.project5.description,
+      technologies: ['Java', 'POO', 'ArrayList', 'Service Layer', 'CLI'],
+      category: 'Backend',
+      icon: FaServer,
+      github: 'https://github.com/CostaCodesFullStack/sistema-mercado-java',
       featured: true,
     },
   ];
@@ -165,7 +188,7 @@ const Projects = () => {
             >
               {/* Imagem do Projeto */}
               <div className="relative overflow-hidden">
-                {!imageErrors[project.id] ? (
+                {project.image && !imageErrors[project.id] ? (
                   <div className="w-full h-48 relative">
                     <Image
                       src={project.image}

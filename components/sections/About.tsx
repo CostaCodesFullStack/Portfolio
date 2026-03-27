@@ -13,7 +13,7 @@ const About = () => {
   });
 
   const stats = [
-    { icon: HiCode, label: t.about.stats.completedProjects, value: '3+' },
+    { icon: HiCode, label: t.about.stats.completedProjects, value: '5+' },
     { icon: HiAcademicCap, label: t.about.stats.yearsOfStudy, value: '2' },
     {
       icon: HiLightBulb,
