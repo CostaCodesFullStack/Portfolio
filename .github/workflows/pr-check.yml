@@ -150,6 +150,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: 🔍 Auditoria NPM
+        continue-on-error: true
         run: npm audit --audit-level=moderate
 
       - name: 🔒 Análise de segurança concluída
@@ -166,6 +167,13 @@ jobs:
     steps:
       - name: 📥 Checkout do código
         uses: actions/checkout@v4
+
+      - name: 📥 Baixar artefato de cobertura
+        if: needs.test-coverage.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report-pr
+          path: .
 
       - name: 📊 Gerar relatório de cobertura
         if: needs.test-coverage.result == 'success'

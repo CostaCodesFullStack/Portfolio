@@ -22,9 +22,9 @@ on:
 # Configurações globais
 env:
   NODE_VERSION: '20'
+  SITE_URL: 'https://portfolio-one-gold-6xch6vskv8.vercel.app'
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  vercel-token: ${{ secrets.VERCEL_TOKEN }}
 
 jobs:
   # Job 1: Validação pré-deploy
@@ -60,6 +60,7 @@ jobs:
     name: 🏗️ Build de Produção
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    needs: [pre-deploy-validation]
 
     steps:
       - name: 📥 Checkout do código
@@ -99,7 +100,9 @@ jobs:
     name: 🚀 Deploy Vercel
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment: production
+    needs: [build-production]
+    environment:
+      name: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment || 'production' }}
 
     steps:
       - name: 📥 Checkout do código
@@ -118,12 +121,13 @@ jobs:
         run: npm run build
 
       - name: 🚀 Deploy para Vercel
+        id: vercel-deploy
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ env.VERCEL_ORG_ID }}
           vercel-project-id: ${{ env.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod --confirm'
+          vercel-args: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging' && '--confirm' || '--prod --confirm' }}
 
       - name: 📊 Verificar deploy
         run: |
@@ -136,6 +140,7 @@ jobs:
     name: 🧪 Testes de Smoke
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    needs: [deploy-vercel]
 
     steps:
       - name: 📥 Checkout do código
@@ -156,11 +161,19 @@ jobs:
           npm run test -- --testPathPatterns="smoke" --passWithNoTests
           echo "✅ Testes de smoke concluídos!"
 
+      - name: 🌐 Verificar URL de produção
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.environment == 'production'
+        run: |
+          echo "🌐 Validando aplicação publicada em ${{ env.SITE_URL }}..."
+          curl --fail --silent --show-error --retry 5 --retry-delay 10 "${{ env.SITE_URL }}" > /dev/null
+          echo "✅ URL de produção respondeu com sucesso!"
+
   # Job 5: Notificação de deploy
   notify-deploy:
     name: 📢 Notificação de Deploy
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    needs: [pre-deploy-validation, build-production, deploy-vercel, smoke-tests]
     if: always()
 
     steps:
@@ -178,13 +191,13 @@ jobs:
           echo "**Ambiente:** ${{ github.event.inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
           echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "**URL:** https://${{ env.VERCEL_PROJECT_ID }}.vercel.app" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging') && 'Preview gerada pela Vercel (veja os logs do deploy)' || env.SITE_URL }}" >> $GITHUB_STEP_SUMMARY
 
       - name: 🎉 Deploy concluído
         if: needs.deploy-vercel.result == 'success' && needs.smoke-tests.result == 'success'
         run: |
-          echo "🎉 Deploy para produção concluído com sucesso!"
-          echo "🌐 Aplicação disponível em: https://${{ env.VERCEL_PROJECT_ID }}.vercel.app"
+          echo "🎉 Deploy concluído com sucesso!"
+          echo "🌐 Destino: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging') && 'Preview gerada pela Vercel (veja os logs do deploy)' || env.SITE_URL }}"
 
       - name: ❌ Deploy falhou
         if: needs.deploy-vercel.result == 'failure' || needs.smoke-tests.result == 'failure'
