@@ -1114,7 +1114,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
     localStorage.setItem('language', language);
   }, [language]);
 
-  const value = {
+  const value: TranslationContextType = {
     language,
     setLanguage,
     t: translations[language],
