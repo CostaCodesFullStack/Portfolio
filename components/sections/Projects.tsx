@@ -3,11 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import {
-  FaGithub,
-  FaExternalLinkAlt,
-  FaCode,
-} from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaCode } from 'react-icons/fa';
 import { HiLightBulb } from 'react-icons/hi';
 import { IconType } from 'react-icons';
 import Image from 'next/image';
@@ -183,7 +179,10 @@ const Projects = () => {
                 ) : (
                   <div className="w-full h-48 bg-gradient-to-br from-primary-600/20 to-primary-400/20 flex items-center justify-center">
                     {/* ✅ Corrigido: usando wrapper Icon em vez de React.createElement */}
-                    <Icon icon={project.icon} className="w-16 h-16 text-primary-400" />
+                    <Icon
+                      icon={project.icon}
+                      className="w-16 h-16 text-primary-400"
+                    />
                   </div>
                 )}
 
@@ -210,7 +209,10 @@ const Projects = () => {
                       aria-label={t.projects.ariaLabels.viewDemo}
                     >
                       {/* ✅ Corrigido */}
-                      <Icon icon={FaExternalLinkAlt} className="w-5 h-5 text-white" />
+                      <Icon
+                        icon={FaExternalLinkAlt}
+                        className="w-5 h-5 text-white"
+                      />
                     </a>
                   )}
                 </div>
@@ -227,7 +229,7 @@ const Projects = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-2 justify-start">
-                  {project.technologies.map((tech) => (
+                  {project.technologies.map(tech => (
                     <span
                       key={tech}
                       className="px-3 py-1 bg-primary-600/10 text-primary-400 text-xs rounded-full border border-primary-600/20"
