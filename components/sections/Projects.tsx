@@ -3,7 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaGithub, FaExternalLinkAlt, FaCode, FaServer } from 'react-icons/fa';
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaCode,
+  FaServer,
+  FaLaptopCode,
+} from 'react-icons/fa';
 import { HiLightBulb } from 'react-icons/hi';
 import { IconType } from 'react-icons';
 import Image from 'next/image';
@@ -108,6 +114,23 @@ const Projects = () => {
       category: 'Backend',
       icon: FaServer,
       github: 'https://github.com/CostaCodesFullStack/sistema-mercado-java',
+      featured: true,
+    },
+    {
+      id: 6,
+      title: t.projects.project6.title,
+      description: t.projects.project6.description,
+      technologies: [
+        'Next.js',
+        'React',
+        'TypeScript',
+        'Tailwind CSS',
+        'Vercel',
+      ],
+      category: 'Frontend',
+      icon: FaLaptopCode,
+      github: 'https://github.com/CostaCodesFullStack/ClinicaAurora',
+      demo: 'https://v0-clinicaaurora.vercel.app',
       featured: true,
     },
   ];

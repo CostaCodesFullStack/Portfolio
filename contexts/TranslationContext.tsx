@@ -197,6 +197,8 @@ interface Translation {
         api: string;
         mysql: string;
         typescript: string;
+        tailwind: string;
+        nextjs: string;
       };
     };
     cta: {
@@ -234,6 +236,10 @@ interface Translation {
       description: string;
     };
     project5: {
+      title: string;
+      description: string;
+    };
+    project6: {
       title: string;
       description: string;
     };
@@ -575,6 +581,8 @@ const translations: Record<Language, Translation> = {
           api: 'APIs REST',
           mysql: 'MySQL',
           typescript: 'TypeScript',
+          tailwind: 'Tailwind CSS',
+          nextjs: 'Next.js',
         },
       },
       cta: {
@@ -621,6 +629,11 @@ const translations: Record<Language, Translation> = {
         title: 'Sistema de Mercado em Java',
         description:
           'Projeto educacional de backend em Java puro para simular o funcionamento de um caixa de mercado, com cadastro de produtos, controle de estoque e carrinho de compras aplicando POO e separacao em camadas.',
+      },
+      project6: {
+        title: 'Clínica Aurora — Landing Page de Estética',
+        description:
+          'Website conceitual para uma clínica de estética premium, desenvolvido com foco em design moderno, experiência do usuário, responsividade e apresentação estratégica de serviços. O projeto explora uma identidade visual sofisticada e uma estrutura completa de páginas para demonstrar uma presença digital profissional.',
       },
       ariaLabels: {
         viewCode: 'Ver código no GitHub',
@@ -961,6 +974,8 @@ const translations: Record<Language, Translation> = {
           api: 'REST APIs',
           mysql: 'MySQL',
           typescript: 'TypeScript',
+          tailwind: 'Tailwind CSS',
+          nextjs: 'Next.js',
         },
       },
       cta: {
@@ -1007,6 +1022,11 @@ const translations: Record<Language, Translation> = {
         title: 'Java Market System',
         description:
           'Educational backend project built with pure Java to simulate a grocery checkout system, including product registration, stock control and shopping cart flows while applying OOP and layered separation.',
+      },
+      project6: {
+        title: 'Aurora Clinic — Aesthetics Website',
+        description:
+          'A conceptual website for a premium aesthetics clinic, designed with a focus on modern design, user experience, responsiveness, and strategic service presentation. The project explores a sophisticated visual identity and a complete page structure to demonstrate a professional digital presence.',
       },
       ariaLabels: {
         viewCode: 'View code on GitHub',
