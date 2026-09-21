@@ -6,23 +6,26 @@ import Footer from '@/components/Footer';
 import Particles from '@/components/Particles';
 import { TranslationProvider } from '@/contexts/TranslationContext';
 import ThemeProviderWrapper from '@/components/providers/ThemeProviderWrapper';
+import MotionProviderWrapper from '@/components/providers/MotionProviderWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Cauã Costa - Estudante de Engenharia de Software',
+  title:
+    'Cauã Costa - Desenvolvedor Fullstack & Estudante de Engenharia de Software',
   description:
-    'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na Faculdade Anhanguera Conheça meus projetos, habilidades e jornada de aprendizado em programação.',
+    'Portfólio profissional de Cauã Costa, desenvolvedor fullstack e estudante de Engenharia de Software, especializado em bots Discord e painéis SaaS para comunidades gamer.',
   keywords: [
     'portfólio',
     'engenharia de software',
-    'desenvolvedor',
+    'desenvolvedor fullstack',
     'programação',
-    'tecnologia',
-    'UFC',
-    'Fortaleza',
-    'React',
-    'JavaScript',
+    'bots discord',
+    'discord.js',
+    'SaaS',
+    'Next.js',
+    'TypeScript',
+    'Matão',
   ],
   authors: [{ name: 'Cauã Costa' }],
   creator: 'Cauã Costa',
@@ -30,16 +33,18 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: 'https://cauacosta.dev',
-    title: 'Cauã Costa - Estudante de Engenharia de Software',
+    title:
+      'Cauã Costa - Desenvolvedor Fullstack & Estudante de Engenharia de Software',
     description:
-      'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na Faculdade Anhanguera Conheça meus projetos e habilidades.',
+      'Portfólio profissional de Cauã Costa, desenvolvedor fullstack especializado em bots Discord e painéis SaaS para comunidades gamer.',
     siteName: 'Cauã Costa Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cauã Costa - Estudante de Engenharia de Software',
+    title:
+      'Cauã Costa - Desenvolvedor Fullstack & Estudante de Engenharia de Software',
     description:
-      'Portfólio profissional de Cauã Costa, estudante de Engenharia de Software na Faculdade Anhanguera',
+      'Portfólio profissional de Cauã Costa, desenvolvedor fullstack especializado em bots Discord e painéis SaaS para comunidades gamer.',
   },
   robots: {
     index: true,
@@ -62,14 +67,16 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="scroll-smooth">
       <body className={inter.className}>
-        <ThemeProviderWrapper>
-          <TranslationProvider>
-            <Particles />
-            <Navbar />
-            <main className="relative z-10">{children}</main>
-            <Footer />
-          </TranslationProvider>
-        </ThemeProviderWrapper>
+        <MotionProviderWrapper>
+          <ThemeProviderWrapper>
+            <TranslationProvider>
+              <Particles />
+              <Navbar />
+              <main className="relative z-10">{children}</main>
+              <Footer />
+            </TranslationProvider>
+          </ThemeProviderWrapper>
+        </MotionProviderWrapper>
       </body>
     </html>
   );

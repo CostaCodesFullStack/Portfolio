@@ -18,7 +18,7 @@ const About = () => {
     {
       icon: HiLightBulb,
       label: t.about.stats.technologiesLearned,
-      value: '3+',
+      value: '15+',
     },
     /* { icon: HiUsers, label: 'Projetos Colaborativos', value: '3+' }, */
   ];

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { HiChevronDown, HiCode, HiLightBulb, HiCog } from 'react-icons/hi';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { container, item } from '@/lib/motion';
 
 const Hero = () => {
   const { t } = useTranslation();
@@ -42,72 +43,59 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
             className="text-center lg:text-left"
           >
-            {/* Logo e Nome */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex items-center space-x-3 mb-4 justify-center lg:justify-start"
-            ></motion.div>
+            <motion.div variants={container} initial="hidden" animate="show">
+              {/* Logo e Nome */}
+              <motion.div
+                variants={item}
+                className="flex items-center space-x-3 mb-4 justify-center lg:justify-start"
+              ></motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="mb-2"
-            >
-              <span className="text-primary-400 font-mono text-sm tracking-wider">
-                <br></br> <br />
-                {t.hero.greeting}
-              </span>
-            </motion.div>
+              <motion.div variants={item} className="mb-2">
+                <span className="text-primary-400 font-mono text-sm tracking-wider">
+                  <br></br> <br />
+                  {t.hero.greeting}
+                </span>
+              </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
-            >
-              <span className="gradient-text">{t.hero.name}</span>
-            </motion.h1>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-xl md:text-2xl lg:text-3xl text-gray-700 dark:text-gray-300 mb-4"
-            >
-              {t.hero.title}
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
-            >
-              {t.hero.description}
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
-            >
-              <a
-                href="#contact"
-                className="btn-primary inline-flex items-center justify-center"
+              <motion.h1
+                variants={item}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
               >
-                {t.hero.cta}
-                <HiChevronDown className="ml-2 w-4 h-4" />
-              </a>
-              <a
-                href="#projects"
-                className="btn-secondary inline-flex items-center justify-center"
+                <span className="gradient-text">{t.hero.name}</span>
+              </motion.h1>
+
+              <motion.h2
+                variants={item}
+                className="text-xl md:text-2xl lg:text-3xl text-gray-700 dark:text-gray-300 mb-4"
               >
-                {t.hero.ctaSecondary}
-              </a>
+                {t.hero.title}
+              </motion.h2>
+
+              <motion.p
+                variants={item}
+                className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+              >
+                {t.hero.description}
+              </motion.p>
+
+              <motion.div
+                variants={item}
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
+              >
+                <a
+                  href="#contact"
+                  className="btn-primary inline-flex items-center justify-center"
+                >
+                  {t.hero.cta}
+                  <HiChevronDown className="ml-2 w-4 h-4" />
+                </a>
+                <a
+                  href="#projects"
+                  className="btn-secondary inline-flex items-center justify-center"
+                >
+                  {t.hero.ctaSecondary}
+                </a>
+              </motion.div>
             </motion.div>
           </motion.div>
 

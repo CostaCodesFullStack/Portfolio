@@ -14,6 +14,7 @@ interface Translation {
   nav: {
     home: string;
     skills: string;
+    services: string;
     experience: string;
     projects: string;
     contact: string;
@@ -80,6 +81,22 @@ interface Translation {
       adaptability: string;
     };
     conceptsList: string[];
+    cta: {
+      title: string;
+      description: string;
+      button: string;
+    };
+  };
+  services: {
+    title: string;
+    subtitle: string;
+    items: {
+      discordBots: { title: string; description: string };
+      saasDashboards: { title: string; description: string };
+      desktopApps: { title: string; description: string };
+      apis: { title: string; description: string };
+      maintenance: { title: string; description: string };
+    };
     cta: {
       title: string;
       description: string;
@@ -182,7 +199,9 @@ interface Translation {
       categories: {
         frontend: string;
         backend: string;
+        data: string;
         tools: string;
+        fundamentals: string;
       };
       technologies: {
         react: string;
@@ -199,6 +218,14 @@ interface Translation {
         typescript: string;
         tailwind: string;
         nextjs: string;
+        nodejs: string;
+        nestjs: string;
+        discordjs: string;
+        prisma: string;
+        postgresql: string;
+        supabase: string;
+        electron: string;
+        stripe: string;
       };
     };
     cta: {
@@ -213,6 +240,7 @@ interface Translation {
     subtitle: string;
     viewProject: string;
     viewCode: string;
+    privateCaseStudy: string;
     categories: {
       featured: string;
       frontend: string;
@@ -242,6 +270,26 @@ interface Translation {
     project6: {
       title: string;
       description: string;
+    };
+    project7: {
+      title: string;
+      description: string;
+      status: string;
+    };
+    project8: {
+      title: string;
+      description: string;
+      status: string;
+    };
+    project9: {
+      title: string;
+      description: string;
+      status: string;
+    };
+    project10: {
+      title: string;
+      description: string;
+      status: string;
     };
     ariaLabels: {
       viewCode: string;
@@ -324,6 +372,7 @@ const translations: Record<Language, Translation> = {
     nav: {
       home: 'Início',
       skills: 'Habilidades',
+      services: 'Serviços',
       experience: 'Experiência',
       projects: 'Projetos',
       contact: 'Contato',
@@ -331,9 +380,9 @@ const translations: Record<Language, Translation> = {
     hero: {
       greeting: 'Olá, eu sou',
       name: 'Cauã Costa',
-      title: 'Estudante de Engenharia de Software',
+      title: 'Estudante de Engenharia de Software & Dev Fullstack',
       description:
-        'Estudante de Engenharia de Software apaixonado por desenvolvimento web, fullstack e frontend moderno. Interessado em backend escalável, APIs, automação e inteligência artificial. Localizado em Matão - SP.',
+        'Construo bots Discord e painéis SaaS para comunidades gamer, unindo os estudos em Engenharia de Software a sistemas reais em produção. Interessado em arquitetura escalável, automação e inteligência artificial. Localizado em Matão - SP.',
       cta: 'Entre em Contato',
       ctaSecondary: 'Ver Projetos',
       scrollIndicator: 'Scroll para próxima seção',
@@ -349,7 +398,7 @@ const translations: Record<Language, Translation> = {
       storyText1:
         'Olá! Sou Cauã Costa, estudante de Engenharia de Software apaixonado por tecnologia e desenvolvimento. Minha jornada na programação começou em 2023, quando descobri o fascinante mundo da criação de soluções digitais e decidi me dedicar a essa área.',
       storyText2:
-        'Atualmente, estou cursando Engenharia de Software com previsão de conclusão em 2029, focado em desenvolvimento web, fullstack e frontend moderno. Tenho grande interesse em backend escalável, APIs, automação e inteligência artificial.',
+        'Hoje, além de cursar Engenharia de Software (previsão de conclusão em 2029), arquiteto e construo sistemas reais para comunidades gamer: bots Discord, painéis SaaS com pagamento recorrente e dashboards desktop. Tenho grande interesse em backend escalável, APIs, automação e inteligência artificial.',
       storyText3:
         'Meu objetivo é me tornar um desenvolvedor full-stack de excelência, contribuindo para projetos que tenham impacto real na sociedade. Estou sempre em busca de novos desafios e oportunidades de crescimento na área de tecnologia, especialmente em desenvolvimento web.',
       stats: {
@@ -417,6 +466,43 @@ const translations: Record<Language, Translation> = {
         description:
           'Confira alguns dos projetos que desenvolvi aplicando essas habilidades',
         button: 'Ver Projetos',
+      },
+    },
+    services: {
+      title: 'Serviços',
+      subtitle: 'O que eu construo para comunidades gamer e negócios digitais',
+      items: {
+        discordBots: {
+          title: 'Bots Discord sob medida',
+          description:
+            'Desenvolvimento de bots com discord.js v14 para automação, moderação, economia e engajamento de comunidades.',
+        },
+        saasDashboards: {
+          title: 'Painéis SaaS de gerenciamento',
+          description:
+            'Painéis web com Next.js, autenticação via Discord OAuth e cobrança recorrente com Stripe.',
+        },
+        desktopApps: {
+          title: 'Dashboards desktop',
+          description:
+            'Aplicativos Electron para gerenciar e operar sistemas em tempo real, com comunicação tipada entre processos.',
+        },
+        apis: {
+          title: 'APIs e backend',
+          description:
+            'APIs REST modulares e versionadas com NestJS e Prisma, prontas para escalar.',
+        },
+        maintenance: {
+          title: 'Manutenção e suporte contínuo',
+          description:
+            'Acompanhamento de sistemas em produção: correções, melhorias e evolução das funcionalidades.',
+        },
+      },
+      cta: {
+        title: 'Tem um projeto em mente?',
+        description:
+          'Vamos conversar sobre como posso ajudar a construir seu bot, painel ou sistema',
+        button: 'Vamos Conversar',
       },
     },
     experience: {
@@ -565,8 +651,10 @@ const translations: Record<Language, Translation> = {
           'Tecnologias e ferramentas que domino através de prática e estudo',
         categories: {
           frontend: 'Frontend',
-          backend: 'Backend/Linguagens',
+          backend: 'Backend/Runtime',
+          data: 'Dados & Infra',
           tools: 'Ferramentas',
+          fundamentals: 'Fundamentos',
         },
         technologies: {
           react: 'React',
@@ -583,6 +671,14 @@ const translations: Record<Language, Translation> = {
           typescript: 'TypeScript',
           tailwind: 'Tailwind CSS',
           nextjs: 'Next.js',
+          nodejs: 'Node.js',
+          nestjs: 'NestJS',
+          discordjs: 'discord.js v14',
+          prisma: 'Prisma ORM',
+          postgresql: 'PostgreSQL',
+          supabase: 'Supabase',
+          electron: 'Electron',
+          stripe: 'Stripe',
         },
       },
       cta: {
@@ -599,6 +695,7 @@ const translations: Record<Language, Translation> = {
         'Alguns dos projetos que desenvolvi durante minha jornada de aprendizado em programação',
       viewProject: 'Ver Projeto',
       viewCode: 'Ver Código',
+      privateCaseStudy: 'Case study privado — sem repositório público',
       categories: {
         featured: 'Destaques',
         frontend: 'Frontend',
@@ -634,6 +731,30 @@ const translations: Record<Language, Translation> = {
         title: 'Clínica Aurora — Landing Page de Estética',
         description:
           'Website conceitual para uma clínica de estética premium, desenvolvido com foco em design moderno, experiência do usuário, responsividade e apresentação estratégica de serviços. O projeto explora uma identidade visual sofisticada e uma estrutura completa de páginas para demonstrar uma presença digital profissional.',
+      },
+      project7: {
+        title: 'Blaze System — Painel SaaS para Bot Discord',
+        description:
+          'Painel web que gerencia assinaturas e acesso a um bot Discord para comunidades de roleplay, com checkout via Stripe, autenticação OAuth do Discord e controle de acesso em camadas por assinatura.',
+        status: 'Em Produção',
+      },
+      project8: {
+        title: 'Discord Store — Bot de Venda Automatizada',
+        description:
+          'Bot Discord completo para venda automatizada de produtos digitais: catálogo com planos e estoque, carrinho, cupons, pagamento via PIX com webhook idempotente e entrega automática.',
+        status: 'MVP',
+      },
+      project9: {
+        title: 'Duxxck Group Dashboard — Gerenciador de Bots',
+        description:
+          'Aplicativo desktop que gerencia múltiplos bots simultaneamente, cada um rodando em uma worker thread isolada, com comunicação tipada entre processos (IPC).',
+        status: 'Em Produção',
+      },
+      project10: {
+        title: 'Movies API — Backend para Plataforma de Streaming',
+        description:
+          'API REST modular e versionada para uma plataforma de filmes e séries, com catálogo, busca, favoritos, histórico e uma camada de abstração para trocar provedores de reprodução sem alterar os módulos de negócio.',
+        status: 'Em Desenvolvimento',
       },
       ariaLabels: {
         viewCode: 'Ver código no GitHub',
@@ -719,6 +840,7 @@ const translations: Record<Language, Translation> = {
     nav: {
       home: 'Home',
       skills: 'Skills',
+      services: 'Services',
       experience: 'Experience',
       projects: 'Projects',
       contact: 'Contact',
@@ -726,9 +848,9 @@ const translations: Record<Language, Translation> = {
     hero: {
       greeting: 'Hello, I am',
       name: 'Cauã Costa',
-      title: 'Software Engineering Student',
+      title: 'Software Engineering Student & Fullstack Developer',
       description:
-        'Software Engineering student passionate about web development, fullstack and modern frontend. Interested in scalable backend, APIs, automation and artificial intelligence. Based in Matão - SP.',
+        'I build Discord bots and SaaS dashboards for gaming communities, combining Software Engineering studies with real systems in production. Interested in scalable architecture, automation and artificial intelligence. Based in Matão - SP.',
       cta: 'Get in Touch',
       ctaSecondary: 'View Projects',
       scrollIndicator: 'Scroll to next section',
@@ -744,7 +866,7 @@ const translations: Record<Language, Translation> = {
       storyText1:
         'Hello! I am Cauã Costa, a Software Engineering student passionate about technology and development. My programming journey began in 2023, when I discovered the fascinating world of creating digital solutions and decided to dedicate myself to this field.',
       storyText2:
-        'Currently, I am studying Software Engineering with expected completion in 2029, focused on web development, fullstack and modern frontend. I have great interest in scalable backend, APIs, automation and artificial intelligence.',
+        'Today, besides studying Software Engineering (expected completion in 2029), I architect and build real systems for gaming communities: Discord bots, SaaS dashboards with recurring payments, and desktop dashboards. I have great interest in scalable backend, APIs, automation and artificial intelligence.',
       storyText3:
         'My goal is to become an excellent full-stack developer, contributing to projects that have real impact on society. I am always looking for new challenges and growth opportunities in the technology field, especially in web development.',
       stats: {
@@ -812,6 +934,43 @@ const translations: Record<Language, Translation> = {
         description:
           'Check out some of the projects I developed applying these skills',
         button: 'View Projects',
+      },
+    },
+    services: {
+      title: 'Services',
+      subtitle: 'What I build for gaming communities and digital businesses',
+      items: {
+        discordBots: {
+          title: 'Custom Discord bots',
+          description:
+            'Bot development with discord.js v14 for automation, moderation, economy and community engagement.',
+        },
+        saasDashboards: {
+          title: 'SaaS management dashboards',
+          description:
+            'Web dashboards with Next.js, Discord OAuth authentication and recurring billing with Stripe.',
+        },
+        desktopApps: {
+          title: 'Desktop dashboards',
+          description:
+            'Electron applications to manage and operate systems in real time, with typed inter-process communication.',
+        },
+        apis: {
+          title: 'APIs and backend',
+          description:
+            'Modular, versioned REST APIs with NestJS and Prisma, built to scale.',
+        },
+        maintenance: {
+          title: 'Ongoing maintenance and support',
+          description:
+            'Follow-up on production systems: fixes, improvements and feature evolution.',
+        },
+      },
+      cta: {
+        title: 'Have a project in mind?',
+        description:
+          "Let's talk about how I can help build your bot, dashboard or system",
+        button: "Let's Talk",
       },
     },
     experience: {
@@ -958,8 +1117,10 @@ const translations: Record<Language, Translation> = {
         subtitle: 'Technologies and tools I master through practice and study',
         categories: {
           frontend: 'Frontend',
-          backend: 'Backend/Languages',
+          backend: 'Backend/Runtime',
+          data: 'Data & Infra',
           tools: 'Tools',
+          fundamentals: 'Fundamentals',
         },
         technologies: {
           react: 'React',
@@ -976,6 +1137,14 @@ const translations: Record<Language, Translation> = {
           typescript: 'TypeScript',
           tailwind: 'Tailwind CSS',
           nextjs: 'Next.js',
+          nodejs: 'Node.js',
+          nestjs: 'NestJS',
+          discordjs: 'discord.js v14',
+          prisma: 'Prisma ORM',
+          postgresql: 'PostgreSQL',
+          supabase: 'Supabase',
+          electron: 'Electron',
+          stripe: 'Stripe',
         },
       },
       cta: {
@@ -992,6 +1161,7 @@ const translations: Record<Language, Translation> = {
         'Some of the projects I developed during my programming learning journey',
       viewProject: 'View Project',
       viewCode: 'View Code',
+      privateCaseStudy: 'Private case study — no public repository',
       categories: {
         featured: 'Featured',
         frontend: 'Frontend',
@@ -1027,6 +1197,30 @@ const translations: Record<Language, Translation> = {
         title: 'Aurora Clinic — Aesthetics Website',
         description:
           'A conceptual website for a premium aesthetics clinic, designed with a focus on modern design, user experience, responsiveness, and strategic service presentation. The project explores a sophisticated visual identity and a complete page structure to demonstrate a professional digital presence.',
+      },
+      project7: {
+        title: 'Blaze System — SaaS Dashboard for a Discord Bot',
+        description:
+          'Web dashboard that manages subscriptions and access to a Discord bot for roleplay communities, with Stripe checkout, Discord OAuth authentication and tiered access control by subscription.',
+        status: 'In Production',
+      },
+      project8: {
+        title: 'Discord Store — Automated Sales Bot',
+        description:
+          'Full Discord bot for automated digital product sales: catalog with plans and stock, cart, coupons, PIX payment with idempotent webhook, and automatic delivery.',
+        status: 'MVP',
+      },
+      project9: {
+        title: 'Duxxck Group Dashboard — Bot Manager',
+        description:
+          'Desktop application that manages multiple bots at once, each running in an isolated worker thread, with typed inter-process communication (IPC).',
+        status: 'In Production',
+      },
+      project10: {
+        title: 'Movies API — Streaming Platform Backend',
+        description:
+          'Modular, versioned REST API for a movies and TV shows platform, with catalog, search, favorites, history and an abstraction layer to swap playback providers without touching business modules.',
+        status: 'In Development',
       },
       ariaLabels: {
         viewCode: 'View code on GitHub',

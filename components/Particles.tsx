@@ -20,6 +20,12 @@ const Particles = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
+    // Respeita a preferência do usuário por menos movimento: desenha as
+    // partículas paradas (sem animar) em vez de não renderizar nada.
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
     const particles: Array<{
       x: number;
       y: number;
@@ -45,21 +51,31 @@ const Particles = () => {
       particles.push(createParticle());
     }
 
+    let rafId: number | null = null;
+    let isPaused = document.visibilityState === 'hidden';
+
     const animate = () => {
+      if (isPaused) {
+        rafId = null;
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle, index) => {
-        // Atualizar posição
-        particle.x += particle.vx;
-        particle.y += particle.vy;
+        if (!prefersReducedMotion) {
+          // Atualizar posição
+          particle.x += particle.vx;
+          particle.y += particle.vy;
 
-        // Verificar bordas
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+          // Verificar bordas
+          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
-        // Manter dentro dos limites
-        particle.x = Math.max(0, Math.min(canvas.width, particle.x));
-        particle.y = Math.max(0, Math.min(canvas.height, particle.y));
+          // Manter dentro dos limites
+          particle.x = Math.max(0, Math.min(canvas.width, particle.x));
+          particle.y = Math.max(0, Math.min(canvas.height, particle.y));
+        }
 
         // Desenhar partícula
         ctx.beginPath();
@@ -86,13 +102,38 @@ const Particles = () => {
         });
       });
 
-      requestAnimationFrame(animate);
+      // Com movimento reduzido, desenha um único frame estático e não
+      // agenda o próximo — evita animação contínua desnecessária.
+      if (!prefersReducedMotion) {
+        rafId = requestAnimationFrame(animate);
+      }
     };
 
-    animate();
+    const handleVisibilityChange = () => {
+      isPaused = document.hidden;
+      // Retoma o loop só se ele não estiver rodando (rafId nulo) e o
+      // usuário não pediu movimento reduzido.
+      if (!isPaused && rafId === null && !prefersReducedMotion) {
+        animate();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    if (!isPaused) {
+      animate();
+    } else if (prefersReducedMotion) {
+      // Ainda desenha o frame estático mesmo se a aba abrir já visível
+      // depois, mas garante o primeiro frame com a aba ativa.
+      animate();
+    }
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, []);
 

@@ -14,6 +14,16 @@ import {
   SiGit,
   SiMysql,
   SiTypescript,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiNestjs,
+  SiDiscord,
+  SiPrisma,
+  SiPostgresql,
+  SiSupabase,
+  SiElectron,
+  SiStripe,
 } from 'react-icons/si';
 
 import { HiCode, HiCog, HiLightBulb, HiUsers } from 'react-icons/hi';
@@ -30,6 +40,18 @@ const Skills = () => {
   const technologies = {
     frontend: [
       { name: t.experience.technologies.technologies.react, icon: SiReact },
+      {
+        name: t.experience.technologies.technologies.nextjs,
+        icon: SiNextdotjs,
+      },
+      {
+        name: t.experience.technologies.technologies.typescript,
+        icon: SiTypescript,
+      },
+      {
+        name: t.experience.technologies.technologies.tailwind,
+        icon: SiTailwindcss,
+      },
       { name: t.experience.technologies.technologies.html5, icon: SiHtml5 },
       { name: t.experience.technologies.technologies.css3, icon: SiCss3 },
       {
@@ -38,19 +60,51 @@ const Skills = () => {
       },
     ],
     backend: [
-      { name: t.experience.technologies.technologies.python, icon: SiPython },
-      { name: t.experience.technologies.technologies.java, icon: SiOpenjdk },
-      { name: t.experience.technologies.technologies.c, icon: SiC },
-      { name: t.experience.technologies.technologies.lua, icon: SiLua },
       {
-        name: t.experience.technologies.technologies.typescript,
-        icon: SiTypescript,
+        name: t.experience.technologies.technologies.nodejs,
+        icon: SiNodedotjs,
+      },
+      {
+        name: t.experience.technologies.technologies.nestjs,
+        icon: SiNestjs,
+      },
+      {
+        name: t.experience.technologies.technologies.discordjs,
+        icon: SiDiscord,
+      },
+      {
+        name: t.experience.technologies.technologies.prisma,
+        icon: SiPrisma,
+      },
+    ],
+    data: [
+      {
+        name: t.experience.technologies.technologies.postgresql,
+        icon: SiPostgresql,
+      },
+      {
+        name: t.experience.technologies.technologies.supabase,
+        icon: SiSupabase,
+      },
+      { name: t.experience.technologies.technologies.mysql, icon: SiMysql },
+      {
+        name: t.experience.technologies.technologies.electron,
+        icon: SiElectron,
       },
     ],
     tools: [
       { name: t.experience.technologies.technologies.git, icon: SiGit },
       { name: t.experience.technologies.technologies.api, icon: HiCode },
-      { name: t.experience.technologies.technologies.mysql, icon: SiMysql },
+      {
+        name: t.experience.technologies.technologies.stripe,
+        icon: SiStripe,
+      },
+    ],
+    fundamentals: [
+      { name: t.experience.technologies.technologies.python, icon: SiPython },
+      { name: t.experience.technologies.technologies.java, icon: SiOpenjdk },
+      { name: t.experience.technologies.technologies.c, icon: SiC },
+      { name: t.experience.technologies.technologies.lua, icon: SiLua },
     ],
   };
 

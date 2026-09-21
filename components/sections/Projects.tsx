@@ -36,8 +36,9 @@ interface Project {
   technologies: string[];
   category: 'Frontend' | 'Backend' | 'Fullstack';
   icon: IconType;
-  github: string;
+  github?: string;
   demo?: string;
+  status?: string;
   featured: boolean;
 }
 
@@ -68,7 +69,7 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/conversor-moedas',
       demo: 'https://costacodesfullstack.github.io/conversor-moedas',
-      featured: true,
+      featured: false,
     },
     {
       id: 2,
@@ -80,7 +81,7 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/Calculadora-Online',
       demo: 'https://costacodesfullstack.github.io/Calculadora-Online',
-      featured: true,
+      featured: false,
     },
     {
       id: 3,
@@ -92,7 +93,7 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/IMC-Online',
       demo: 'https://costacodesfullstack.github.io/IMC-Online',
-      featured: true,
+      featured: false,
     },
     {
       id: 4,
@@ -104,7 +105,7 @@ const Projects = () => {
       icon: FaCode,
       github: 'https://github.com/CostaCodesFullStack/landing-page',
       demo: 'https://costacodesfullstack.github.io/landing-page',
-      featured: true,
+      featured: false,
     },
     {
       id: 5,
@@ -114,7 +115,7 @@ const Projects = () => {
       category: 'Backend',
       icon: FaServer,
       github: 'https://github.com/CostaCodesFullStack/sistema-mercado-java',
-      featured: true,
+      featured: false,
     },
     {
       id: 6,
@@ -131,6 +132,61 @@ const Projects = () => {
       icon: FaLaptopCode,
       github: 'https://github.com/CostaCodesFullStack/ClinicaAurora',
       demo: 'https://v0-clinicaaurora.vercel.app',
+      featured: false,
+    },
+    // Projetos reais em produção/desenvolvimento — sem repositório público
+    // (código comercial/privado), por isso sem `github`/`demo`.
+    {
+      id: 7,
+      title: t.projects.project7.title,
+      description: t.projects.project7.description,
+      technologies: [
+        'Next.js',
+        'TypeScript',
+        'Prisma',
+        'Stripe',
+        'Discord OAuth',
+        'PostgreSQL',
+      ],
+      category: 'Fullstack',
+      icon: FaLaptopCode,
+      status: t.projects.project7.status,
+      featured: true,
+    },
+    {
+      id: 8,
+      title: t.projects.project8.title,
+      description: t.projects.project8.description,
+      technologies: [
+        'discord.js v14',
+        'TypeScript',
+        'Prisma',
+        'PostgreSQL',
+        'PIX',
+      ],
+      category: 'Backend',
+      icon: FaServer,
+      status: t.projects.project8.status,
+      featured: true,
+    },
+    {
+      id: 9,
+      title: t.projects.project9.title,
+      description: t.projects.project9.description,
+      technologies: ['Electron', 'React', 'TypeScript', 'IPC'],
+      category: 'Fullstack',
+      icon: FaLaptopCode,
+      status: t.projects.project9.status,
+      featured: true,
+    },
+    {
+      id: 10,
+      title: t.projects.project10.title,
+      description: t.projects.project10.description,
+      technologies: ['NestJS', 'TypeScript', 'Prisma', 'PostgreSQL', 'Swagger'],
+      category: 'Backend',
+      icon: FaServer,
+      status: t.projects.project10.status,
       featured: true,
     },
   ];
@@ -211,6 +267,11 @@ const Projects = () => {
             >
               {/* Imagem do Projeto */}
               <div className="relative overflow-hidden">
+                {project.status && (
+                  <span className="absolute top-3 left-3 z-10 px-3 py-1 text-xs font-semibold rounded-full bg-dark-900/80 text-primary-300 border border-primary-600/40">
+                    {project.status}
+                  </span>
+                )}
                 {project.image && !imageErrors[project.id] ? (
                   <div className="w-full h-48 relative">
                     <Image
@@ -232,36 +293,44 @@ const Projects = () => {
                   </div>
                 )}
 
-                {/* Overlay com links */}
-                <div className="absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300"
-                      aria-label={t.projects.ariaLabels.viewCode}
-                    >
-                      {/* ✅ Corrigido */}
-                      <Icon icon={FaGithub} className="w-5 h-5 text-white" />
-                    </a>
-                  )}
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300"
-                      aria-label={t.projects.ariaLabels.viewDemo}
-                    >
-                      {/* ✅ Corrigido */}
-                      <Icon
-                        icon={FaExternalLinkAlt}
-                        className="w-5 h-5 text-white"
-                      />
-                    </a>
-                  )}
-                </div>
+                {/* Overlay com links (ou aviso de case study privado, quando não há link público) */}
+                {project.github || project.demo ? (
+                  <div className="absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300"
+                        aria-label={t.projects.ariaLabels.viewCode}
+                      >
+                        {/* ✅ Corrigido */}
+                        <Icon icon={FaGithub} className="w-5 h-5 text-white" />
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300"
+                        aria-label={t.projects.ariaLabels.viewDemo}
+                      >
+                        {/* ✅ Corrigido */}
+                        <Icon
+                          icon={FaExternalLinkAlt}
+                          className="w-5 h-5 text-white"
+                        />
+                      </a>
+                    )}
+                  </div>
+                ) : (
+                  <div className="absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center px-4 text-center">
+                    <span className="text-sm text-gray-300">
+                      {t.projects.privateCaseStudy}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Conteúdo do Projeto */}
@@ -310,6 +379,11 @@ const Projects = () => {
                       <Icon icon={FaExternalLinkAlt} className="w-4 h-4" />
                       <span>{t.projects.viewProject}</span>
                     </a>
+                  )}
+                  {!project.github && !project.demo && (
+                    <span className="text-sm text-gray-500 dark:text-gray-500 italic">
+                      {t.projects.privateCaseStudy}
+                    </span>
                   )}
                 </div>
               </div>
