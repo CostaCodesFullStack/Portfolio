@@ -68,13 +68,6 @@ const Experience = () => {
   // Certificações Oficiais - Cards Pequenos
   const certifications = [
     {
-      title: t.experience.certificationsList.htmlCss,
-      issuer: 'Curso em Vídeo',
-      year: '2025',
-      description: t.experience.certificationDetails.htmlCss,
-      icon: FaCertificate,
-    },
-    {
       title: t.experience.certificationsList.javascript,
       issuer: 'Curso em Vídeo',
       year: '2025',
@@ -95,6 +88,13 @@ const Experience = () => {
       description: t.experience.certificationDetails.java,
       icon: HiClock,
     },
+    {
+      title: t.experience.certificationsList.softwareEngeneer,
+      issuer: 'FIAP',
+      year: '2026',
+      description: t.experience.certificationDetails.softwareEngeneer,
+      icon: FaCertificate,
+    }
   ];
 
   return (

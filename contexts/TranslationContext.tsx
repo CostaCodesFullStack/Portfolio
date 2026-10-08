@@ -127,10 +127,10 @@ interface Translation {
       fivemBot: string;
     };
     certificationsList: {
-      htmlCss: string;
       javascript: string;
       python: string;
       java: string;
+      softwareEngeneer: string;
     };
     achievementsList: {
       portfolio: string;
@@ -180,10 +180,10 @@ interface Translation {
       };
     };
     certificationDetails: {
-      htmlCss: string;
       javascript: string;
       python: string;
       java: string;
+      softwareEngeneer: string;
     };
     achievementDetails: {
       portfolio: string;
@@ -530,10 +530,10 @@ const translations: Record<Language, Translation> = {
         fivemBot: 'Bot Discord para Comunidade FiveM',
       },
       certificationsList: {
-        htmlCss: 'HTML5 e CSS3',
         javascript: 'JavaScript',
         python: 'Python',
         java: 'Java',
+        softwareEngeneer: 'Engenharia de Software',
       },
       achievementsList: {
         portfolio: 'Portfólio Profissional',
@@ -614,7 +614,7 @@ const translations: Record<Language, Translation> = {
         modsDevelopment: {
           title: 'Mods MTA/FIVEM (LUA)',
           type: 'Aprendizado Independente',
-          period: '2023',
+          period: '2020 - 2023',
           description:
             'Desenvolvimento de modificações usando LUA para servidores de jogos',
           achievements: [
@@ -626,13 +626,13 @@ const translations: Record<Language, Translation> = {
         },
       },
       certificationDetails: {
-        htmlCss:
-          'Desenvolvimento web com HTML5 e CSS3, incluindo responsividade e design moderno.',
         javascript:
           'Fundamentos de JavaScript, DOM, APIs e desenvolvimento web interativo.',
         python:
           'Fundamentos de Python, estruturas de dados, algoritmos e desenvolvimento de aplicações.',
         java: 'Fundamentos de Java, orientação a objetos, estruturas de dados e desenvolvimento de aplicações.',
+        softwareEngeneer:
+          'Fundamentos de Engenharia de Software, metodologias de desenvolvimento, gestão de projetos, HTML e CSS.',
       },
       achievementDetails: {
         portfolio: 'Desenvolvimento de portfólio completo com React e Next.js',
@@ -997,10 +997,10 @@ const translations: Record<Language, Translation> = {
         fivemBot: 'FiveM Community Discord Bot',
       },
       certificationsList: {
-        htmlCss: 'HTML5 and CSS3',
         javascript: 'JavaScript',
         python: 'Python',
         java: 'Java',
+        softwareEngeneer: 'Software Engineering',
       },
       achievementsList: {
         portfolio: 'Professional Portfolio',
@@ -1093,13 +1093,13 @@ const translations: Record<Language, Translation> = {
         },
       },
       certificationDetails: {
-        htmlCss:
-          'Web development with HTML5 and CSS3, including responsiveness and modern design.',
         javascript:
           'JavaScript fundamentals, DOM, APIs and interactive web development.',
         python:
           'Python fundamentals, data structures, algorithms and application development.',
         java: 'Java fundamentals, object-oriented programming, data structures and application development.',
+        softwareEngeneer:
+          'Software Engineering fundamentals, development methodologies, project management, HTML and CSS.',
       },
       achievementDetails: {
         portfolio: 'Complete portfolio development with React and Next.js',
