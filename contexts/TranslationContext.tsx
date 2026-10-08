@@ -131,6 +131,7 @@ interface Translation {
       python: string;
       java: string;
       softwareEngeneer: string;
+      gitGithub: string;
     };
     achievementsList: {
       portfolio: string;
@@ -184,6 +185,7 @@ interface Translation {
       python: string;
       java: string;
       softwareEngeneer: string;
+      gitGithub: string;
     };
     achievementDetails: {
       portfolio: string;
@@ -534,6 +536,7 @@ const translations: Record<Language, Translation> = {
         python: 'Python',
         java: 'Java',
         softwareEngeneer: 'Engenharia de Software',
+        gitGithub: 'Git e GitHub',
       },
       achievementsList: {
         portfolio: 'Portfólio Profissional',
@@ -633,6 +636,8 @@ const translations: Record<Language, Translation> = {
         java: 'Fundamentos de Java, orientação a objetos, estruturas de dados e desenvolvimento de aplicações.',
         softwareEngeneer:
           'Fundamentos de Engenharia de Software, metodologias de desenvolvimento, gestão de projetos, HTML e CSS.',
+        gitGithub:
+          'Fundamentos de controle de versão com Git e fluxos de colaboração com GitHub.',
       },
       achievementDetails: {
         portfolio: 'Desenvolvimento de portfólio completo com React e Next.js',
@@ -1001,6 +1006,7 @@ const translations: Record<Language, Translation> = {
         python: 'Python',
         java: 'Java',
         softwareEngeneer: 'Software Engineering',
+        gitGithub: 'Git and GitHub',
       },
       achievementsList: {
         portfolio: 'Professional Portfolio',
@@ -1100,6 +1106,8 @@ const translations: Record<Language, Translation> = {
         java: 'Java fundamentals, object-oriented programming, data structures and application development.',
         softwareEngeneer:
           'Software Engineering fundamentals, development methodologies, project management, HTML and CSS.',
+        gitGithub:
+          'Version control fundamentals using Git and collaboration workflows with GitHub.',
       },
       achievementDetails: {
         portfolio: 'Complete portfolio development with React and Next.js',

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
   HiAcademicCap,
@@ -12,6 +12,9 @@ import {
 } from 'react-icons/hi';
 import { FaGraduationCap, FaCertificate, FaGamepad } from 'react-icons/fa';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { useState } from 'react';
+import CertificateModal from '../CertificateModel';
+import { certificates, type Certificate } from '@/lib/certificates';
 
 const Experience = () => {
   const { t } = useTranslation();
@@ -19,6 +22,7 @@ const Experience = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
 
   // Formação Acadêmica - Card Grande
   const education = {
@@ -70,9 +74,10 @@ const Experience = () => {
     {
       title: t.experience.certificationsList.javascript,
       issuer: 'Curso em Vídeo',
-      year: '2025',
+      year: 'Cursando',
       description: t.experience.certificationDetails.javascript,
-      icon: FaCertificate,
+      icon: HiClock,
+      certificateId: null,
     },
     {
       title: t.experience.certificationsList.python,
@@ -80,6 +85,7 @@ const Experience = () => {
       year: '2025',
       description: t.experience.certificationDetails.python,
       icon: FaCertificate,
+      certificateId: 'python',
     },
     {
       title: t.experience.certificationsList.java,
@@ -87,6 +93,7 @@ const Experience = () => {
       year: t.experience.inProgress,
       description: t.experience.certificationDetails.java,
       icon: HiClock,
+      certificateId: null,
     },
     {
       title: t.experience.certificationsList.softwareEngeneer,
@@ -94,7 +101,16 @@ const Experience = () => {
       year: '2026',
       description: t.experience.certificationDetails.softwareEngeneer,
       icon: FaCertificate,
-    }
+      certificateId: 'engenharia-de-software',
+    },
+    {
+      title: t.experience.certificationsList.gitGithub,
+      issuer: 'DIO',
+      year: '2026',
+      description: t.experience.certificationDetails.gitGithub,
+      icon: FaCertificate,
+      certificateId: 'git-e-github',
+    },
   ];
 
   return (
@@ -253,42 +269,71 @@ const Experience = () => {
           </h3>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                className="card text-center hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 border-yellow-400/30"
-              >
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
-                    <cert.icon className="w-6 h-6 text-white" />
+            {certifications.map((cert, index) => {
+              const certificate = certificates.find(
+                c => c.id === cert.certificateId
+              );
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+                  onClick={
+                    certificate ? () => setSelectedCert(certificate) : undefined
+                  }
+                  onKeyDown={
+                    certificate
+                      ? e => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setSelectedCert(certificate);
+                          }
+                        }
+                      : undefined
+                  }
+                  role={certificate ? 'button' : undefined}
+                  tabIndex={certificate ? 0 : undefined}
+                  className={`card text-center hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 border-yellow-400/30 ${
+                    certificate ? 'cursor-pointer' : ''
+                  }`}
+                >
+                  <div className="flex justify-center mb-4">
+                    <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                      <cert.icon className="w-6 h-6 text-white" />
+                    </div>
                   </div>
-                </div>
 
-                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                  {cert.title}
-                </h4>
-                <p className="text-yellow-600 dark:text-yellow-400 font-medium mb-2">
-                  {cert.issuer}
-                </p>
-                <p className="text-primary-500 dark:text-primary-400 text-sm mb-3 font-semibold">
-                  {cert.year}
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 text-xs">
-                  {cert.description}
-                </p>
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    {cert.title}
+                  </h4>
+                  <p className="text-yellow-600 dark:text-yellow-400 font-medium mb-2">
+                    {cert.issuer}
+                  </p>
+                  <p className="text-primary-500 dark:text-primary-400 text-sm mb-3 font-semibold">
+                    {cert.year}
+                  </p>
+                  <p className="text-gray-700 dark:text-gray-300 text-xs">
+                    {cert.description}
+                  </p>
 
-                <div className="flex justify-center mt-4">
-                  {cert.year === t.experience.inProgress ? (
-                    <HiClock className="w-5 h-5 text-yellow-500" />
-                  ) : (
-                    <HiCheckCircle className="w-5 h-5 text-emerald-500" />
+                  <div className="flex justify-center mt-4">
+                    {cert.year === t.experience.inProgress ? (
+                      <HiClock className="w-5 h-5 text-yellow-500" />
+                    ) : (
+                      <HiCheckCircle className="w-5 h-5 text-emerald-500" />
+                    )}
+                  </div>
+
+                  {certificate && (
+                    <p className="mt-3 text-xs font-medium text-yellow-700 dark:text-yellow-400">
+                      Ver certificado →
+                    </p>
                   )}
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
 
@@ -323,6 +368,15 @@ const Experience = () => {
           </div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {selectedCert && (
+          <CertificateModal
+            certificate={selectedCert}
+            onClose={() => setSelectedCert(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };
